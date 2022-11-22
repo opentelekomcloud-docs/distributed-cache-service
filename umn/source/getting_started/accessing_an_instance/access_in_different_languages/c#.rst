@@ -1,0 +1,101 @@
+:original_name: dcs-ug-0312013.html
+
+.. _dcs-ug-0312013:
+
+C#
+==
+
+Access a DCS Redis instance through C# Client StackExchange.Redis on an ECS in the same VPC. For more information about how to use other Redis clients, visit `the Redis official website <https://redis.io/clients>`__.
+
+Prerequisites
+-------------
+
+-  A DCS Redis instance has been created and is in the **Running** state.
+-  An ECS has been created. For details about how to create an ECS, see `Elastic Cloud Server User Guide <https://docs.otc.t-systems.com/en-us/usermanual/ecs/en-us_topic_0163572588.html>`__.
+-  If the ECS runs the Linux OS, ensure that the GCC compilation environment has been installed on the ECS.
+
+Procedure
+---------
+
+#. .. _dcs-ug-0312013__en-us_topic_0148195355_li457118182512:
+
+   View the IP address/domain name and port number of the DCS Redis instance to be accessed.
+
+   For details, see :ref:`Viewing Details of a DCS Instance <dcs-ug-0312016>`.
+
+#. Log in to the ECS.
+
+   A Windows ECS is used as an example.
+
+#. Install Visual Studio Community 2017 on the ECS.
+
+#. Start Visual Studio 2017 and create a project.
+
+   Set the project name to **redisdemo**.
+
+#. Install StackExchange.Redis by using the NuGet package manager of Visual Studio.
+
+   Access the NuGet package manager console according to :ref:`Figure 1 <dcs-ug-0312013__en-us_topic_0148195355_fig394516508313>`, and enter **Install-Package StackExchange.Redis -Version 2.2.79**. (The version number is optional).
+
+   .. _dcs-ug-0312013__en-us_topic_0148195355_fig394516508313:
+
+   .. figure:: /_static/images/en-us_image_0148195318.png
+      :alt: **Figure 1** Accessing the NuGet package manager console
+
+      **Figure 1** Accessing the NuGet package manager console
+
+#. Write the following code, and use the String Set and Get methods to test the connection.
+
+   .. code-block::
+
+      using System;
+      using StackExchange.Redis;
+
+      namespace redisdemo
+      {
+          class Program
+          {
+              // redis config
+              private static ConfigurationOptions connDCS = ConfigurationOptions.Parse("10.10.38.233:6379,password=********,connectTimeout=2000");
+              //the lock for singleton
+              private static readonly object Locker = new object();
+              //singleton
+              private static ConnectionMultiplexer redisConn;
+              //singleton
+              public static ConnectionMultiplexer getRedisConn()
+              {
+                  if (redisConn == null)
+                  {
+                      lock (Locker)
+                      {
+                          if (redisConn == null || !redisConn.IsConnected)
+                          {
+                              redisConn = ConnectionMultiplexer.Connect(connDCS);
+                          }
+                      }
+                  }
+                  return redisConn;
+              }
+              static void Main(string[] args)
+              {
+                  redisConn = getRedisConn();
+                  var db = redisConn.GetDatabase();
+                  //set get
+                  string strKey = "Hello";
+                  string strValue = "DCS for Redis!";
+                  Console.WriteLine( strKey + ", " + db.StringGet(strKey));
+
+                  Console.ReadLine();
+              }
+          }
+      }
+
+   *10.10.38.233:6379* contains an example IP address/domain name and port number of the DCS Redis instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312013__en-us_topic_0148195355_li457118182512>`. Change the IP address/domain name and port as required. ``********`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
+
+#. Run the code. You have successfully accessed the instance if the following command output is displayed:
+
+   .. code-block::
+
+      Hello, DCS for Redis!
+
+   For more information about other commands of StackExchange.Redis, visit `StackExchange.Redis <https://stackexchange.github.io/StackExchange.Redis/>`__.
