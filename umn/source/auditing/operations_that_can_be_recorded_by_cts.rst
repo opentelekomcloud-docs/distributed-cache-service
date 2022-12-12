@@ -14,59 +14,59 @@ The following lists the DCS operations that can be recorded by CTS.
    +--------------------------------------------------------+---------------+--------------------------------------+
    | Operation                                              | Resource Type | Trace Name                           |
    +========================================================+===============+======================================+
-   | Creating an instance                                   | DCS           | createDCSInstance                    |
+   | Creating an instance                                   | Redis         | createDCSInstance                    |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Submitting an instance creation request                | DCS           | submitCreateDCSInstanceRequest       |
+   | Submitting an instance creation request                | Redis         | submitCreateDCSInstanceRequest       |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Deleting multiple instances                            | DCS           | batchDeleteDCSInstance               |
+   | Deleting multiple instances                            | Redis         | batchDeleteDCSInstance               |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Deleting an instance                                   | DCS           | deleteDCSInstance                    |
+   | Deleting an instance                                   | Redis         | deleteDCSInstance                    |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Modifying instance information                         | DCS           | modifyDCSInstanceInfo                |
+   | Modifying instance information                         | Redis         | modifyDCSInstanceInfo                |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Modifying instance configurations                      | DCS           | modifyDCSInstanceConfig              |
+   | Modifying instance configurations                      | Redis         | modifyDCSInstanceConfig              |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Changing instance password                             | DCS           | modifyDCSInstancePassword            |
+   | Changing instance password                             | Redis         | modifyDCSInstancePassword            |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Restarting an instance                                 | DCS           | restartDCSInstance                   |
+   | Restarting an instance                                 | Redis         | restartDCSInstance                   |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Submitting an instance restarting request              | DCS           | submitRestartDCSInstanceRequest      |
+   | Submitting an instance restarting request              | Redis         | submitRestartDCSInstanceRequest      |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Starting an instance                                   | DCS           | startDCSInstance                     |
+   | Starting an instance                                   | Redis         | startDCSInstance                     |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Submitting an instance starting request                | DCS           | submitStartDCSInstanceRequest        |
+   | Submitting an instance starting request                | Redis         | submitStartDCSInstanceRequest        |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Clearing instance data                                 | DCS           | flushDCSInstance                     |
+   | Clearing instance data                                 | Redis         | flushDCSInstance                     |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Restarting instances in batches                        | DCS           | batchRestartDCSInstance              |
+   | Restarting instances in batches                        | Redis         | batchRestartDCSInstance              |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Submitting a request to restart instances in batches   | DCS           | submitBatchRestartDCSInstanceRequest |
+   | Submitting a request to restart instances in batches   | Redis         | submitBatchRestartDCSInstanceRequest |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Starting multiple instances                            | DCS           | batchStartDCSInstance                |
+   | Starting multiple instances                            | Redis         | batchStartDCSInstance                |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Submitting a request to start instances in batches     | DCS           | submitBatchStartDCSInstanceRequest   |
+   | Submitting a request to start instances in batches     | Redis         | submitBatchStartDCSInstanceRequest   |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Restoring instance data                                | DCS           | restoreDCSInstance                   |
+   | Restoring instance data                                | Redis         | restoreDCSInstance                   |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Submitting a request to restore instance data          | DCS           | submitRestoreDCSInstanceRequest      |
+   | Submitting a request to restore instance data          | Redis         | submitRestoreDCSInstanceRequest      |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Backing up instance data                               | DCS           | backupDCSInstance                    |
+   | Backing up instance data                               | Redis         | backupDCSInstance                    |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Submitting a request to back up instance data          | DCS           | submitBackupDCSInstanceRequest       |
+   | Submitting a request to back up instance data          | Redis         | submitBackupDCSInstanceRequest       |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Deleting instance backup files                         | DCS           | deleteInstanceBackupFile             |
+   | Deleting instance backup files                         | Redis         | deleteInstanceBackupFile             |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Deleting background tasks                              | DCS           | deleteDCSInstanceJobRecord           |
+   | Deleting background tasks                              | Redis         | deleteDCSInstanceJobRecord           |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Modifying instance specifications                      | DCS           | modifySpecification                  |
+   | Modifying instance specifications                      | Redis         | modifySpecification                  |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Submitting a request to modify instance specifications | DCS           | submitModifySpecificationRequest     |
+   | Submitting a request to modify instance specifications | Redis         | submitModifySpecificationRequest     |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Creating an instance subscription order                | DCS           | createInstanceOrder                  |
+   | Creating an instance subscription order                | Redis         | createInstanceOrder                  |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Switching between master and standby nodes             | DCS           | masterStandbySwitchover              |
+   | Switching between master and standby nodes             | Redis         | masterStandbySwitchover              |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Resetting instance password                            | DCS           | resetDCSInstancePassword             |
+   | Resetting instance password                            | Redis         | resetDCSInstancePassword             |
    +--------------------------------------------------------+---------------+--------------------------------------+
-   | Submitting a request to clear instance data            | DCS           | submitFlushDCSInstanceRequest        |
+   | Submitting a request to clear instance data            | Redis         | submitFlushDCSInstanceRequest        |
    +--------------------------------------------------------+---------------+--------------------------------------+

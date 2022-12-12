@@ -9,7 +9,7 @@ Access a DCS Redis instance through phpredis on an ECS in the same VPC. For more
 
 .. note::
 
-   The operations described in this section apply only to single-node, master/standby, and Proxy Cluster instances. To use phpredis to connect to a Redis Cluster instance, see the `phpredis description <https://github.com/phpredis/phpredis/blob/develop/cluster.markdown#readme>`__.
+   The operations described in this section apply only to single-node, master/standby, and Proxy Cluster instances. To use phpredis to connect to a Redis Cluster instance, see the `phpredis description <https://github.com/phpredis/phpredis#readme>`__.
 
 Prerequisites
 -------------

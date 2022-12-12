@@ -5,11 +5,9 @@
 What Is the Default Data Eviction Policy?
 =========================================
 
-Data is evicted from cache based on a user-defined space limit in order to make space for new data. In the current versions of DCS, you can select an eviction policy.
+Data is evicted from cache based on a user-defined space limit in order to make space for new data.
 
-**noeviction** is the default eviction policy for single-node and master/standby DCS Redis instances. You can change the eviction policy by configuring the instance parameters on the DCS console.
-
-**volatile-lru** is the default eviction policy for cluster DCS Redis instances. To change the eviction policy for cluster instances, contact technical support.
+You can change the eviction policy by configuring the **maxmemory-policy** parameter.
 
 When **maxmemory** is reached, you can select one of the following eight eviction policies:
 

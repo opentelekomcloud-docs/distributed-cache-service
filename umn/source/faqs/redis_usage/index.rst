@@ -26,6 +26,8 @@ Redis Usage
 -  :ref:`Why Is Memory of a DCS Redis Instance Used Up by Just a Few Keys? <dcs-faq-0730033>`
 -  :ref:`Can I Recover Data from Deleted DCS Instances? <dcs-faq-0730034>`
 -  :ref:`Why Is "Error in execution" Returned When I Access Redis? <dcs-faq-210223001>`
+-  :ref:`Why Does a Key Disappear in Redis? <dcs-faq-210409001>`
+-  :ref:`Will Cached Data Be Retained After an Instance Is Restarted? <dcs-faq-0220330>`
 
 .. toctree::
    :maxdepth: 1
@@ -52,3 +54,5 @@ Redis Usage
    why_is_memory_of_a_dcs_redis_instance_used_up_by_just_a_few_keys
    can_i_recover_data_from_deleted_dcs_instances
    why_is_error_in_execution_returned_when_i_access_redis
+   why_does_a_key_disappear_in_redis
+   will_cached_data_be_retained_after_an_instance_is_restarted

@@ -31,7 +31,7 @@ The maintenance time window is the period when the DCS service team upgrade and 
 
 DCS instance maintenance takes place only once a quarter and does not interrupt services. Even so, you are advised to select a time period when the service demand is low.
 
-When creating an instance, you must specify a maintenance time window, which can be modified after the instance is created.
+When creating an instance, you must specify a maintenance time window, which can be modified on the **Basic Information** page after the instance is created.
 
 For details, see: :ref:`Modifying Maintenance Time Window <dcs-ug-0312025>`.
 
