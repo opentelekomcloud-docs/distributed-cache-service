@@ -23,6 +23,6 @@ Access in Different Languages
    clients_in_python
    go-redis
    hiredis_in_c++
-   c#
+   csharp
    php/index
    node.js
