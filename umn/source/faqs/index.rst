@@ -11,6 +11,7 @@ FAQs
 -  :ref:`Instance Scaling and Upgrade <dcs-faq-0326022>`
 -  :ref:`Monitoring and Alarm <dcs-faq-0326023>`
 -  :ref:`Data Backup, Export, and Migration <dcs-faq-0326024>`
+-  :ref:`Analysis of Big Keys and Hot Keys <dcs-faq-0805001>`
 -  :ref:`Master/Standby Switchover <dcs-faq-191204001>`
 
 .. toctree::
@@ -23,4 +24,5 @@ FAQs
    instance_scaling_and_upgrade/index
    monitoring_and_alarm/index
    data_backup,_export,_and_migration/index
+   analysis_of_big_keys_and_hot_keys/index
    master_standby_switchover/index

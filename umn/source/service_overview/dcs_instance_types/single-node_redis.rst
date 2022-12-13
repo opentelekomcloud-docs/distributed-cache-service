@@ -52,7 +52,7 @@ Architecture description:
 
    .. note::
 
-      For intra-VPC access, the client and the instance must be in the same VPC with specified security group rule configurations.
+      For intra-VPC access, the client and the instance must be in the same VPC with specified security group rule configurations with specified security group rule configurations.
 
       For details, see :ref:`Security Group Configurations <en-us_topic_0090662012>`.
 

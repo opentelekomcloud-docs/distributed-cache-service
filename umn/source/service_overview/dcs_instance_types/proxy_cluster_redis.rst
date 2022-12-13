@@ -32,7 +32,7 @@ Each Proxy Cluster instance consists of load balancers, proxies, cluster manager
    ============ ======= ======
 
 
-.. figure:: /_static/images/en-us_image_0296786822.png
+.. figure:: /_static/images/en-us_image_0000001383102132.png
    :alt: **Figure 1** Proxy Cluster DCS Redis instance architecture
 
    **Figure 1** Proxy Cluster DCS Redis instance architecture
