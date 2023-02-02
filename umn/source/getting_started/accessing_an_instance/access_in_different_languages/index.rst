@@ -22,7 +22,7 @@ Access in Different Languages
    lettuce_integration_with_spring_boot
    clients_in_python
    go-redis
-   hiredis_in_c++
+   hiredis_in_c
    csharp
    php/index
    node.js
