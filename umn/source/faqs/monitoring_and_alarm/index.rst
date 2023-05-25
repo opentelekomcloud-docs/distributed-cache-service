@@ -21,6 +21,6 @@ Monitoring and Alarm
    does_redis_support_command_audits
    what_should_i_do_if_the_monitoring_data_of_a_dcs_redis_instance_is_abnormal
    why_is_used_memory_greater_than_available_memory
-   why_does_bandwidth_usage_exceed_100%
+   why_does_bandwidth_usage_exceed_100pct
    why_is_the_rejected_connections_metric_displayed
    why_is_flow_control_triggered_how_do_i_handle_it

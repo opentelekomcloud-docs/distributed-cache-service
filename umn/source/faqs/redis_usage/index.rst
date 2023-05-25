@@ -33,7 +33,7 @@ Redis Usage
    :maxdepth: 1
    :hidden: 
 
-   why_is_cpu_usage_of_a_dcs_redis_instance_100%
+   why_is_cpu_usage_of_a_dcs_redis_instance_100pct
    can_i_change_the_vpc_and_subnet_for_a_dcs_redis_instance
    why_arent_security_groups_configured_for_dcs_redis_4.0_and_5.0_instances
    do_dcs_redis_instances_limit_the_size_of_a_key_or_value
@@ -44,7 +44,7 @@ Redis Usage
    does_dcs_for_redis_support_sentinel
    what_is_the_default_data_eviction_policy
    what_should_i_do_if_an_error_occurs_in_redis_exporter
-   why_is_memory_usage_more_than_100%
+   why_is_memory_usage_more_than_100pct
    why_is_redisson_distributed_lock_not_supported_by_dcs_proxy_cluster_redis_3.0_instances
    can_i_customize_or_change_the_port_for_accessing_a_dcs_instance
    can_i_modify_the_connection_addresses_for_accessing_a_dcs_instance
