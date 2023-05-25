@@ -19,6 +19,7 @@ import sys
 
 extensions = [
     'otcdocstheme',
+    'otc_sphinx_directives'
 ]
 
 otcdocs_auto_name = False
@@ -81,7 +82,7 @@ html_theme_options = {
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
 
-html_title = "Distributed Cache Service - API Reference"
+html_title = "Distributed Cache Service - Service Based View"
 
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -93,9 +94,4 @@ html_static_path = ['_static']
 html_copy_source = False
 
 # -- Options for PDF output --------------------------------------------------
-latex_documents = [
-    ('index',
-     'dcs-api-ref.tex',
-     u'Distributed Cache Service - API Reference',
-     u'OpenTelekomCloud', 'manual'),
-]
+latex_documents = []

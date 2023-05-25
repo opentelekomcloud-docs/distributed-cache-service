@@ -15,7 +15,7 @@ Instance Scaling and Upgrade
    :maxdepth: 1
    :hidden: 
 
-   can_dcs_redis_instances_be_upgraded,_for_example,_from_redis_3.0_to_redis_4.0_or_5.0
+   can_dcs_redis_instances_be_upgraded_for_example_from_redis_3.0_to_redis_4.0_or_5.0
    are_services_interrupted_if_maintenance_is_performed_during_the_maintenance_time_window
    are_instance_resources_affected_during_specification_modification
    are_services_interrupted_during_specification_modification

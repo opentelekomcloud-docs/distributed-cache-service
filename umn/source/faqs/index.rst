@@ -23,6 +23,6 @@ FAQs
    redis_commands/index
    instance_scaling_and_upgrade/index
    monitoring_and_alarm/index
-   data_backup,_export,_and_migration/index
+   data_backup_export_and_migration/index
    analysis_of_big_keys_and_hot_keys/index
    master_standby_switchover/index
