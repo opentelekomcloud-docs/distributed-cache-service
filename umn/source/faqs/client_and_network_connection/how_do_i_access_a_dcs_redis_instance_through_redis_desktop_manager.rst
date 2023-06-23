@@ -5,7 +5,7 @@
 How Do I Access a DCS Redis Instance Through Redis Desktop Manager?
 ===================================================================
 
-You can access a DCS Redis instance through the Redis Desktop Manager within a VPC.
+**You can access a DCS Redis instance through the Redis Desktop Manager within a VPC.**
 
 #. Enter the address, port number (6379), and authentication password of the DCS instance you want to access.
 

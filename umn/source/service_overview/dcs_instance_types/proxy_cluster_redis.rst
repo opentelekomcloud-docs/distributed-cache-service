@@ -5,13 +5,13 @@
 Proxy Cluster Redis
 ===================
 
-DCS provides two types of cluster Redis instances: Proxy Cluster and Redis Cluster. Proxy Cluster uses Linux Virtual Server (LVS) and proxies. Redis Cluster is the native distributed implementation of Redis. Proxy Cluster instances are compatible with Redis 3.0, while Redis Cluster instances are compatible with Redis 4.0 and 5.0.
+DCS for Redis provides Proxy Cluster instances, which use Linux Virtual Server (LVS) and proxies to achieve high availability.
 
-This section describes Proxy Cluster DCS Redis 3.0 instances.
+Proxy Cluster DCS Redis instances are compatible with Redis 3.0.
 
 .. note::
 
-   -  A Proxy Cluster instance can be connected in the same way that a single-node or master/standby instance is connected, without any special settings on the client. You can use the IP address or domain name of the instance, and do not need to know or use the proxy or shard addresses.
+   -  A Proxy Cluster instance can be connected in the same way that a single-node or master/standby instance is connected, without any special settings on the client. You can use the IP address of the instance, and do not need to know or use the proxy or shard addresses.
 
 Proxy Cluster DCS Redis 3.0 Instances
 -------------------------------------

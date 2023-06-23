@@ -5,7 +5,11 @@
 Single-Node Redis
 =================
 
-Three Redis versions are available for single-node DCS Redis instances: Redis 3.0, Redis 4.0, and Redis 5.0.
+Single-node DCS Redis instances are available in versions 3.0/4.0/5.0/6.0.
+
+.. note::
+
+   You cannot upgrade the Redis version for an instance. For example, a single-node DCS Redis 4.0 instance cannot be upgraded to a single-node DCS Redis 5.0 instance. If your service requires the features of higher Redis versions, create a DCS Redis instance of a higher version and then migrate data from the old instance to the new one.
 
 Features
 --------
@@ -35,7 +39,7 @@ Architecture
 
 .. note::
 
-   To access a DCS Redis 3.0 instance, you must use port 6379. To access a DCS Redis 4.0 or 5.0 instance, you can customize the port. If no port is specified, the default port 6379 will be used. In the following architecture, port 6379 is used. If you have customized a port, replace **6379** with the actual port.
+   To access a DCS Redis 3.0 instance, you must use port 6379. To access a DCS Redis 4.0/5.0/6.0 instance, you can customize the port. If no port is specified, the default port 6379 will be used. In the following architecture, port 6379 is used. If you have customized a port, replace **6379** with the actual port.
 
 .. _cachesinglenode__fig15457185394718:
 
@@ -52,7 +56,7 @@ Architecture description:
 
    .. note::
 
-      For intra-VPC access, the client and the instance must be in the same VPC with specified security group rule configurations with specified security group rule configurations.
+      For intra-VPC access, the client and the instance must be in the same VPC with specified security group rule configurations.
 
       For details, see :ref:`Security Group Configurations <en-us_topic_0090662012>`.
 

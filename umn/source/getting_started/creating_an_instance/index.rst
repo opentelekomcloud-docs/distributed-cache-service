@@ -6,7 +6,7 @@ Creating an Instance
 ====================
 
 -  :ref:`Identifying Requirements <purchasepreparation>`
--  :ref:`Preparing the Environment <dcs-ug-0312004>`
+-  :ref:`Preparing Required Resources <dcs-ug-0312004>`
 -  :ref:`Creating a DCS Redis Instance <dcs-ug-0326008>`
 
 .. toctree::
@@ -14,5 +14,5 @@ Creating an Instance
    :hidden: 
 
    identifying_requirements
-   preparing_the_environment
+   preparing_required_resources
    creating_a_dcs_redis_instance

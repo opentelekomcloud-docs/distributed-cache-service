@@ -7,7 +7,7 @@ Web CLI Commands
 
 Web CLI is a command line tool provided on the DCS console. This section describes Web CLI's compatibility with Redis commands, including supported and disabled commands. For details about the command syntax, visit the `Redis official website <https://redis.io/commands>`__.
 
-**Currently, only DCS for Redis 4.0 and 5.0 support Web CLI.**
+**Currently, only DCS for Redis 4.0/5.0/6.0 support Web CLI.**
 
 .. note::
 

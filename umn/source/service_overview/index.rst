@@ -10,11 +10,11 @@ Service Overview
 -  :ref:`DCS Instance Types <dcs-pd-200312001>`
 -  :ref:`DCS Instance Specifications <en-us_topic_0054235835>`
 -  :ref:`Command Compatibility <dcs-pd-200312003>`
--  :ref:`HA and DR Policies <globaldrpolicy>`
+-  :ref:`Disaster Recovery and Multi-Active Solution <globaldrpolicy>`
 -  :ref:`Comparing Redis Versions <redisdifference>`
 -  :ref:`Comparing DCS and Open-Source Cache Services <dcs-pd-0326003>`
 -  :ref:`Basic Concepts <dcs-pd-200312004>`
--  :ref:`Permissions Management <dcs-pd-210626001>`
+-  :ref:`Permissions <dcs-pd-210626001>`
 -  :ref:`Related Services <dcs-pd-0326006>`
 -  :ref:`Accessing DCS <en-us_topic_0054235836>`
 
@@ -27,10 +27,10 @@ Service Overview
    dcs_instance_types/index
    dcs_instance_specifications/index
    command_compatibility/index
-   ha_and_dr_policies
+   disaster_recovery_and_multi-active_solution
    comparing_redis_versions
    comparing_dcs_and_open-source_cache_services
    basic_concepts
-   permissions_management
+   permissions
    related_services
    accessing_dcs/index

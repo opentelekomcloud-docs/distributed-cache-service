@@ -90,7 +90,7 @@ Procedure
           }
       }
 
-   *10.10.38.233:6379* contains an example IP address/domain name and port number of the DCS Redis instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312013__en-us_topic_0148195355_li457118182512>`. Change the IP address/domain name and port as required. ``********`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
+   *10.10.38.233:6379* contains an example IP address/domain name and port number of the DCS Redis instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312013__en-us_topic_0148195355_li457118182512>`. Change them as required. ``********`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
 
 #. Run the code. You have successfully accessed the instance if the following command output is displayed:
 

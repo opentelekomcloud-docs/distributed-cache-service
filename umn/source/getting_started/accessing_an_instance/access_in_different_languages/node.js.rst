@@ -89,7 +89,7 @@ Procedure
       // All arguments are passed directly to the redis server:
       redis.set('key', 100, 'EX', 10);
 
-   *host* indicates the example IP address/domain name of DCS instance and *port* indicates the port number of DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312012__en-us_topic_0148195323_li5233248151213>`. Change the IP address/domain name and port as required. ``******`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
+   *host* indicates the example IP address/domain name of the DCS instance and *port* indicates the port number of the DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312012__en-us_topic_0148195323_li5233248151213>`. Change them as required. ``******`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
 
 #. Run the sample script to access the chosen DCS instance.
 
@@ -163,7 +163,7 @@ Procedure
       // All arguments are passed directly to the redis server:
       redis.set('key', 100, 'EX', 10);
 
-   *host* indicates the example IP address/domain name of DCS instance and *port* indicates the port number of DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312012__en-us_topic_0148195323_li11511175651212>`. Change the IP address/domain name and port as required. ``******`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
+   *host* indicates the example IP address/domain name of the DCS instance and *port* indicates the port number of the DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312012__en-us_topic_0148195323_li11511175651212>`. Change them as required. ``******`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
 
 #. Run the sample script to access the chosen DCS instance.
 

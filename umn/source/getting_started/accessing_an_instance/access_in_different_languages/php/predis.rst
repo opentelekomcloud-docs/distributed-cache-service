@@ -87,6 +87,6 @@ Procedure
                 echo $value;
          ?>
 
-   *{redis_instance_address}* indicates the actual IP address or domain name of the DCS instance and *{port}* is the actual port number of DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-211202002__en-us_topic_0000001184480402_li1655151054317>`. Change the IP address/domain name and port as required. *{password}* indicates the password used to log in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation. If password-free access is required, delete the line that contains "password".
+   *{redis_instance_address}* indicates the actual IP address/domain name of the DCS instance and *{port}* is the actual port number of DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-211202002__en-us_topic_0000001184480402_li1655151054317>`. Change them as required. *{password}* indicates the password used to log in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation. If password-free access is required, delete the line that contains "password".
 
 #. Run the **php redis.php** command to access the DCS instance.

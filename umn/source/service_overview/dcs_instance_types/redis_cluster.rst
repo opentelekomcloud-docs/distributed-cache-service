@@ -5,16 +5,19 @@
 Redis Cluster
 =============
 
-This section describes Redis Cluster DCS Redis 4.0 and 5.0 instances.
+Redis Cluster DCS instances use the native distributed implementation of Redis.
 
-Redis Cluster DCS Redis 4.0 and 5.0 Instances
----------------------------------------------
+Redis Cluster DCS instances are compatible with Redis 4.0 and 5.0.
+
+
+Redis Cluster
+-------------
 
 The Redis Cluster instance type provided by DCS is compatible with the `native Redis Cluster <https://redis.io/topics/cluster-spec>`__, which uses smart clients and a distributed architecture to perform sharding.
 
 :ref:`Table 1 <cacheproxy__table3552324111>` lists the shard specification for different instance specifications.
 
-**Specification per shard=Instance specification/Number of shards**. For example, if a 48 GB instance has 6 shards, the specification of each shard is 48 GB/6 = 8 GB.
+**Size of a shard = Instance specification/Number of shards**. For example, if a 48 GB instance has 6 shards, the size of each shard is 48 GB/6 = 8 GB.
 
 .. _cacheproxy__table3552324111:
 
