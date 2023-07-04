@@ -25,4 +25,5 @@ For cluster instances:
 
 .. note::
 
-   You can analyze big keys and hot keys on the DCS console. For details, see :ref:`Cache Analysis <dcs-ug-190808001>`.
+   -  You can analyze big keys and hot keys on the DCS console. For details, see :ref:`Analyzing Big Keys and Hot Keys <dcs-ug-190808001>`.
+   -  Running commands (such as **KEYS**) that consume lots of resources may cause high CPU and bandwidth usage. As a result, flow control is triggered.

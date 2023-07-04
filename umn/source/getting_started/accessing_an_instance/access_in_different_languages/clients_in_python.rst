@@ -48,7 +48,7 @@ Procedure
 
       a. Install Python and redis-py.
 
-         #. If the system does not provide Python, run the following **yum** command to install it.
+         #. If the system does not provide Python, run the **yum** command to install it.
 
          #. Run the following command to download and decompress the redis-py package:
 
@@ -84,7 +84,7 @@ Procedure
 
                r = redis.StrictRedis(host='XXX.XXX.XXX.XXX', port=6379, password='******');
 
-            *XXX.XXX.XXX.XXX* indicates the IP address/domain name of the DCS instance and **6379** is an example port number of the instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312011__en-us_topic_0148195287_li450593110588>`. Change the IP address/domain name and port as required. ``******`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
+            *XXX.XXX.XXX.XXX* indicates the IP address/domain name of the DCS instance and **6379** is an example port number of the instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312011__en-us_topic_0148195287_li450593110588>`. Change them as required. ``******`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
 
             You have successfully accessed the instance if the following command output is displayed. Enter commands to perform read and write operations on the database.
 
@@ -116,15 +116,15 @@ Procedure
 
          #. Run the **python** command to enter the CLI mode.
 
-         #. Run the following command to access the chosen DCS Redis instance:
+         #. Run the following command to access the chosen DCS Redis instance. If the instance does not have a password, exclude **password='******'** from the command.
 
             .. code-block::
 
                >>> from rediscluster import RedisCluster
 
-               >>> startup_nodes = [{"host": "192.168.0.143", "port": "6379"}]
+               >>> startup_nodes = [{"host": "192.168.0.143", "port": "6379"},{"host": "192.168.0.144", "port": "6379"},{"host": "192.168.0.145", "port": "6379"},{"host": "192.168.0.146", "port": "6379"}]
 
-               >>> rc = RedisCluster(startup_nodes=startup_nodes, decode_responses=True)
+               >>> rc = RedisCluster(startup_nodes=startup_nodes, decode_responses=True, password='******')
 
                >>> rc.set("foo", "bar")
                True

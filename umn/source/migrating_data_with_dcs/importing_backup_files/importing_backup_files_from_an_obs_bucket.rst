@@ -1,0 +1,134 @@
+:original_name: dcs-ug-0312037.html
+
+.. _dcs-ug-0312037:
+
+Importing Backup Files from an OBS Bucket
+=========================================
+
+Scenario
+--------
+
+Use the DCS console to migrate Redis data from Redis of other vendors or self-hosted Redis to DCS for Redis.
+
+Simply download the source Redis data and then upload the data to an OBS bucket in the same region as the target DCS Redis instance. After you have created a migration task on the DCS console, DCS will read data from the OBS bucket and data will be migrated to the target instance.
+
+.aof, .rbb, .zip, and .tar.gz files can be uploaded to OBS buckets. You can directly upload .aof and .rdb files or compress them into .zip or .tar.gz files before uploading.
+
+Prerequisites
+-------------
+
+-  The OBS bucket must be in the same region as the target DCS Redis instance.
+-  The data files to be uploaded must be in the .aof, .rdb, .zip, or .tar.gz format.
+-  To migrate data from a single-node or master/standby Redis instance of other cloud vendors, create a backup task and download the backup file.
+-  To migrate data from a cluster Redis instance of other cloud vendors, download all backup files and upload all of them to the OBS bucket. Each backup file contains data for a shard of the instance.
+-  Redis Cluster instances only support .rdb files and do not support .aof files.
+
+.. _dcs-ug-0312037__en-us_topic_0179456697_dcs-migration-190703002_section1128152020384:
+
+Step 1: Prepare the Target DCS Redis Instance
+---------------------------------------------
+
+-  If a DCS Redis instance is not available, create one first. For details, see :ref:`Creating a DCS Redis Instance <dcs-ug-0326008>`.
+-  If a DCS Redis instance is available, you do not need to create a new one. However, you can clear the instance data before the migration.
+
+   -  If the target instance is Redis 4.0 and later, clear the data by referring to :ref:`Clearing DCS Instance Data <dcs-ug-0312018>`.
+   -  If the target instance is a DCS Redis 3.0 instance, run the **FLUSHALL** command to clear data.
+   -  If the target instance data is not cleared before the migration and the source and target instances contain the same key, the key in the target instance will be overwritten by the key in the source instance after the migration.
+
+-  Redis is backward compatible. The target instance version must be the same as or later than the source instance version.
+
+Step 2: Create an OBS Bucket and Upload Backup Files
+----------------------------------------------------
+
+#. Create an OBS bucket.
+
+   a. Log in to the OBS Console and click **Create Bucket**.
+
+   b. Select a region.
+
+      The OBS bucket must be in the same region as the target DCS Redis instance.
+
+   c. Specify **Bucket Name**.
+
+      The bucket name must meet the naming rules specified on the console.
+
+   d. Set **Storage Class** to **Standard**, **Warm** or **Cold**.
+
+   e. Set **Bucket Policy** to **Private**, **Public Read**, or **Public Read and Write**.
+
+   f. Configure default encryption.
+
+   g. Click **Create Now**.
+
+#. Upload the backup data files to the OBS bucket by using OBS Browser+.
+
+   If the backup file to be uploaded does not exceed 5 GB, upload the file using the OBS console by referring to step :ref:`3 <dcs-ug-0312037__li8307135965315>`.
+
+   If the backup file to be uploaded is larger than 5 GB, perform the following steps to upload the file using OBS Browser+.
+
+   a. Download OBS Browser+.
+
+      For details, see section "Downloading OBS Browser+" in *Object Storage Service (OBS) Tools Guide (OBS Browser+)*.
+
+   b. Install OBS Browser+.
+
+      For details, see section "Installing OBS Browser+" in *Object Storage Service (OBS) Tools Guide (OBS Browser+)*.
+
+   c. Log in to OBS Browser+.
+
+      For details, see section "Logging In to OBS Browser+" in *Object Storage Service (OBS) Tools Guide (OBS Browser+)*.
+
+   d. Create a bucket.
+
+   e. Upload backup data.
+
+#. .. _dcs-ug-0312037__li8307135965315:
+
+   On the OBS console, upload the backup data files to the OBS bucket.
+
+   Perform the following steps if the backup file size does not exceed 5 GB:
+
+   a. In the bucket list, click the name of the created bucket.
+
+   b. In the navigation pane, choose **Objects**.
+
+   c. On the **Objects** tab page, click **Upload Object**.
+
+   d. Upload the objects.
+
+      To upload objects, drag files or folders to the **Upload Object** area or click **add file**. A maximum of 100 files can be uploaded at a time. The total size cannot exceed 5 GB.
+
+   e. Click **Upload**.
+
+Step 3: Create a Migration Task
+-------------------------------
+
+#. Log in to the DCS console.
+
+#. Click |image1| in the upper left corner and select a region and a project.
+
+#. In the navigation pane, choose **Data Migration**.
+
+#. Click **Create Backup Import Task**.
+
+#. Specify **Task Name** and **Description**.
+
+#. Select **OBS Bucket** as the data source and then select the OBS bucket to which you have uploaded backup files.
+
+   .. note::
+
+      You can upload files in the .aof, .rdb, .zip, or .tar.gz format.
+
+#. Select the backup files whose data is to be migrated.
+
+#. Select the target DCS Redis instance prepared in :ref:`Step 1: Prepare the Target DCS Redis Instance <dcs-ug-0312037__en-us_topic_0179456697_dcs-migration-190703002_section1128152020384>`.
+
+#. Enter the password of the target instance. Click **Test Connection** to verify the password.
+
+#. Click **Next**.
+
+#. Confirm the migration task details and click **Submit**.
+
+   Go back to the data migration task list. After the migration is successful, the task status changes to **Successful**.
+
+.. |image1| image:: /_static/images/en-us_image_0000001194523107.png

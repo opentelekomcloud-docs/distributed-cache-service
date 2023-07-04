@@ -119,7 +119,7 @@ Procedure
 
       **./connRedis** **{redis_ip_address}** **6379** **{password}**
 
-      *{redis_instance_address}* indicates the IP address/domain name of DCS instance and **6379** is an example port number of DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312010__en-us_topic_0148195243_li1655151054317>`. Change the IP address/domain name and port as required. *{password}* indicates the password used to log in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
+      *{redis_instance_address}* indicates the IP address/domain name of DCS instance and **6379** is an example port number of DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312010__en-us_topic_0148195243_li1655151054317>`. Change them as required. *{password}* indicates the password used to log in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
 
       You have successfully accessed the instance if the following command output is displayed:
 

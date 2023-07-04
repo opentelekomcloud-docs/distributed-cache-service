@@ -6,7 +6,7 @@ Java
 ====
 
 -  :ref:`Jedis <dcs-ug-0713005>`
--  :ref:`Lettuce <dcs-ug-211011001>`
+-  :ref:`Lettuce <dcs-ug-211105002>`
 -  :ref:`Redisson <dcs-ug-211105004>`
 
 .. toctree::

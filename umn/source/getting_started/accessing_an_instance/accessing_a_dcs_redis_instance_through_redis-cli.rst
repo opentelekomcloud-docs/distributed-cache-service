@@ -9,19 +9,23 @@ Access a DCS Redis instance through redis-cli on an ECS in the same VPC. For mor
 
 .. note::
 
-   -  Redis 3.0 does not support port customization and allows only port 6379. For Redis 4.0 and 5.0, you can specify a port or use the default port 6379. The following uses the default port 6379. If you have specified a port, replace 6379 with the actual port.
+   -  Redis 3.0 does not support port customization and allows only port 6379. For Redis 4.0 and later, you can specify a port or use the default port 6379. The following uses the default port 6379. If you have specified a port, replace 6379 with the actual port.
 
    -  **When connecting to a Redis Cluster instance, ensure that** **-c** **is added to the command.** Otherwise, the connection will fail.
 
       -  Run the following command to connect to a Redis Cluster instance:
 
-         ./redis-cli -h *{dcs_instance_address}* -p 6379 -a *{password}* **-c**
+         ./redis-cli -h *{dcs_instance_address}* -p *6379* -a *{password}* **-c**
 
       -  Run the following command to connect to a single-node, master/standby, or Proxy Cluster instance:
 
          *./redis-cli -h* *{dcs_instance_address} -p 6379* -a *{password}*
 
       For details, see :ref:`3 <dcs-ug-0326009__en-us_topic_0148195299_li1511472544119>` and :ref:`4 <dcs-ug-0326009__en-us_topic_0148195299_li126171140194317>`.
+
+   -  If SSL is enabled for a single-node or master/standby DCS Redis 6.0 instance, set an SSL certificate path.
+
+      *./redis-cli -h* *{dcs_instance_address} -p 6379* -a *{password}* **--tls --cacert {certification file path}**
 
 Prerequisites
 -------------
@@ -65,7 +69,7 @@ Procedure (Linux)
 
    Access a DCS instance of a type other than Redis Cluster.
 
-   Perform the following procedure to access a DCS Redis 3.0 instance, or a single-node or master/standby DCS Redis 4.0 or 5.0 instance.
+   Perform the following procedure to access a single-node, master/standby instance.
 
    **./redis-cli -h** *${instance IP}* **-p 6379 -a** *${password}*
 
@@ -141,4 +145,4 @@ Procedure (Windows)
 
 **redis-cli.exe -h XXX -p 6379**
 
-**XXX** indicates the IP address of the DCS instance and **6379** is an example port number used for accessing a DCS instance. For details about how to obtain the IP address and port number, see :ref:`Viewing Details of a DCS Instance <dcs-ug-0312016>`. Change the IP address and port as required.
+**XXX** indicates the IP address of the DCS instance and **6379** is an example port number used for accessing the DCS instance. For details about how to obtain the IP address and port number, see :ref:`Viewing Details of a DCS Instance <dcs-ug-0312016>`. Change the IP address and port as required.

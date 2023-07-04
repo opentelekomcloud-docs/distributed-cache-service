@@ -10,19 +10,12 @@ DCS Instance
 
 An instance is the minimum resource unit provided by DCS.
 
-DCS supports the Redis cache engine, and single-node, master/standby, and cluster instance types. For each instance type, multiple specifications are available.
-
 For details, see :ref:`DCS Instance Specifications <en-us_topic_0054235835>` and :ref:`DCS Instance Types <dcs-pd-200312001>`.
 
 Project
 -------
 
 Projects are used to group and isolate OpenStack resources (computing resources, storage resources, and network resources). A project can be a department or a project team. Multiple projects can be created for one account.
-
-Replica
--------
-
-A replica is a node of a DCS instance. No replication indicates that the instance does not have a standby node. Master/Standby replication indicates that the instance has a standby node. For example, a master/standby DCS instance has a master/standby replication. Each node of a cluster DCS Redis instance has a master/standby replication.
 
 Maintenance Time Window
 -----------------------
@@ -48,3 +41,10 @@ Shard
 -----
 
 A shard is a management unit of a cluster DCS Redis instance. Each shard corresponds to a redis-server process. A cluster consists of multiple shards. Each shard has multiple slots. Data is distributedly stored in the slots. The use of shards increases cache capacity and concurrent connections.
+
+Each cluster instance consists of multiple shards. By default, each shard is a master/standby instance with two replicas. The number of shards is equal to the number of master nodes in a cluster instance.
+
+Replica
+-------
+
+A replica is a node in a DCS instance. A single-replica instance has no standby node. A two-replica instance has one master node and one standby node. By default, each master/standby instance has two replicas. If the number of replicas is set to three for a master/standby instance, the instance has one master node and two standby nodes. A single-node instance has only one node.

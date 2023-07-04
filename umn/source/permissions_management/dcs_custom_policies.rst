@@ -5,14 +5,14 @@
 DCS Custom Policies
 ===================
 
-Custom policies can be created to supplement the system-defined policies of DCS. For the actions that can be added for custom policies, see Permissions Policies and Supported Actions.
+Custom policies can be created to supplement the system-defined policies of DCS. For the actions that can be added to custom policies, see section "Permissions Policies and Supported Actions" in the *Distributed Cache Service API Reference*.
 
 You can create custom policies in either of the following ways:
 
 -  Visual editor: Select cloud services, actions, resources, and request conditions. This does not require knowledge of policy syntax.
 -  JSON: Edit JSON policies from scratch or based on an existing policy.
 
-For details, see "Creating a Custom Policy". The following section contains examples of common DCS custom policies.
+For details, see section "Creating a Custom Policy" in the *Identity and Access Management API Reference*. The following section contains examples of common DCS custom policies.
 
 .. note::
 

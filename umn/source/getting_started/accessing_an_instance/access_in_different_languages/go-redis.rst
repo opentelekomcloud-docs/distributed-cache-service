@@ -77,7 +77,7 @@ Procedure
           fmt.Println(val1)
       }
 
-   *host:port* are the IP address/domain name and port number of the DCS Redis instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-211105001__en-us_topic_0000001174913212_li457118182512>`. Change the IP address/domain name and port as required. ``********`` indicates the password used to log in to the DCS Redis instance. This password is defined during DCS Redis instance creation.
+   *host:port* are the IP address/domain name and port number of the DCS Redis instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-211105001__en-us_topic_0000001174913212_li457118182512>`. Change them as required. ``********`` indicates the password used to log in to the DCS Redis instance. This password is defined during DCS Redis instance creation.
 
 #. Run the **go build -o test main.go** command to package the code into an executable file, for example, **test**.
 

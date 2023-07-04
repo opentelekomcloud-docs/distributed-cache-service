@@ -9,7 +9,7 @@ There are two ways to access DCS:
 
 -  Using the management console
 
-   The DCS provides a web-based management console. To launch the DCS console, create an account on the management console and log in, and then choose **Application** > **Distributed Cache Service** on the homepage. On the DCS console, you can create, restart, and delete DCS instances, and change their passwords.
+   The DCS provides a web-based management console. To launch the DCS console, create an account on the management console and log in, and then choose **Database** > **Distributed Cache Service** on the homepage. On the DCS console, you can create, restart, and delete DCS instances, and change their passwords.
 
 -  Using APIs
 
