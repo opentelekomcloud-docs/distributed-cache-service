@@ -9,5 +9,7 @@ Distributed Cache Service (DCS) is an online, distributed, in-memory cache servi
 
    .. service_card::
       :service_type: dcs
+      :environment: internal
       :umn: This document describes basic concepts, functions, and FAQs of DCSs and provides instructions for applying for and using DCSs.
       :api-ref: This document describes application programming interfaces (APIs) of Distributed Cache Service (DCS) and provides API parameter.
+      :best-practice: To use Distributed Cache Service more securely, reliably, flexibly, and efficiently, you are advised to follow the following best practices. 
