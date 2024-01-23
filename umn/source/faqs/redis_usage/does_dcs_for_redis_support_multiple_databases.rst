@@ -5,6 +5,6 @@
 Does DCS for Redis Support Multiple Databases?
 ==============================================
 
-Both single-node and master/standby DCS Redis instances support multiple databases. By default, single-node and master/standby DCS instances can read and write data in 256 databases (databases numbering 0-255).
+Both single-node and master/standby DCS Redis instances support multiple databases. By default, single-node and master/standby DCS instances can read and write data in 256 databases (databases numbering 0-255). The default database is DB0.
 
-Cluster DCS instances do not support data read/write in multiple databases.
+Redis Cluster DCS instances do not support multi-DB. There is only one database (DB0).

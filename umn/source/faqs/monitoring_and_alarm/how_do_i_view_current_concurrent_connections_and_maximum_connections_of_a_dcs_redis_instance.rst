@@ -26,6 +26,6 @@ Viewing or Modifying the Maximum Connections of an Instance
 
 When creating an instance on the console, you can view the default maximum number of connections and the limit that can be configured.
 
-After an instance is created, you can view or change the value of **maxclients** (the maximum number of connections) on the **Parameters** page of the DCS console. (This parameter cannot be modified for Proxy Cluster instances.)
+After an instance is created, you can view or change the value of **maxclients** (the maximum number of connections) on the **Instance Configuration** > **Parameters** page of the DCS console. (This parameter cannot be modified for Proxy Cluster instances.)
 
 .. |image1| image:: /_static/images/en-us_image_0000001383077054.png

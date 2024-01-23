@@ -19,6 +19,9 @@ Client and Network Connection
 -  :ref:`What Should Be Noted When Using Redis for Pub/Sub? <dcs-faq-0730011>`
 -  :ref:`How Do I Troubleshoot Redis Connection Failures? <dcs-faq-0730010>`
 -  :ref:`What Can I Do If Error "Cannot assign requested address" Is Returned When I Access Redis Using connect? <dcs-faq-210721003>`
+-  :ref:`Connection Pool Selection and Recommended Jedis Parameter Settings <dcs-faq-211230001>`
+-  :ref:`Should I Use a Domain Name or an IP Address to Connect to a DCS Redis Instance? <dcs-faq-022025>`
+-  :ref:`Is the Read-only Address of a Master/Standby Instance Connected to the Master or Standby Node? <dcs-faq-221222>`
 
 .. toctree::
    :maxdepth: 1
@@ -38,3 +41,6 @@ Client and Network Connection
    what_should_be_noted_when_using_redis_for_pub_sub
    how_do_i_troubleshoot_redis_connection_failures
    what_can_i_do_if_error_cannot_assign_requested_address_is_returned_when_i_access_redis_using_connect
+   connection_pool_selection_and_recommended_jedis_parameter_settings
+   should_i_use_a_domain_name_or_an_ip_address_to_connect_to_a_dcs_redis_instance
+   is_the_read-only_address_of_a_master_standby_instance_connected_to_the_master_or_standby_node

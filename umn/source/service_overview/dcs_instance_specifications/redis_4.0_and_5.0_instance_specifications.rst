@@ -117,7 +117,7 @@ In addition to larger memory, Redis Cluster instances feature more connections a
 
 -  Available memory per node = Instance available memory/Master node quantity. For example:
 
-   For example, a 24 GB instance has 24 GB available memory and 3 master nodes. The available memory per node is 24/3 = 8 GB.
+   For example, a 64 GB instance has 64 GB available memory and 8 master nodes. The available memory per node is 64/8 = 8 GB.
 
 -  Maximum connections limit per node = Maximum connections limit/Master node quantity For example:
 

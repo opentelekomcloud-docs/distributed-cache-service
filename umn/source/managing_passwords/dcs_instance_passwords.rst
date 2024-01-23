@@ -21,7 +21,7 @@ Passwords can be configured to control access to your DCS instances, ensuring th
       -  Lowercase letters
       -  Uppercase letters
       -  Digits
-      -  special characters (:literal:`\`~!@#$^&*()-_=+\\|{}:,<.>/?`)
+      -  Special characters (:literal:`\`~!@#$^&*()-_=+\\|{},<.>/?`)
 
 Using Passwords Securely
 ------------------------

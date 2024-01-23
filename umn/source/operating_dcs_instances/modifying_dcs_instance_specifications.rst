@@ -9,9 +9,10 @@ On the DCS console, you can scale a DCS Redis instance to a larger or smaller ca
 
 .. note::
 
-   -  **Modify instance specifications during off-peak hours.**
+   -  **Modify instance specifications during off-peak hours.** If the modification failed in peak hours (for example, when memory or CPU usage is over 90% or write traffic surges), try again during off-peak hours.
    -  If your DCS instances are too old to support scaling, contact technical support to upgrade the instances.
    -  Services may be interrupted for seconds during the modification. Therefore, services connected to Redis must support reconnection.
+   -  Modifying instance specifications does not affect the connection address, password, data, security group, and whitelist configurations of the instance.
 
 Change of the Instance Type
 ---------------------------
@@ -43,14 +44,17 @@ Scaling
 
    .. table:: **Table 1** Scaling options supported by different DCS instances
 
-      ============ =============== =============== ============= =============
-      Cache Engine Single-Node     Master/Standby  Redis Cluster Proxy Cluster
-      ============ =============== =============== ============= =============
-      Redis 3.0    Scaling up/down Scaling up/down N/A           Scaling up
-      Redis 4.0    Scaling up/down Scaling up/down Scaling up    N/A
-      Redis 5.0    Scaling up/down Scaling up/down Scaling up    N/A
-      Redis 6.0    Scaling up/down Scaling up/down N/A           N/A
-      ============ =============== =============== ============= =============
+      +--------------+-----------------+-----------------+-------------------------+---------------+
+      | Cache Engine | Single-Node     | Master/Standby  | Redis Cluster           | Proxy Cluster |
+      +==============+=================+=================+=========================+===============+
+      | Redis 3.0    | Scaling up/down | Scaling up/down | N/A                     | Scaling up    |
+      +--------------+-----------------+-----------------+-------------------------+---------------+
+      | Redis 4.0    | Scaling up/down | Scaling up/down | Scaling up              | N/A           |
+      +--------------+-----------------+-----------------+-------------------------+---------------+
+      | Redis 5.0    | Scaling up/down | Scaling up/down | Scaling up              | N/A           |
+      +--------------+-----------------+-----------------+-------------------------+---------------+
+      | Redis 6.0    | Scaling up/down | Scaling up/down | Scaling up/down, out/in | N/A           |
+      +--------------+-----------------+-----------------+-------------------------+---------------+
 
    .. note::
 
@@ -77,7 +81,7 @@ Scaling
       -  Before scaling, perform cache analysis to ensure that no big keys (>= 512 MB) exist in the instance. Otherwise, scaling may fail.
       -  Backup records created before scaling cannot be restored.
 
--  **Notes on changing the number of replicas of a DCS Redis 4.0 or 5.0 instance:**
+-  **Notes on changing the number of replicas of a DCS Redis instance:**
 
    Deleting replicas interrupts connections. If your application cannot reconnect to Redis or handle exceptions, you need to restart the application after scaling.
 

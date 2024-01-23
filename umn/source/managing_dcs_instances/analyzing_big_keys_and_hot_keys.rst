@@ -50,6 +50,24 @@ Big Key Analysis Procedure
 
       A maximum of 20 big key analysis records are retained for Strings and 80 are retained for Lists, Sets, Zsets, and Hashes.
 
+   .. table:: **Table 1** Results of big key analysis
+
+      +-----------+-------------------------------------------------------------------+
+      | Parameter | Description                                                       |
+      +===========+===================================================================+
+      | Key       | Name of a big key.                                                |
+      +-----------+-------------------------------------------------------------------+
+      | Type      | Type of a big key, which can be string, list, set, zset, or hash. |
+      +-----------+-------------------------------------------------------------------+
+      | Size      | Size or number of elements of a big key.                          |
+      +-----------+-------------------------------------------------------------------+
+      | Shard     | Shard where the big key of the cluster instance is located.       |
+      +-----------+-------------------------------------------------------------------+
+      | Database  | Database where a big key is located.                              |
+      +-----------+-------------------------------------------------------------------+
+
+.. _dcs-ug-190808001__section47852016145218:
+
 Hot Key Analysis Procedure
 --------------------------
 
@@ -77,7 +95,7 @@ Hot Key Analysis Procedure
 
       The console displays a maximum of 100 hot key analysis records for each instance.
 
-   .. table:: **Table 1** Results of hot key analysis
+   .. table:: **Table 2** Results of hot key analysis
 
       +-----------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
       | Parameter                         | Description                                                                                                                                                                                                                                                                                                                          |
@@ -91,6 +109,8 @@ Hot Key Analysis Procedure
       | FREQ                              | Reflects the access frequency of a key within a specific period of time.                                                                                                                                                                                                                                                             |
       |                                   |                                                                                                                                                                                                                                                                                                                                      |
       |                                   | **FREQ** is the logarithmic access frequency counter. The maximum value of **FREQ** is 255, which indicates 1 million access requests. After **FREQ** reaches **255**, it will no longer increment even if access requests continue to increase. **FREQ** will decrement by 1 for every minute during which the key is not accessed. |
+      +-----------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+      | Shard                             | Shard where the hot key of the cluster instance is located.                                                                                                                                                                                                                                                                          |
       +-----------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
       | DataBase                          | Database where a hot key is located.                                                                                                                                                                                                                                                                                                 |
       +-----------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

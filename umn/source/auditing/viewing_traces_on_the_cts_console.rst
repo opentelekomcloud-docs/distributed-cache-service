@@ -24,7 +24,7 @@ Procedure
 
 #. Specify the filters used for querying traces. The following filters are available:
 
-   -  **Search By**:
+   -  **Trace Type**, **Trace Source**, **Resource Type**, and **Search By**
 
       Select an option from the drop-down list. Select **DCS** from the **Trace Source** drop-down list.
 

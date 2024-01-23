@@ -11,8 +11,10 @@ Managing DCS Instances
 -  :ref:`Modifying the Security Group <dcs-ug-0312026>`
 -  :ref:`Viewing Background Tasks <dcs-ug-0312028>`
 -  :ref:`Viewing Data Storage Statistics of a DCS Redis 3.0 Proxy Cluster Instance <dcs-ug-0312029>`
+-  :ref:`Managing Tags <tagmanagement>`
 -  :ref:`Managing Shards and Replicas <dcs-ug-210107001>`
 -  :ref:`Analyzing Big Keys and Hot Keys <dcs-ug-190808001>`
+-  :ref:`Scanning Expired Keys <dcs-ug-210330002>`
 -  :ref:`Managing IP Address Whitelist <dcs-ug-190812001>`
 -  :ref:`Viewing Redis Slow Queries <dcs-ug-190926001>`
 -  :ref:`Viewing Redis Run Logs <dcs-ug-1009001>`
@@ -28,8 +30,10 @@ Managing DCS Instances
    modifying_the_security_group
    viewing_background_tasks
    viewing_data_storage_statistics_of_a_dcs_redis_3.0_proxy_cluster_instance
+   managing_tags
    managing_shards_and_replicas
    analyzing_big_keys_and_hot_keys
+   scanning_expired_keys
    managing_ip_address_whitelist
    viewing_redis_slow_queries
    viewing_redis_run_logs

@@ -7,19 +7,19 @@ Why Does Bandwidth Usage Exceed 100%?
 
 The basic information about the bandwidth usage metric is as follows.
 
-+-----------------+-----------------+-----------------------------------------------------------------+-------------+-------------------------------------------------------------+------------------------------+
-| Metric ID       | Metric Name     | Description                                                     | Value Range | Monitored Object and Dimension                              | Monitoring Period (Raw Data) |
-+=================+=================+=================================================================+=============+=============================================================+==============================+
-| bandwidth_usage | Bandwidth Usage | Percentage of the used bandwidth to the maximum bandwidth limit | 0-200%      | Monitored object:                                           | 1 minute                     |
-|                 |                 |                                                                 |             |                                                             |                              |
-|                 |                 |                                                                 |             | Master/standby DCS Redis 4.0 or 5.0 instances               |                              |
-|                 |                 |                                                                 |             |                                                             |                              |
-|                 |                 |                                                                 |             | Redis Server of Redis Cluster DCS Redis 4.0 or 5.0 instance |                              |
-|                 |                 |                                                                 |             |                                                             |                              |
-|                 |                 |                                                                 |             | Dimension:                                                  |                              |
-|                 |                 |                                                                 |             |                                                             |                              |
-|                 |                 |                                                                 |             | dcs_cluster_node                                            |                              |
-+-----------------+-----------------+-----------------------------------------------------------------+-------------+-------------------------------------------------------------+------------------------------+
++-----------------+-----------------+-----------------------------------------------------------------+-------------+------------------------------------------------------+------------------------------+
+| Metric ID       | Metric Name     | Description                                                     | Value Range | Monitored Object and Dimension                       | Monitoring Period (Raw Data) |
++=================+=================+=================================================================+=============+======================================================+==============================+
+| bandwidth_usage | Bandwidth Usage | Percentage of the used bandwidth to the maximum bandwidth limit | 0-200%      | Monitored object:                                    | 1 minute                     |
+|                 |                 |                                                                 |             |                                                      |                              |
+|                 |                 |                                                                 |             | Redis 4.0 and later                                  |                              |
+|                 |                 |                                                                 |             |                                                      |                              |
+|                 |                 |                                                                 |             | Redis Server of a master/standby or cluster instance |                              |
+|                 |                 |                                                                 |             |                                                      |                              |
+|                 |                 |                                                                 |             | Dimension:                                           |                              |
+|                 |                 |                                                                 |             |                                                      |                              |
+|                 |                 |                                                                 |             | dcs_cluster_node                                     |                              |
++-----------------+-----------------+-----------------------------------------------------------------+-------------+------------------------------------------------------+------------------------------+
 
 Bandwidth usage = (Input flow + Output flow)/(2 x Maximum bandwidth) x 100%
 

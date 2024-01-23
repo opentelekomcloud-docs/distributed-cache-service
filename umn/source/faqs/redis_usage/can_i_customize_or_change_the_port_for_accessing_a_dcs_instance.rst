@@ -5,7 +5,7 @@
 Can I Customize or Change the Port for Accessing a DCS Instance?
 ================================================================
 
-You cannot customize or change the port for accessing a DCS Redis 3.0 instance. You can customize (during instance creation) but cannot change the port for accessing a DCS Redis 4.0 or later instance.
+You cannot customize or change the port for accessing a DCS Redis 3.0 instance. You can customize (during instance creation) and change the port (on the instance details page) for accessing a DCS Redis 4.0 or later instance.
 
 -  Redis 3.0
 

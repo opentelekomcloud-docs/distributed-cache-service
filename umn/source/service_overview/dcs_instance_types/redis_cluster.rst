@@ -5,9 +5,11 @@
 Redis Cluster
 =============
 
-Redis Cluster DCS instances use the native distributed implementation of Redis.
+Redis Cluster DCS instances use the native distributed implementation of Redis. Redis Cluster instances have the following features:
 
-Redis Cluster DCS instances are compatible with Redis 4.0 and 5.0.
+-  They are compatible with native Redis clusters.
+-  They inherit the smart client design from Redis.
+-  They deliver many times higher performance than master/standby instances.
 
 
 Redis Cluster

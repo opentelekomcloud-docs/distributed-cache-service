@@ -27,6 +27,12 @@ Access a DCS Redis instance through redis-cli on an ECS in the same VPC. For mor
 
       *./redis-cli -h* *{dcs_instance_address} -p 6379* -a *{password}* **--tls --cacert {certification file path}**
 
+   -  If SSL is enabled for a Redis Cluster DCS Redis 6.0 instance, set a certificate path.
+
+      ./redis-cli -h *{dcs_instance_address}* -p *6379* -a *{password}* -c **--tls --cacert {certification file path}**
+
+   -  To connect to Redis with SSL encryption, use redis-cli 6.x or later.
+
 Prerequisites
 -------------
 
@@ -39,7 +45,7 @@ Procedure (Linux)
 
 #. .. _dcs-ug-0326009__en-us_topic_0148195299_li5799181918288:
 
-   Obtain the IP address and port number of the DCS Redis instance to be accessed.
+   View the IP address/domain name and port number of the DCS Redis instance to be accessed.
 
    For details, see :ref:`Viewing Details of a DCS Instance <dcs-ug-0312016>`.
 
@@ -49,17 +55,21 @@ Procedure (Linux)
 
    a. Log in to the ECS.
 
-   b. Run the following command to download the source code package of your Redis client from http://download.redis.io/releases/redis-5.0.8.tar.gz:
+   b. Run the following command to download the source code package of your Redis client from `https://download.redis.io/releases/redis-6.2.13.tar.gz <http://download.redis.io/releases/redis-5.0.8.tar.gz>`__:
 
-      **wget http://download.redis.io/releases/redis-5.0.8.tar.gz**
+      **wget http://download.redis.io/releases/redis-6.2.13.tar.gz**
+
+      .. note::
+
+         The following uses redis-6.2.13 as an example. For details, see the `Redis official website <https://redis.io/download?spm=a2c4g.11186623.2.15.4e732074zS4LSS#installation>`__.
 
    c. Run the following command to decompress the source code package of your Redis client:
 
-      **tar -xzf redis-5.0.8.tar.gz**
+      **tar -xzf redis-6.2.13.tar.gz**
 
    d. Run the following commands to go to the Redis directory and compile the source code of your Redis client:
 
-      **cd redis-5.0.8**
+      **cd redis-6.2.13**
 
       **make**
 
@@ -71,12 +81,17 @@ Procedure (Linux)
 
    Perform the following procedure to access a single-node, master/standby instance.
 
-   **./redis-cli -h** *${instance IP}* **-p 6379 -a** *${password}*
+   ./redis-cli -h ${dcs_instance_address} -p 6379 -a ${password}
 
    .. note::
 
-      a. If the instance is password-free, connect it by running the **./redis-cli -h** *${instance IP}* **-p 6379** command.
-      b. If the instance is password-protected, connect it by running the **./redis-cli -h** *${instance IP}* **-p 6379 -a** *${password}* command.
+      a. If the instance is password-free, connect it by running the **./redis-cli -h** *${dcs_instance_address}* **-p 6379** command.
+
+      b. If the instance is password-protected, connect it by running the **./redis-cli -h** *${dcs_instance_address}* **-p 6379 -a** *${password}* command.
+
+      c. *{dcs_instance_address}* can be the **Connection Address** (domain name) or **IP Address**. :ref:`Should I Use a Domain Name or an IP Address to Connect to a DCS Redis Instance? <dcs-faq-022025>`
+
+         |image1|
 
 #. .. _dcs-ug-0326009__en-us_topic_0148195299_li126171140194317:
 
@@ -88,13 +103,13 @@ Procedure (Linux)
 
       **./redis-cli -h {dcs_instance_address} -p 6379 -a {password} -c**
 
-      *{dcs_instance_address}* indicates the IP address of the DCS Redis instance, **6379** is the port used for accessing the instance, *{password}* is the password of the instance, and **-c** is used for accessing Redis Cluster nodes. The IP address and port number are obtained in :ref:`1 <dcs-ug-0326009__en-us_topic_0148195299_li5799181918288>`.
+      *{dcs_instance_address}* indicates the IP address/domain name of the DCS Redis instance, **6379** is the port used for accessing the instance, *{password}* is the password of the instance, and **-c** is used for accessing Redis Cluster nodes. The IP address/domain name and port number are obtained in :ref:`1 <dcs-ug-0326009__en-us_topic_0148195299_li5799181918288>`.
 
       Example:
 
       .. code-block::
 
-         root@ecs-redis:~/redis-5.0.8/src# ./redis-cli -h 192.168.0.85 -p 6379 -a ****** -c
+         root@ecs-redis:~/redis-6.2.13/src# ./redis-cli -h 192.168.0.85 -p 6379 -a ****** -c
          192.168.0.85:6379>
 
    b. Run the following command to view the Redis Cluster node information:
@@ -145,4 +160,6 @@ Procedure (Windows)
 
 **redis-cli.exe -h XXX -p 6379**
 
-**XXX** indicates the IP address of the DCS instance and **6379** is an example port number used for accessing the DCS instance. For details about how to obtain the IP address and port number, see :ref:`Viewing Details of a DCS Instance <dcs-ug-0312016>`. Change the IP address and port as required.
+**XXX** indicates the IP address/domain name of the DCS instance and **6379** is an example port number used for accessing the DCS instance. For details about how to obtain the IP address/domain name and port number, see :ref:`Viewing Details of a DCS Instance <dcs-ug-0312016>`. Change the address and port as required.
+
+.. |image1| image:: /_static/images/en-us_image_0000001538860065.png

@@ -11,6 +11,6 @@ Can I Export Backup Data of DCS Redis Instances to RDB Files Using the Console?
 
    **redis-cli -h {redis_address} -p 6379 [-a password] --rdb {output.rdb}**
 
--  Redis 4.0/5.0/6.0
+-  Redis 4.0 and later
 
-   Yes. DCS Redis 4.0/5.0/6.0 instances support AOF and RDB persistence. You can back up data to RDB and AOF files on the console and download the files.
+   Yes. DCS Redis 4.0 and later instances support AOF and RDB persistence. You can back up data to RDB and AOF files on the console and download the files.
