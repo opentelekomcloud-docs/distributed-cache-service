@@ -14,7 +14,7 @@ You can create one or more DCS Redis instances with the required computing capab
 Prerequisites
 -------------
 
-You have prepared :ref:`necessary resources <dcs-ug-0326008>`.
+You have prepared :ref:`necessary resources <dcs-ug-0312004>`.
 
 
 Creating a DCS Redis Instance
@@ -41,7 +41,7 @@ Creating a DCS Redis Instance
       .. note::
 
          -  When creating a Proxy Cluster instance, you can only select version 3.0.
-         -  When creating a Redis Cluster instance, you can select versions 4.0 or 5.0.
+         -  When creating a Redis Cluster instance, you can select versions 4.0, 5.0, or 6.0.
          -  The Redis version cannot be changed once the instance is created. To use a later Redis version, create another DCS Redis instance and then migrate data from the old instance to the new one.
          -  The method of connecting a client to a Redis Cluster instance is different from that of connecting a client to other types of instances. For details, see :ref:`Accessing a DCS Redis Instance Through redis-cli <dcs-ug-0326009>`.
 
@@ -76,7 +76,7 @@ Creating a DCS Redis Instance
 
       Redis Cluster instances only support automatically-assigned IP addresses. The other instance types support both automatically-assigned IP addresses and manually-specified IP addresses. You can manually specify an IP address available in your subnet.
 
-      For a DCS Redis 4.0 or later instance, you can specify a port numbering in the range from 1 to 65535. If no port is specified, the default port 6379 will be used. For a DCS Redis 3.0 instance, the port cannot be customized. Port 6379 will be used.
+      For a DCS Redis 4.0 or later instance, you can specify a port number in the range from 1 to 65535. If no port is specified, the default port 6379 will be used. For a DCS Redis 3.0 instance, the port cannot be customized. Port 6379 will be used.
 
    c. Select a security group.
 
@@ -111,7 +111,7 @@ Creating a DCS Redis Instance
 
    This parameter is displayed only when the instance type is master/standby or cluster. For more information on how to configure a backup policy, see :ref:`Overview <en-us_topic_0079835992>`.
 
-#. Specify the quantity.
+#. Specify the number of instances to create.
 
 #. Enter an instance name.
 

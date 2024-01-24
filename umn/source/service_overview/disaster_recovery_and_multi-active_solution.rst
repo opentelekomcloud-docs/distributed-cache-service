@@ -59,7 +59,7 @@ The master and standby nodes of a master/standby or cluster DCS instance can be 
 
    This mechanism applies in a similar way to a cluster DCS instance. Each shard (process) is deployed across AZs.
 
-When creating a master/standby or cluster DCS instance, select a standby AZ that is different from the primary AZ. See the following figure.
+When creating a master/standby or cluster DCS instance, select a standby AZ that is different from the primary AZ.
 
 
 .. figure:: /_static/images/en-us_image_0000001536314713.png
@@ -67,8 +67,7 @@ When creating a master/standby or cluster DCS instance, select a standby AZ that
 
    **Figure 6** Selecting different AZs
 
-Backup, configuration modification, and password change functions cannot be used during the fault.
-
 .. note::
 
-   You can deploy your application across AZs to ensure both data reliability and service availability in the event of power supply or network disruptions.
+   -  You can deploy your application across AZs to ensure both data reliability and service availability in the event of power supply or network disruptions.
+   -  Cross-AZ instances do not support password changes, command renaming, and specification modification when an AZ is faulty.

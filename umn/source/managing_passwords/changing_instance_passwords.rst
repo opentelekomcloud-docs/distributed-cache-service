@@ -41,7 +41,7 @@ Procedure
          -  Lowercase letters
          -  Uppercase letters
          -  Digits
-         -  special characters (:literal:`\`~!@#$^&*()-_=+\\|{}:,<.>/?`)
+         -  Special characters (:literal:`\`~!@#$^&*()-_=+\\|{},<.>/?`)
 
 #. In the **Change Password** dialog box, click **OK** to confirm the password change.
 

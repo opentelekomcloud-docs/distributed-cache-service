@@ -26,4 +26,8 @@ Procedure
 
    If the instance is the master/standby or cluster type, you can specify the shard and replica whose run logs you want to collect. If the instance is the single-node type, logs of the only node of the instance will be collected.
 
+   Select the collection period and click **OK**.
+
+#. After the log file is successfully collected, click **Download** to download it.
+
 .. |image1| image:: /_static/images/en-us_image_0000001148443452.png

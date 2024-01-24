@@ -7,20 +7,21 @@ go-redis
 
 Access a DCS Redis instance through go-redis on an ECS in the same VPC. For more information about how to use other Redis clients, visit `the Redis official website <https://redis.io/clients>`__.
 
+.. _dcs-ug-211105001__en-us_topic_0000001174913212_section1502270695932:
+
 Prerequisites
 -------------
 
 -  A DCS Redis instance has been created and is in the **Running** state.
+
+-  View the IP address /domain name and port number of the DCS Redis instance to be accessed.
+
+   For details, see :ref:`Viewing Details of a DCS Instance <dcs-ug-0312016>`.
+
 -  An ECS has been created. For details about how to create an ECS, see `Elastic Cloud Server User Guide <https://docs.otc.t-systems.com/en-us/usermanual/ecs/en-us_topic_0163572588.html>`__.
 
 Procedure
 ---------
-
-#. .. _dcs-ug-211105001__en-us_topic_0000001174913212_li457118182512:
-
-   View the IP address/domain name and port number of the DCS Redis instance to be accessed.
-
-   For details, see :ref:`Viewing Details of a DCS Instance <dcs-ug-0312016>`.
 
 #. Log in to the ECS.
 
@@ -77,7 +78,7 @@ Procedure
           fmt.Println(val1)
       }
 
-   *host:port* are the IP address/domain name and port number of the DCS Redis instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-211105001__en-us_topic_0000001174913212_li457118182512>`. Change them as required. ``********`` indicates the password used to log in to the DCS Redis instance. This password is defined during DCS Redis instance creation.
+   *host:port* are the IP address/domain name and port number of the DCS Redis instance. For details about how to obtain the IP address/domain name and port, see :ref:`Prerequisites <dcs-ug-211105001__en-us_topic_0000001174913212_section1502270695932>`. Change them as required. ``********`` indicates the password used to log in to the DCS Redis instance. This password is defined during DCS Redis instance creation.
 
 #. Run the **go build -o test main.go** command to package the code into an executable file, for example, **test**.
 

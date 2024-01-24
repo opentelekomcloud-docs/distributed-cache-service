@@ -17,11 +17,7 @@ Creating a Whitelist Group
 
 #. Log in to the DCS console.
 
-#. Click |image1| in the upper left corner of the management console and select a region.
-
-   .. note::
-
-      Select the same region as your application service.
+#. Click |image1| in the upper left corner and select a region and a project.
 
 #. In the navigation pane, choose **Cache Manager**.
 
@@ -54,4 +50,4 @@ Creating a Whitelist Group
       -  In the whitelist group list, click **Modify** to modify the IP addresses or IP address ranges in a group, and click **Delete** to delete a whitelist group.
       -  After whitelist has been enabled, you can click **Disable Whitelist** above the whitelist group list to allow all IP addresses connected to the VPC to access the instance.
 
-.. |image1| image:: /_static/images/en-us_image_0148195246.png
+.. |image1| image:: /_static/images/en-us_image_0000001681129365.png

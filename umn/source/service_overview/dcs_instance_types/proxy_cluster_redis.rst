@@ -5,9 +5,11 @@
 Proxy Cluster Redis
 ===================
 
-DCS for Redis provides Proxy Cluster instances, which use Linux Virtual Server (LVS) and proxies to achieve high availability.
+DCS for Redis provides Proxy Cluster instances, which use Linux Virtual Server (LVS) and proxies to achieve high availability. Proxy Cluster instances have the following features:
 
-Proxy Cluster DCS Redis instances are compatible with Redis 3.0.
+-  The client is decoupled from the cloud service.
+-  They support millions of concurrent requests, equivalent to Redis Cluster instances.
+-  A wide range of memory specifications adapt to different scenarios.
 
 .. note::
 

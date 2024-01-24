@@ -8,9 +8,9 @@ Importing Backup Files from an OBS Bucket
 Scenario
 --------
 
-Use the DCS console to migrate Redis data from Redis of other vendors or self-hosted Redis to DCS for Redis.
+Use the DCS console to migrate backup data to DCS for Redis.
 
-Simply download the source Redis data and then upload the data to an OBS bucket in the same region as the target DCS Redis instance. After you have created a migration task on the DCS console, DCS will read data from the OBS bucket and data will be migrated to the target instance.
+Simply download the source Redis backup data and then upload the data to an OBS bucket in the same region as the target DCS Redis instance. After you have created a migration task on the DCS console, DCS will read data from the OBS bucket and data will be migrated to the target instance.
 
 .aof, .rbb, .zip, and .tar.gz files can be uploaded to OBS buckets. You can directly upload .aof and .rdb files or compress them into .zip or .tar.gz files before uploading.
 
@@ -98,7 +98,15 @@ Step 2: Create an OBS Bucket and Upload Backup Files
 
       To upload objects, drag files or folders to the **Upload Object** area or click **add file**. A maximum of 100 files can be uploaded at a time. The total size cannot exceed 5 GB.
 
-   e. Click **Upload**.
+
+      .. figure:: /_static/images/en-us_image_0000001634759086.png
+         :alt: **Figure 1** Uploading an object
+
+         **Figure 1** Uploading an object
+
+   e. (Optional) Select **KMS encryption** to encrypt the file you want to upload.
+
+   f. Click **Upload**.
 
 Step 3: Create a Migration Task
 -------------------------------
@@ -119,11 +127,11 @@ Step 3: Create a Migration Task
 
       You can upload files in the .aof, .rdb, .zip, or .tar.gz format.
 
-#. Select the backup files whose data is to be migrated.
+#. In the **Backup Files** area, click **Add Backup** and select the backup files to be migrated.
 
 #. Select the target DCS Redis instance prepared in :ref:`Step 1: Prepare the Target DCS Redis Instance <dcs-ug-0312037__en-us_topic_0179456697_dcs-migration-190703002_section1128152020384>`.
 
-#. Enter the password of the target instance. Click **Test Connection** to verify the password.
+#. Enter the password of the target instance. Click **Test Connection** to verify the password. If the instance is not password-protected, click **Test Connection** directly.
 
 #. Click **Next**.
 

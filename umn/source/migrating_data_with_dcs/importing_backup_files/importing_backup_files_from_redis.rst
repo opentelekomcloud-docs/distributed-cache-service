@@ -57,7 +57,7 @@ Step 3: Create a Migration Task
 
 #. Select the target instance created in :ref:`Step 2: Prepare the Target DCS Redis Instance <dcs-ug-210226001__en-us_topic_0179456697_dcs-migration-190703002_section1128152020384>`.
 
-#. Enter the password of the target instance. Click **Test Connection** to verify the password.
+#. Enter the password of the target instance. Click **Test Connection** to verify the password. If the instance is not password-protected, click **Test Connection** directly.
 
 #. Click **Next**.
 

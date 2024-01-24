@@ -10,6 +10,15 @@ Scenario
 
 If the source and target instances are interconnected and the **SYNC** and **PSYNC** commands are supported in the source instance, data can be migrated online in full or incrementally from the source to the target.
 
+.. caution::
+
+   -  If the **SYNC** and **PSYNC** commands are disabled on the source Redis instance, enable them before performing online migration. Otherwise, the migration fails. If you use a DCS Redis instance for online migration, the **SYNC** command is automatically enabled.
+   -  During online migration, you are advised to set **repl-timeout** on the source instance to 300s and **client-output-buffer-limit** to 20% of the maximum memory of the instance.
+
+.. note::
+
+   During online migration, results of the **FLUSHDB** and **FLUSHALL** commands executed on the source will not be synchronized to the target.
+
 Impacts on Services
 -------------------
 
@@ -26,8 +35,6 @@ Step 1: Obtain Information About the Source Redis Instance
 
 -  If the source is a cloud Redis instance, obtain its name.
 -  If the source is self-hosted Redis, obtain its IP address or domain name and port number.
-
-.. _dcs-ug-0312038__en-us_topic_0179456698_dcs-migration-190703003_section1128152020384:
 
 Step 2: Prepare the Target DCS Redis Instance
 ---------------------------------------------
@@ -121,20 +128,16 @@ Configuring the Online Migration Task
 
 #. Configure source Redis and target Redis.
 
-   a. **Source Redis Type**: Select **Redis in the cloud** or **Self-hosted Redis** as required.
+   a. The Redis type can be **Redis in the cloud** or **Self-hosted Redis** as required.
 
       -  **Redis in the cloud**: a DCS Redis instance that is in the same VPC as the migration task
       -  **Self-hosted Redis**: self-hosted Redis in another cloud, or in on-premises data centers. If you select this option, enter Redis addresses.
 
-   b. If the instance is password-protected, you can click **Test Connection** to check whether the instance password is correct and whether the network is connected.
+      .. note::
 
-#. For **Target Instance**, select the DCS Redis Instance prepared in :ref:`Step 2: Prepare the Target DCS Redis Instance <dcs-ug-0312038__en-us_topic_0179456698_dcs-migration-190703003_section1128152020384>`.
+         If the source and target Redis instances are connected but are in different regions of DCS, you can only select **Self-hosted Redis** for **Target Redis Type** and enter the instance addresses, regardless of whether the target Redis instance is self-hosted or in the cloud.
 
-   If the instance is password-protected, you can click **Test Connection** to check whether the instance password meets the requirements.
-
-   .. note::
-
-      If the source and target Redis instances are connected but are in different regions of DCS, you can only select **Self-hosted Redis** for **Target Redis Type** and enter the instance addresses, regardless of whether the target Redis instance is self-hosted or in the cloud.
+   b. If the instance is password-protected, you can click **Test Connection** to check whether the instance password is correct and whether the network is connected. If the instance is not password-protected, click **Test Connection** directly.
 
 #. Click **Next**.
 
@@ -144,7 +147,8 @@ Configuring the Online Migration Task
 
    .. note::
 
-      If the migration type is full+incremental, the migration task status will remain **Migrating** until you click **Stop**.
+      -  If the migration type is full+incremental, the migration task status will remain **Migrating** until you click **Stop**.
+      -  After data migration, duplicate keys will be overwritten.
 
 Verifying the Migration
 -----------------------

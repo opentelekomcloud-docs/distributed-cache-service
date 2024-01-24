@@ -16,6 +16,7 @@ Distributed Cache Service - User Guide
    parameter_templates/index
    monitoring/index
    auditing/index
+   data_migration_guide/index
    faqs/index
    glossary
    change_history

@@ -5,11 +5,13 @@
 Command Restrictions
 ====================
 
-Some Redis commands are supported by cluster DCS instances for multi-key operations in the same slot. For details, see :ref:`Table 1 <dcs-pd-200813003__table7589193113396>`.
+Some Redis commands are supported by Redis Cluster DCS instances for multi-key operations in the same slot. For details, see :ref:`Table 1 <dcs-pd-200813003__table7589193113396>`.
+
+Some commands support multiple keys but do not support cross-slot access. For details, see :ref:`Table 2 <dcs-pd-200813003__table152098710112>`.
 
 .. _dcs-pd-200813003__table7589193113396:
 
-.. table:: **Table 1** Redis commands restricted in cluster DCS instances.
+.. table:: **Table 1** Redis commands restricted in Redis Cluster DCS instances
 
    +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | Category        | Description                                                                                                                                                       |
@@ -60,3 +62,15 @@ Some Redis commands are supported by cluster DCS instances for multi-key operati
 .. note::
 
    While running commands that take a long time to run, such as **FLUSHALL**, DCS instances may not respond to other commands and may change to the faulty state. After the command finishes executing, the instance will return to normal.
+
+.. _dcs-pd-200813003__table152098710112:
+
+.. table:: **Table 2** Multi-key commands of Proxy Cluster instances
+
+   +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+   | Category                                                 | Command                                                                                                        |
+   +==========================================================+================================================================================================================+
+   | Multi-key commands that support cross-slot access        | DEL, MGET, MSET, EXISTS, SUNION, SINTER, SDIFF, SUNIONSTORE, SINTERSTORE, SDIFFSTORE, ZUNIONSTORE, ZINTERSTORE |
+   +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+   | Multi-key commands that do not support cross-slot access | SMOVE, SORT, BITOP, MSETNX, RENAME, RENAMENX, BLPOP, BRPOP, RPOPLPUSH, BRPOPLPUSH, PFMERGE, PFCOUNT            |
+   +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+

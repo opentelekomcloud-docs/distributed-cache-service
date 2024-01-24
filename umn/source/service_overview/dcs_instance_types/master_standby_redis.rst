@@ -22,7 +22,9 @@ Master/Standby DCS instances have the following features:
 
    By default, data persistence is enabled by both the master and the standby node of a master/standby instance.
 
-   The standby node of a DCS Redis instance is invisible to you. Only the master node provides data read/write operations.
+   The standby node of a DCS Redis 3.0 instance is invisible to you. Only the master node provides data read/write operations.
+
+   The standby node of a Redis 4.0/5.0/6.0 instance is visible to you. You can read data from the standby node by connecting to it using the instance read-only address.
 
 #. **Data synchronization**
 
@@ -78,18 +80,24 @@ Architecture description:
 
    DCS Redis 3.0 instances are accessed through port 6379 by default. Port customization is not supported.
 
+.. _cachemasterslave__section5805185095215:
+
 Architecture of Master/Standby DCS Redis 4.0/5.0/6.0 Instances
 --------------------------------------------------------------
 
 The following figure shows the architecture of a master/standby DCS Redis 4.0/5.0/6.0 instance.
 
 
-.. figure:: /_static/images/en-us_image_0000001478356482.png
+.. figure:: /_static/images/en-us_image_0000001528638365.png
    :alt: **Figure 2** Architecture of a master/standby DCS Redis 4.0/5.0/6.0 instance
 
    **Figure 2** Architecture of a master/standby DCS Redis 4.0/5.0/6.0 instance
 
 Architecture description:
+
+#. Each master/standby DCS Redis 4.0/5.0/6.0 instance has two connection addresses. When connecting to such an instance, you can use the read/write domain name address to connect to the master node or use the read-only domain name address to connect to the standby node.
+
+   The connection addresses can be obtained on the instance details page on the DCS console.
 
 #. Master/standby DCS Redis 4.0/5.0/6.0 instances support Sentinels. Sentinels monitor the running status of the master and standby nodes. If the master node becomes faulty, a failover will be performed.
 
@@ -98,3 +106,9 @@ Architecture description:
 #. A standby node has the same specifications as a master node. A master/standby instance consists of a pair of master and standby nodes by default.
 
 #. To access a DCS Redis 4.0/5.0/6.0 instance, you can customize the port. If no port is specified, the default port 6379 will be used. In the architecture diagram, port 6379 is used. If you have customized a port, replace **6379** with the actual port.
+
+.. note::
+
+   To implement read/write splitting using a master/standby instance, ensure that your client can distinguish between read and write requests. The client directs write requests to the read/write domain name and read requests to the read-only domain name.
+
+   **Requests to the read-only domain name address may fail if the standby node of a master/standby DCS Redis 4.0/5.0/6.0** **instance is faulty. For higher reliability and lower latency, do not use the read-only address.**

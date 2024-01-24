@@ -28,6 +28,6 @@ You are advised to change the instance specifications during off-peak hours beca
       -  Before scaling, perform cache analysis to ensure that no big keys (>= 512 MB) exist in the instance. Otherwise, scaling may fail.
       -  Backup records created before scaling cannot be restored.
 
--  **Notes on changing the number of replicas of a DCS Redis 4.0 or 5.0 instance:**
+-  **Notes on changing the number of replicas of a DCS Redis instance:**
 
    Deleting replicas interrupts connections. If your application cannot reconnect to Redis or handle exceptions, you need to restart the application after scaling.

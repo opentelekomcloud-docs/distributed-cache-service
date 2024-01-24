@@ -37,6 +37,8 @@ Procedure
 
    Information in the **Description** text box cannot exceed 128 bytes.
 
+   After the backup is complete, click **Download**, **Restore**, or **Delete** next to the backup record as required.
+
    .. note::
 
       Instance backup takes 10 to 15 minutes. The data added or modified during the backup process will not be backed up.
