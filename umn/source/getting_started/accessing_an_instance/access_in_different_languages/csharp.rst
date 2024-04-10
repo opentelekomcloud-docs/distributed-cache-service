@@ -56,7 +56,7 @@ Procedure
           class Program
           {
               // redis config
-              private static ConfigurationOptions connDCS = ConfigurationOptions.Parse("10.10.38.233:6379,password=********,connectTimeout=2000");
+              private static ConfigurationOptions connDCS = ConfigurationOptions.Parse("{instance_ip_address}:{port},password=********,connectTimeout=2000");
               //the lock for singleton
               private static readonly object Locker = new object();
               //singleton
@@ -90,7 +90,7 @@ Procedure
           }
       }
 
-   10.10.38.233:6379 contains an example IP address/domain name and port number of the DCS Redis instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312013__en-us_topic_0148195355_li457118182512>`. Change them as required. ``********`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
+   *{instance_ip_address}* and *{port}* are the IP address/domain name and port number of the DCS Redis instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312013__en-us_topic_0148195355_li457118182512>`. Change them as required. ``********`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
 
 #. Run the code. You have successfully accessed the instance if the following command output is displayed:
 

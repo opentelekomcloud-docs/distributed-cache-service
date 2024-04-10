@@ -33,7 +33,7 @@ Cross-AZ Deployment
 
 Master/Standby instances are deployed across different AZs with physically isolated power supplies and networks. Applications can also be deployed across AZs to achieve HA for both data and applications.
 
-When creating a master/standby or cluster DCS Redis instance, you can select a standby AZ for the standby node.
+When creating a master/standby or cluster DCS Redis instance, you can select a standby AZ for the node.
 
 .. _dcs-pd-200312004__en-us_topic_0145956240_section20999323134412:
 

@@ -37,7 +37,8 @@ Viewing Slow Queries on the Console
 
    .. note::
 
-      For details about the commands, visit the `Redis official website <https://redis.io/commands>`__.
+      -  For details about the commands, visit the `Redis official website <https://redis.io/commands>`__.
+      -  Slow queries of up to seven days can be queried.
 
 
    .. figure:: /_static/images/en-us_image_0281049655.png

@@ -37,7 +37,7 @@ Procedure
 
    a. Run the following command to download the Predis source file:
 
-      **wget https://github.com/predis/predis/archive/refs/tags/v1.1.10.tar.gz**
+      **wget https://github.com/predis/predis/archive/refs/tags/v2.2.2.tar.gz**
 
       .. note::
 
@@ -45,11 +45,11 @@ Procedure
 
    b. Run the following commands to decompress the source Predis package:
 
-      **tar -zxvf predis-1.1.10.tar.gz**
+      **tar -zxvf predis-2.2.2.tar.gz**
 
    c. Rename the decompressed Predis directory **predis** and move it to **/usr/share/php/**.
 
-      **mv predis-1.1.10 predis**
+      **mv predis-2.2.2 predis**
 
 #. Edit a file used to connect to Redis.
 
@@ -63,7 +63,7 @@ Procedure
              $client = new Predis\Client([
                'scheme' => 'tcp' ,
                'host'     => '{redis_instance_address}' ,
-               'port'     => {port} ,
+               'port'     =>{port} ,
                'password' => '{password}'
              ]);
              $client->set('foo', 'bar');

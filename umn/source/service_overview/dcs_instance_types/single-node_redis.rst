@@ -5,11 +5,12 @@
 Single-Node Redis
 =================
 
-Single-node DCS Redis instances are available in versions 3.0/4.0/5.0/6.0.
+A single-node DCS Redis instance has only one node and does not support data persistence. They are suitable for cache services that do not require data reliability.
 
 .. note::
 
-   You cannot upgrade the Redis version for an instance. For example, a single-node DCS Redis 4.0 instance cannot be upgraded to a single-node DCS Redis 5.0 instance. If your service requires the features of higher Redis versions, create a DCS Redis instance of a higher version and then migrate data from the old instance to the new one.
+   -  You cannot upgrade the Redis version of an instance. For example, a single-node DCS instance cannot be upgraded from Redis 4.0 to Redis 5.0. If you need Redis features of later versions, create a DCS Redis instance of a later version and then migrate data from the earlier instance to the new one.
+   -  Single-node instances cannot ensure data persistence and do not support manual or scheduled data backup. Exercise caution before using them.
 
 Features
 --------

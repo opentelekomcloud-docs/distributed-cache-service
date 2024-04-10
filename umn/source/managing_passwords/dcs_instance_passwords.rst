@@ -33,7 +33,7 @@ Using Passwords Securely
    .. code-block::
 
       $ redis-cli -h 192.168.0.148 -p 6379
-      redis 192.168.0.148:6379>auth yourPassword
+      redis 192.168.0.148:6379>auth {yourPassword}
       OK
       redis 192.168.0.148:6379>
 

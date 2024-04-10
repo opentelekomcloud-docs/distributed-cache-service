@@ -552,17 +552,17 @@ Parameter Description
 
 .. table:: **Table 2** RedisStandaloneConfiguration parameters
 
-   +-----------+---------------+----------------------------------------------------------------+
-   | Parameter | Default Value | Description                                                    |
-   +===========+===============+================================================================+
-   | hostName  | localhost     | IP address/domain name for connecting to a DCS Redis instance. |
-   +-----------+---------------+----------------------------------------------------------------+
-   | port      | 6379          | Port number                                                    |
-   +-----------+---------------+----------------------------------------------------------------+
-   | database  | 0             | Database subscript                                             |
-   +-----------+---------------+----------------------------------------------------------------+
-   | password  | ``-``         | Password                                                       |
-   +-----------+---------------+----------------------------------------------------------------+
+   +-----------+---------------+---------------------------------------------------------------+
+   | Parameter | Default Value | Description                                                   |
+   +===========+===============+===============================================================+
+   | hostName  | localhost     | IP address/domain name for connecting to a DCS Redis instance |
+   +-----------+---------------+---------------------------------------------------------------+
+   | port      | 6379          | Port number                                                   |
+   +-----------+---------------+---------------------------------------------------------------+
+   | database  | 0             | Database subscript                                            |
+   +-----------+---------------+---------------------------------------------------------------+
+   | password  | ``-``         | Password                                                      |
+   +-----------+---------------+---------------------------------------------------------------+
 
 .. table:: **Table 3** RedisClusterConfiguration parameters
 
@@ -639,19 +639,19 @@ Parameter Description
    +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | blockWhenExhausted             | true          | Indicates whether to wait after the connection pool is exhausted. **true**: Wait. **false**: Do not wait. To validate **maxWaitMillis**, this parameter must be set to **true**.                 |
    +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | maxWaitMillis                  | -1            | Maximum amount of time a connection allocation should block before throwing an exception when the pool is exhausted. The default value -1 indicates to wait indefinitely.                        |
+   | maxWaitMillis                  | -1            | Maximum amount of time a connection allocation should block before throwing an exception when the pool is exhausted. The default value **-1** indicates to wait indefinitely.                    |
    +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | testOnCreate                   | false         | Set to true to enable connectivity test on creating connections. Default: false.                                                                                                                 |
+   | testOnCreate                   | false         | Set to true to enable connectivity test on creating connections. Default: **false**.                                                                                                             |
    +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | testOnBorrow                   | false         | Set to true to enable connectivity test on borrowing connections. Default: false. Set to false for heavy-traffic services to reduce overhead.                                                    |
+   | testOnBorrow                   | false         | Set to true to enable connectivity test on borrowing connections. Default: **false**. Set to false for heavy-traffic services to reduce overhead.                                                |
    +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | testOnReturn                   | false         | Set to true to enable connectivity test on returning connections. Default: false. Set to false for heavy-traffic services to reduce overhead.                                                    |
+   | testOnReturn                   | false         | Set to **true** to enable connectivity test on returning connections. Default: **false**. Set to **false** for heavy-traffic services to reduce overhead.                                        |
    +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | testWhileIdle                  | false         | Indicates whether to check for idle connections. If this parameter is set to **false**, idle connections are not evicted. Recommended value: **true**.                                           |
    +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | softMinEvictableIdleTimeMillis | 1800000       | Duration after which idle connections are evicted. If the idle duration is greater than this value and the maximum number of idle connections is reached, idle connections are directly evicted. |
    +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | minEvictableIdleTimeMillis     | 60000         | An eviction policy, set -1 (suggested) to disable it. Use softminEvictableIdleTimeMillis instead.                                                                                                |
+   | minEvictableIdleTimeMillis     | 60000         | An eviction policy, set to **-1** (suggested) to disable it. Use **softminEvictableIdleTimeMillis** instead.                                                                                     |
    +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | timeBetweenEvictionRunsMillis  | 60000         | Eviction interval, in milliseconds.                                                                                                                                                              |
    +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

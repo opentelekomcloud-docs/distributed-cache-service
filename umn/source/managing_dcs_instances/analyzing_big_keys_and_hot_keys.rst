@@ -13,7 +13,7 @@ By performing big key analysis and hot key analysis, you will have a picture of 
 -  During big key analysis, all keys will be traversed. The larger the number of keys, the longer the analysis takes.
 -  Perform big key analysis during off-peak hours and avoid automatic backup periods.
 -  For a master/standby or cluster instance, the big key analysis is performed on the standby node, so the impact on the instance is minor. For a single-node instance, the big key analysis is performed on the only node of the instance and will reduce the instance access performance by up to 10%. Therefore, perform big key analysis on single-node instances during off-peak hours.
--  A maximum of 100 big key analysis records (20 for Strings and 80 for Lists/Sets/Zsets/Hashes) are retained for each instance. When this limit is reached, the oldest records will be deleted to make room for new records. You can also manually delete records you no longer need.
+-  A maximum of 100 big key analysis records (20 for Strings; 80 for Lists/Sets/Zsets/Hashes and max. 20 for each type) are retained for each instance. When this limit is reached, the oldest records will be deleted to make room for new records. You can also manually delete records you no longer need.
 
 **Notes on hot key analysis:**
 

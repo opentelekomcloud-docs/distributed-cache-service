@@ -25,3 +25,8 @@ Solutions
 
 -  Configure scheduled hot key analysis tasks by referring to :ref:`Hot Key Analysis <dcs-ug-190808001__section47852016145218>`, or use the **SCAN** command to traverse all keys on a scheduled basis and remove expired keys from the memory.
 -  Configure a scheduled task to scan all master nodes of the instance. All keys will be scanned, and Redis will determine whether the keys have expired. Expired keys will be released. For details, see :ref:`Scanning Expired Keys <dcs-ug-210330002>`.
+
+How Do I Know Which Expired Keys Have Been Deleted?
+---------------------------------------------------
+
+Deleted expired keys cannot be queried.

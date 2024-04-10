@@ -5,4 +5,4 @@
 Does DCS for Redis Support Redis Clusters?
 ==========================================
 
-Yes. DCS for Redis 4.0 and 5.0 support Redis Clusters. DCS for Redis 3.0 supports Proxy Clusters.
+Yes. DCS for Redis 4.0 and later support Redis Clusters. DCS for Redis 3.0 supports Proxy Clusters.

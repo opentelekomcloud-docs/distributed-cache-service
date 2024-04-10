@@ -48,7 +48,7 @@ Step 2: Uploading the AOF file to ECS
 Step 3: Importing Data
 ----------------------
 
-**redis-cli -h {dcs_instance_address} -p 6379** **-a** **{password} --pipe < appendonly.aof**
+**redis-cli -h {dcs_instance_address} -p 6379 -a {password} --pipe < appendonly.aof**
 
 Step 4: Verifying Migration
 ---------------------------

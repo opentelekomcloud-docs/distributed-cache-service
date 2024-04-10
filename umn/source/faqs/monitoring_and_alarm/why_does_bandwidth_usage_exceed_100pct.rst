@@ -23,7 +23,7 @@ The basic information about the bandwidth usage metric is as follows.
 
 Bandwidth usage = (Input flow + Output flow)/(2 x Maximum bandwidth) x 100%
 
-According to the formula, the bandwidth usage counts in the input flow and output flow, which include the traffic for replication between the master and replicas. Therefore, the total traffic is greater than the normal service traffic.
+According to the formula, the bandwidth usage counts in the input flow and output flow, which include the traffic for replication between the master and replicas. Therefore, the total bandwidth usage is larger than the normal service traffic, and may exceed 100%.
 
 If the value of the **Flow Control Times** metric is larger than 0, the maximum bandwidth has been reached and flow control has been performed.
 

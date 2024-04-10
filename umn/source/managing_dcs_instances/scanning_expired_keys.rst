@@ -98,14 +98,18 @@ To schedule automatic scans, click |image2| next to **Scheduled**. Set the param
 
 **Performance**
 
--  The **SCAN** command is executed at the data plane every 5 ms, that is, 200 times per second. If **Keys to Iterate** is set to **10**, **100**, or **1000**, 2000, 20,000, or 200,000 keys are scanned per second.
+-  The **SCAN** command is executed at the data plane every 5 ms, that is, 200 times per second. If **Keys to Iterate** is set to **10**, **50**, **100**, or **1000**, 2000, 10,000, 20,000, or 200,000 keys are scanned per second.
 -  The larger the number of keys scanned per second, the higher the CPU usage.
 
 **Reference test**
 
-A master/standby instance is scanned. There are 10 million keys that will not expire and 5 million keys that will expire. The expiration time is 1 to 10 seconds.
+A master/standby instance is scanned. There are 10 million keys that will not expire and 5 million keys that will expire. The expiration time is 1 to 10 seconds. A full scan is executed.
 
--  Natural deletion: 10,000 records are deleted per second. It takes 8 minutes to delete 5 million expired keys. The CPU usage is about 5%.
+.. note::
+
+   The following test results are for reference only. They may vary depending on the site environment and network fluctuation.
+
+-  Natural deletion: 10,000 expired keys are deleted per second. It takes 8 minutes to delete 5 million expired keys. The CPU usage is about 5%.
 -  **Keys to Iterate** set to **10**: The scanning takes 125 minutes (15 million/2000/60 seconds) and the CPU usage is about 8%.
 -  **Keys to Iterate** set to **50**: The scanning takes 25 minutes (15 million/10,000/60 seconds) and the CPU usage is about 10%.
 -  **Keys to Iterate** set to **100**: The scanning takes 12.5 minutes (15 million/20,000/60 seconds) and the CPU usage is about 20%.
@@ -114,8 +118,8 @@ A master/standby instance is scanned. There are 10 million keys that will not ex
 **Configuration suggestions**
 
 -  You can configure the number of keys to be scanned and the scanning interval based on the total number of keys and the increase in the number of keys in the instance.
--  In the reference test with 15 million keys and **Keys to Iterate** set to **10**, the scanning takes about 125 minutes. In this case, set the interval to more than 4 hours.
--  If you want to accelerate the scanning, set **Keys to Iterate** to **100**. It takes about 12.5 minutes to complete the scanning. Therefore, set the interval to more than 30 minutes.
+-  In the reference test with 15 million keys and **Keys to Iterate** set to **10**, the scanning takes about 125 minutes. In this case, set the scan interval to more than 4 hours.
+-  If you want to accelerate the scanning, set **Keys to Iterate** to **100**. It takes about 12.5 minutes to complete the scanning. Therefore, set the scan interval to more than 30 minutes.
 -  The larger the number of keys to iterate, the faster the scanning, and the higher the CPU usage. There is a trade-off between time and CPU usage.
 -  If the number of expired keys does not increase rapidly, you can scan expired keys once a day.
 
