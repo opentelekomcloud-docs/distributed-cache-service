@@ -32,7 +32,7 @@ The following lists commands supported by DCS for Redis 3.0.
       -  **Server** group: **MONITOR**
       -  **Key** group: **RANDOMKE** (for old Proxy Cluster instances)
 
-.. table:: **Table 1** Commands supported by DCS Redis 3.0 instances 1
+.. table:: **Table 1** Commands supported by DCS Redis 3.0 instances (1)
 
    +----------------------------------------------+-----------------------------------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+-------------------------------------------------------+-----------------------------------------------+
    | `Keys <https://redis.io/commands#generic>`__ | `String <https://redis.io/commands#string>`__ | `Hash <https://redis.io/commands#hash>`__ | `List <https://redis.io/commands#list>`__ | `Set <https://redis.io/commands#set>`__ | `Sorted Set <https://redis.io/commands#sorted_set>`__ | `Server <https://redis.io/commands#server>`__ |
@@ -82,7 +82,7 @@ The following lists commands supported by DCS for Redis 3.0.
    | ``-``                                        | STRLEN                                        | ``-``                                     | ``-``                                     | ``-``                                   | ``-``                                                 | ``-``                                         |
    +----------------------------------------------+-----------------------------------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+-------------------------------------------------------+-----------------------------------------------+
 
-.. table:: **Table 2** Commands supported by DCS Redis 3.0 instances 2
+.. table:: **Table 2** Commands supported by DCS Redis 3.0 instances (2)
 
    +---------------------------------------------------------+------------------------------------------------+-----------------------------------------------------------+-------------------------------------------------------+-----------------------------------------------------+-----------------------------------------+
    | `HyperLoglog <https://redis.io/commands#hyperloglog>`__ | `Pub/Sub <https://redis.io/commands#pubsub>`__ | `Transactions <https://redis.io/commands#transactions>`__ | `Connection <https://redis.io/commands#connection>`__ | `Scripting <https://redis.io/commands#scripting>`__ | `Geo <https://redis.io/commands#geo>`__ |
@@ -107,7 +107,7 @@ Commands Disabled by DCS for Redis 3.0
 
 The following lists commands disabled by DCS for Redis 3.0.
 
-.. table:: **Table 3** Redis commands disabled in single-node and master/standby Redis 3.0 instances
+.. table:: **Table 3** Redis commands disabled in single-node and master/standby DCS Redis 3.0 instances
 
    +----------------------------------------------+-----------------------------------------------+
    | `Keys <https://redis.io/commands#generic>`__ | `Server <https://redis.io/commands#server>`__ |
@@ -129,7 +129,7 @@ The following lists commands disabled by DCS for Redis 3.0.
    | ``-``                                        | BGREWRITEAOF                                  |
    +----------------------------------------------+-----------------------------------------------+
 
-.. table:: **Table 4** Redis commands disabled in Proxy Cluster Redis 3.0 instances
+.. table:: **Table 4** Redis commands disabled in Proxy Cluster DCS Redis 3.0 instances
 
    +----------------------------------------------+-----------------------------------------------+-------------------------------------------+-----------------------------------------------------------+-------------------------------------------------------+-------------------------------------------------+------------------+
    | `Keys <https://redis.io/commands#generic>`__ | `Server <https://redis.io/commands#server>`__ | `List <https://redis.io/commands#list>`__ | `Transactions <https://redis.io/commands#transactions>`__ | `Connection <https://redis.io/commands#connection>`__ | `Cluster <https://redis.io/commands#cluster>`__ | codis            |

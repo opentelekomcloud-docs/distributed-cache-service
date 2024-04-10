@@ -32,6 +32,8 @@ After AOF persistence is enabled, the Redis-Server process needs to record opera
 -  If the disk or I/O of the underlying compute node is faulty, the latency may increase or a master/standby switchover may occur.
 -  Redis-Server periodically rewrites the AOF. During a rewrite, the latency may be high for a short time. For details about the AOF rewriting rules, see :ref:`When Will AOF Rewrites Be Triggered? <dcs-faq-210706001>`
 
-If DCS instances are used to accelerate applications, you are advised to disable persistence for higher performance and stability. Exercise caution when disabling persistence. Without persistence, cached data may be lost in extreme scenarios (for example, when both the master and standby nodes are faulty).
+If DCS instances are used for application acceleration, you are advised to disable AOF persistence for higher performance and stability.
+
+**Exercise caution when disabling AOF persistence. After it is disabled, cached data may be lost in extreme scenarios, for example, when both the master and standby nodes are faulty.**
 
 To disable AOF persistence, set parameter **appendonly** to **no** on the instance details page.

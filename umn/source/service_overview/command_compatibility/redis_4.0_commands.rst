@@ -108,7 +108,7 @@ Commands Disabled by DCS for Redis 4.0
 
 The following lists commands disabled by DCS for Redis 4.0.
 
-.. table:: **Table 3** Redis commands disabled in single-node and master/standby Redis 4.0 instances
+.. table:: **Table 3** Redis commands disabled in single-node and master/standby DCS Redis 4.0 instances
 
    +----------------------------------------------+-----------------------------------------------+
    | `Keys <https://redis.io/commands#generic>`__ | `Server <https://redis.io/commands#server>`__ |
@@ -134,7 +134,7 @@ The following lists commands disabled by DCS for Redis 4.0.
    | ``-``                                        | PSYNC                                         |
    +----------------------------------------------+-----------------------------------------------+
 
-.. table:: **Table 4** Redis commands disabled in Redis Cluster Redis 4.0 instances
+.. table:: **Table 4** Redis commands disabled in Redis Cluster DCS Redis 4.0 instances
 
    +----------------------------------------------+-----------------------------------------------+-------------------------------------------------+
    | `Keys <https://redis.io/commands#generic>`__ | `Server <https://redis.io/commands#server>`__ | `Cluster <https://redis.io/commands#cluster>`__ |

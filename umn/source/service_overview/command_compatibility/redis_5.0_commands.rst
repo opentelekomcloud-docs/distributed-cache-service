@@ -146,7 +146,7 @@ The following lists commands disabled by DCS for Redis 5.0.
    | ``-``                                        | PSYNC                                         |
    +----------------------------------------------+-----------------------------------------------+
 
-.. table:: **Table 4** Redis commands disabled in Redis Cluster Redis 5.0 instances
+.. table:: **Table 4** Redis commands disabled in Redis Cluster DCS Redis 5.0 instances
 
    +----------------------------------------------+-----------------------------------------------+-------------------------------------------------+
    | `Keys <https://redis.io/commands#generic>`__ | `Server <https://redis.io/commands#server>`__ | `Cluster <https://redis.io/commands#cluster>`__ |

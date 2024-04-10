@@ -20,11 +20,11 @@ Procedure
 
 #. Click the name of a DCS instance.
 
-#. Click the **Run Logs** tab.
+#. Click **Run Logs**.
 
 #. Click **Create Log File**.
 
-   If the instance is the master/standby or cluster type, you can specify the shard and replica whose run logs you want to collect. If the instance is the single-node type, logs of the only node of the instance will be collected.
+   For a master/standby or cluster instance, logs will be collected from the specified shard and replica. If the instance is the single-node type, logs of the only node of the instance will be collected.
 
    Select the collection period and click **OK**.
 

@@ -89,7 +89,7 @@ Procedure (Linux)
 
       b. If the instance is password-protected, connect it by running the **./redis-cli -h** *${dcs_instance_address}* **-p 6379 -a** *${password}* command.
 
-      c. *{dcs_instance_address}* can be the **Connection Address** (domain name) or **IP Address**. :ref:`Should I Use a Domain Name or an IP Address to Connect to a DCS Redis Instance? <dcs-faq-022025>`
+      c. *{dcs_instance_address}* can be the **Connection Address** (domain name) or **IP Address**. For details, see :ref:`Should I Use Domain Name or IP Address to Connect to a Redis Instance? <dcs-faq-022025>`.
 
          |image1|
 
@@ -97,7 +97,7 @@ Procedure (Linux)
 
    Access a DCS instance of the Redis Cluster type.
 
-   Perform the following procedure to access a DCS Redis 4.0 or 5.0 instance in Redis Cluster type.
+   Do as follows to access a Redis Cluster instance:
 
    a. Run the following commands to access the chosen DCS Redis instance:
 

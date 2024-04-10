@@ -9,7 +9,7 @@ Flow control is triggered when the traffic used by a Redis instance in a period 
 
 .. note::
 
-   For details about the maximum allowed bandwidth, see the "Assured/Maximum Bandwidth" column of different instance types listed in :ref:`DCS Instance Specifications <en-us_topic_0054235835>`.
+   For details about the maximum bandwidth of an instance flavor, see :ref:`Instance Specifications <en-us_topic_0054235835>`, or refer to the page of creating an instance on the console.
 
 Even if the bandwidth usage is low, flow control may still be triggered. The real-time bandwidth usage is reported once in each reporting period. Flow controls are checked every second. The traffic may surge within seconds and then fall back between reporting periods. By the time the bandwidth usage is reported, it may have already restored to the normal level.
 

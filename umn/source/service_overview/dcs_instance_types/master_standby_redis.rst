@@ -5,7 +5,7 @@
 Master/Standby Redis
 ====================
 
-This section describes master/standby DCS Redis instances. Redis versions available for master/standby DCS Redis instances include Redis 3.0, 4.0, 5.0, and 6.0.
+This section describes master/standby DCS Redis instances.
 
 .. note::
 

@@ -14,7 +14,7 @@ Prerequisites
 
 -  A DCS Redis instance has been created and is in the **Running** state.
 
--  View the IP address /domain name and port number of the DCS Redis instance to be accessed.
+-  View the IP address/domain name and port number of the DCS Redis instance to be accessed.
 
    For details, see :ref:`Viewing Details of a DCS Instance <dcs-ug-0312016>`.
 

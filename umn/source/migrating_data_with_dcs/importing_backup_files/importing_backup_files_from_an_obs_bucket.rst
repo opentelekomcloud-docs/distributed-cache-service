@@ -18,7 +18,7 @@ Prerequisites
 -------------
 
 -  The OBS bucket must be in the same region as the target DCS Redis instance.
--  The data files to be uploaded must be in the .aof, .rdb, .zip, or .tar.gz format.
+-  The data files to be uploaded must be in .aof, .rdb, .zip, or .tar.gz formats. .zip files must contain .aof or .rdb files.
 -  To migrate data from a single-node or master/standby Redis instance of other cloud vendors, create a backup task and download the backup file.
 -  To migrate data from a cluster Redis instance of other cloud vendors, download all backup files and upload all of them to the OBS bucket. Each backup file contains data for a shard of the instance.
 -  Redis Cluster instances only support .rdb files and do not support .aof files.

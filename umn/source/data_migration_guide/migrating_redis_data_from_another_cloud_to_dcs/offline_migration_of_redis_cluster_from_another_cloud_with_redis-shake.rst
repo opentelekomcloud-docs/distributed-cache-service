@@ -54,7 +54,7 @@ If the source Redis and the destitution Redis cannot be connected, or the source
          # If there is no password, skip the following parameter.
          source.password_raw = {source_redis_password}
          # IP addresses and port numbers of all masters of the source Redis Cluster, which are separated by semicolons (;).
-         source.address = {master1_ip}:{master1_port};{master2_ip}:{master2_port}...{masterN_ip}:{masterN_port}
+         source.address = {master1_ip}:{master1_port};{master2_ip}:{master2_port}…{masterN_ip}:{masterN_port}
 
    -  Run the following command to export the RDB file:
 
@@ -65,6 +65,10 @@ If the source Redis and the destitution Redis cannot be connected, or the source
       .. code-block::
 
          execute runner[*run.CmdDump] finished!
+
+      .. note::
+
+         If you cannot export the source Redis backup files using this method due to cloud vendors' restrictions on the **SYNC** and **PSYNC** commands, export the files on the source console or contact the source technical support.
 
 #. Import the RDB file.
 
@@ -80,9 +84,9 @@ If the source Redis and the destitution Redis cannot be connected, or the source
          # If there is no password, skip the following parameter.
          target.password_raw = {target_redis_password}
          # IP addresses and port numbers of all masters of the target instance, which are separated by semicolons (;).
-         target.address = {master1_ip}:{master1_port};{master2_ip}:{master2_port}...{masterN_ip}:{masterN_port}
+         target.address = {master1_ip}:{master1_port};{master2_ip}:{master2_port}…{masterN_ip}:{masterN_port}
          # List the RDB files to be imported, separated by semicolons (;).
-         rdb.input = local_dump.0;local_dump.1;local_dump.2;local_dump.3
+         rdb.input = {local_dump.0};{local_dump.1};{local_dump.2};{local_dump.3}
 
       Save and exit.
 

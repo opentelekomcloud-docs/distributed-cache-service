@@ -9,7 +9,7 @@ Redisson implements lock acquisition and unlocking in the following process:
 
 #. Redisson lock acquisition and unlocking are implemented by running Lua scripts.
 #. During lock acquisition, the **EXISTS**, **HSET**, **PEXPIRE**, **HEXISTS**, **HINCRBY**, **PEXPIRE**, and **PTTL** commands must be executed in the Lua script.
-#. During unlocking, the **EXISTS**, **PUBLISH**, **HEXISTS**, **PEXIPRE**, and **DEL** commands must be executed in the Lua script.
+#. During unlocking, the **EXISTS**, **PUBLISH**, **HEXISTS**, **PEXPIRE**, and **DEL** commands must be executed in the Lua script.
 
 In a proxy-based cluster, the proxy processes **PUBLISH** and **SUBSCRIBE** commands and forwards requests to the Redis server. The **PUBLISH** command cannot be executed in the Lua script.
 

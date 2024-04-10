@@ -14,7 +14,7 @@ Spring Boot 1.x is integrated with Jedis, and Spring Boot 2.x is integrated with
 .. note::
 
    -  If a password was set during DCS Redis instance creation, configure the password for connecting to Redis using Redisson. Do not hard code the plaintext password.
-   -  To connect to a single-node, master/standby, or Proxy Cluster instance, use the **useSingleServer** method of the **SingleServerConfig** object of Redisson. To connect to a Redis Cluster instance, use the **useClusterServers** method of the **ClusterServersConfig** object.
+   -  To connect to a single-node or Proxy Cluster instance, use the **useSingleServer** method of the **SingleServerConfig** object of Redisson. To connect to a master/standby instance, use the **useMasterSlaveServers** method of the **MasterSlaveServersConfig** object of Redisson. To connect to a Redis Cluster instance, use the **useClusterServers** method of the **ClusterServersConfig** object.
 
 Prerequisites
 -------------
@@ -58,22 +58,23 @@ Bean Configuration
 
 Spring Boot does not provide Redisson adaptation, and the **application.properties** configuration file does not have the corresponding configuration item. Therefore, you can only use Bean configuration.
 
--  Single-node
+-  Single-node and Proxy Cluster
 
    .. code-block::
 
+      import org.redisson.Redisson;
+      import org.redisson.api.RedissonClient;
       import org.redisson.codec.JsonJacksonCodec;
       import org.redisson.config.Config;
       import org.redisson.config.SingleServerConfig;
-      import org.redisson.spring.data.connection.RedissonConnectionFactory;
       import org.springframework.beans.factory.annotation.Value;
       import org.springframework.context.annotation.Bean;
       import org.springframework.context.annotation.Configuration;
 
       @Configuration
-      public class RedisConfiguration {
+      public class SingleConfig {
 
-          @Value("${redis.address}")
+          @Value("${redis.address:}")
           private String redisAddress;
 
           @Value("${redis.password:}")
@@ -107,12 +108,7 @@ Spring Boot does not provide Redisson adaptation, and the **application.properti
           private Integer redisRetryInterval = 200;
 
           @Bean
-          public RedissonConnectionFactory redissonConnectionFactory(Config redissonSingleServerConfig) {
-              return new RedissonConnectionFactory(redissonSingleServerConfig);
-          }
-
-          @Bean
-          public Config redissonSingleServerConfig() {
+          public RedissonClient redissonClient(){
               Config redissonConfig = new Config();
 
               SingleServerConfig serverConfig = redissonConfig.useSingleServer();
@@ -130,7 +126,7 @@ Spring Boot does not provide Redisson adaptation, and the **application.properti
               serverConfig.setRetryInterval(redisRetryInterval);
 
               redissonConfig.setCodec(new JsonJacksonCodec());
-              return redissonConfig;
+              return Redisson.create(redissonConfig);
           }
       }
 
@@ -138,20 +134,26 @@ Spring Boot does not provide Redisson adaptation, and the **application.properti
 
    .. code-block::
 
+      import org.redisson.Redisson;
+      import org.redisson.api.RedissonClient;
       import org.redisson.codec.JsonJacksonCodec;
       import org.redisson.config.Config;
       import org.redisson.config.MasterSlaveServersConfig;
       import org.redisson.config.ReadMode;
       import org.redisson.config.SubscriptionMode;
-      import org.redisson.spring.data.connection.RedissonConnectionFactory;
       import org.springframework.beans.factory.annotation.Value;
       import org.springframework.context.annotation.Bean;
       import org.springframework.context.annotation.Configuration;
 
+      import java.util.HashSet;
+
       @Configuration
-      public class RedisConfiguration {
+      public class MasterStandbyConfig {
           @Value("${redis.master.address}")
           private String redisMasterAddress;
+
+          @Value("${redis.slave.address}")
+          private String redisSlaveAddress;
 
           @Value("${redis.database:0}")
           private Integer redisDatabase = 0;
@@ -184,16 +186,14 @@ Spring Boot does not provide Redisson adaptation, and the **application.properti
           private Integer redisRetryInterval = 200;
 
           @Bean
-          public RedissonConnectionFactory redissonConnectionFactory(Config redissonMasterSlaveServersConfig) {
-              return new RedissonConnectionFactory(redissonMasterSlaveServersConfig);
-          }
-
-          @Bean
-          public Config redissonMasterSlaveServersConfig() {
+          public RedissonClient redissonClient() {
               Config redissonConfig = new Config();
 
               MasterSlaveServersConfig serverConfig = redissonConfig.useMasterSlaveServers();
               serverConfig.setMasterAddress(redisMasterAddress);
+              HashSet<String> slaveSet = new HashSet<>();
+              slaveSet.add(redisSlaveAddress);
+              serverConfig.setSlaveAddresses(slaveSet);
 
               serverConfig.setDatabase(redisDatabase);
               serverConfig.setPassword(redisPassword);
@@ -212,83 +212,7 @@ Spring Boot does not provide Redisson adaptation, and the **application.properti
               serverConfig.setRetryInterval(redisRetryInterval);
 
               redissonConfig.setCodec(new JsonJacksonCodec());
-              return redissonConfig;
-          }
-      }
-
--  Proxy Cluster
-
-   .. code-block::
-
-      import org.redisson.codec.JsonJacksonCodec;
-      import org.redisson.config.Config;
-      import org.redisson.config.SingleServerConfig;
-      import org.redisson.spring.data.connection.RedissonConnectionFactory;
-      import org.springframework.beans.factory.annotation.Value;
-      import org.springframework.context.annotation.Bean;
-      import org.springframework.context.annotation.Configuration;
-
-      @Configuration
-      public class RedisConfiguration {
-
-          @Value("${redis.address}")
-          private String redisAddress;
-
-          @Value("${redis.password:}")
-          private String redisPassword;
-
-          @Value("${redis.database:0}")
-          private Integer redisDatabase = 0;
-
-          @Value("${redis.connect.timeout:3000}")
-          private Integer redisConnectTimeout = 3000;
-
-          @Value("${redis.connection.idle.timeout:10000}")
-          private Integer redisConnectionIdleTimeout = 10000;
-
-          @Value("${redis.connection.ping.interval:1000}")
-          private Integer redisConnectionPingInterval = 1000;
-
-          @Value("${redis.timeout:2000}")
-          private Integer timeout = 2000;
-
-          @Value("${redis.connection.pool.min.size:50}")
-          private Integer redisConnectionPoolMinSize;
-
-          @Value("${redis.connection.pool.max.size:200}")
-          private Integer redisConnectionPoolMaxSize;
-
-          @Value("${redis.retry.attempts:3}")
-          private Integer redisRetryAttempts = 3;
-
-          @Value("${redis.retry.interval:200}")
-          private Integer redisRetryInterval = 200;
-
-          @Bean
-          public RedissonConnectionFactory redissonConnectionFactory(Config redissonProxyServerConfig) {
-              return new RedissonConnectionFactory(redissonProxyServerConfig);
-          }
-
-          @Bean
-          public Config redissonProxyServerConfig() {
-              Config redissonConfig = new Config();
-
-              SingleServerConfig serverConfig = redissonConfig.useSingleServer();
-              serverConfig.setAddress(redisAddress);
-              serverConfig.setConnectionMinimumIdleSize(redisConnectionPoolMinSize);
-              serverConfig.setConnectionPoolSize(redisConnectionPoolMaxSize);
-
-              serverConfig.setDatabase(redisDatabase);
-              serverConfig.setPassword(redisPassword);
-              serverConfig.setConnectTimeout(redisConnectTimeout);
-              serverConfig.setIdleConnectionTimeout(redisConnectionIdleTimeout);
-              serverConfig.setPingConnectionInterval(redisConnectionPingInterval);
-              serverConfig.setTimeout(timeout);
-              serverConfig.setRetryAttempts(redisRetryAttempts);
-              serverConfig.setRetryInterval(redisRetryInterval);
-
-              redissonConfig.setCodec(new JsonJacksonCodec());
-              return redissonConfig;
+              return Redisson.create(redissonConfig);
           }
       }
 
@@ -296,20 +220,21 @@ Spring Boot does not provide Redisson adaptation, and the **application.properti
 
    .. code-block::
 
-      import java.util.List;
-
+      import org.redisson.Redisson;
+      import org.redisson.api.RedissonClient;
       import org.redisson.codec.JsonJacksonCodec;
       import org.redisson.config.ClusterServersConfig;
       import org.redisson.config.Config;
       import org.redisson.config.ReadMode;
       import org.redisson.config.SubscriptionMode;
-      import org.redisson.spring.data.connection.RedissonConnectionFactory;
       import org.springframework.beans.factory.annotation.Value;
       import org.springframework.context.annotation.Bean;
       import org.springframework.context.annotation.Configuration;
 
+      import java.util.List;
+
       @Configuration
-      public class RedisConfiguration {
+      public class ClusterConfig {
 
           @Value("${redis.cluster.address}")
           private List<String> redisClusterAddress;
@@ -345,12 +270,7 @@ Spring Boot does not provide Redisson adaptation, and the **application.properti
           private Integer redisMasterConnectionPoolMaxSize = 200;
 
           @Bean
-          public RedissonConnectionFactory redissonConnectionFactory(Config redissonClusterServersConfig) {
-              return new RedissonConnectionFactory(redissonClusterServersConfig);
-          }
-
-          @Bean
-          public Config redissonClusterServersConfig() {
+          public RedissonClient redissonClient() {
               Config redissonConfig = new Config();
 
               ClusterServersConfig serverConfig = redissonConfig.useClusterServers();
@@ -373,7 +293,7 @@ Spring Boot does not provide Redisson adaptation, and the **application.properti
               serverConfig.setRetryInterval(redisRetryInterval);
 
               redissonConfig.setCodec(new JsonJacksonCodec());
-              return redissonConfig;
+              return Redisson.create(redissonConfig);
           }
       }
 
@@ -402,12 +322,12 @@ Parameter Description
    | keepPubSubOrder     | true                                | Indicates whether to receive messages in the publish sequence. **If messages can be processed concurrently, you are advised to set this parameter to false.**                                          |
    +---------------------+-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. table:: **Table 2** SingleServerConfig parameters (single-node)
+.. table:: **Table 2** SingleServerConfig parameters (single-node, or Proxy Cluster)
 
    +---------------------------------------+---------------+-------------------------------------------------------------------------------------------+
    | Parameter                             | Default Value | Description                                                                               |
    +=======================================+===============+===========================================================================================+
-   | address                               | ``-``         | Node connection information, in *ip*\ **:**\ *port* format.                               |
+   | address                               | ``-``         | Node connection information, in redis://*ip*\ **:**\ *port* format.                       |
    +---------------------------------------+---------------+-------------------------------------------------------------------------------------------+
    | database                              | 0             | ID of the database to be used.                                                            |
    +---------------------------------------+---------------+-------------------------------------------------------------------------------------------+
@@ -436,14 +356,14 @@ Parameter Description
    | clientName                            | null          | Client name.                                                                              |
    +---------------------------------------+---------------+-------------------------------------------------------------------------------------------+
 
-.. table:: **Table 3** MasterSlaveServersConfig parameters (master/standby and Proxy Cluster)
+.. table:: **Table 3** MasterSlaveServersConfig parameters (master/standby)
 
    +---------------------------------------+------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
    | Parameter                             | Default Value          | Description                                                                                                                                           |
    +=======================================+========================+=======================================================================================================================================================+
-   | masterAddress                         | ``-``                  | Master node connection information, in *ip*\ **:**\ *port* format.                                                                                    |
+   | masterAddress                         | ``-``                  | Master node connection information, in redis://*ip*\ **:**\ *port* format.                                                                            |
    +---------------------------------------+------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | slaveAddresses                        | ``-``                  | List of replica connection information: **Set<**\ *ip*\ **:**\ *port*\ **>**                                                                          |
+   | slaveAddresses                        | ``-``                  | Standby node connection information, in Set<redis://*ip:port*> format.                                                                                |
    +---------------------------------------+------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
    | readMode                              | SLAVE                  | Read mode. By default, read traffic is distributed to replica nodes. The value can be **MASTER** (recommended), **SLAVE**, or **MASTER_SLAVE**.       |
    +---------------------------------------+------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -482,49 +402,49 @@ Parameter Description
 
 .. table:: **Table 4** ClusterServersConfig parameters (Redis Cluster)
 
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Parameter                             | Default Value          | Description                                                                                                                                                  |
-   +=======================================+========================+==============================================================================================================================================================+
-   | nodeAddress                           | ``-``                  | Connection addresses of cluster nodes. Each address uses the *ip*\ **:**\ *port* format. Use commas (,) to separate connection addresses of different nodes. |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | password                              | null                   | Password for logging in to the cluster.                                                                                                                      |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | scanInterval                          | 1000                   | Interval for periodically checking the cluster node status, in milliseconds.                                                                                 |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | readMode                              | SLAVE                  | Read mode. By default, read traffic is distributed to replica nodes. The value can be **MASTER** (recommended), **SLAVE**, or **MASTER_SLAVE**.              |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | loadBalancer                          | RoundRobinLoadBalancer | Load balancing algorithm. This parameter is valid only when **readMode** is set to **SLAVE** or **MASTER_SLAVE**. Read traffic is distributed evenly.        |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | masterConnectionMinimumIdleSize       | 32                     | Minimum number of connections to the master node of each shard.                                                                                              |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | masterConnectionPoolSize              | 64                     | Maximum number of connections to the master node of each shard.                                                                                              |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | slaveConnectionMinimumIdleSize        | 32                     | Minimum number of connections to each replica node of each shard. If **readMode** is set to **MASTER**, the value of this parameter is invalid.              |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | slaveConnectionPoolSize               | 64                     | Maximum number of connections to each replica node of each shard. If **readMode** is set to **MASTER**, the value of this parameter is invalid.              |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | subscriptionMode                      | SLAVE                  | Subscription mode. By default, only replica nodes handle subscription. The value can be **SLAVE** or **MASTER** (recommended).                               |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | subscriptionConnectionMinimumIdleSize | 1                      | Minimum number of connections to the target node for pub/sub.                                                                                                |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | subscriptionConnectionPoolSize        | 50                     | Maximum number of connections to the target node for pub/sub.                                                                                                |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | subcriptionPerConnection              | 5                      | Maximum number of subscriptions on each subscription connection.                                                                                             |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | connectionTimeout                     | 10000                  | Connection timeout interval, in milliseconds.                                                                                                                |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | idleConnectionTimeout                 | 10000                  | Maximum time (in milliseconds) for reclaiming idle connections.                                                                                              |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | pingConnectionInterval                | 30000                  | Heartbeat for detecting available connections, in milliseconds. **Recommended: 3000**.                                                                       |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | timeout                               | 3000                   | Timeout interval for waiting for a response, in milliseconds.                                                                                                |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | retryAttemps                          | 3                      | Maximum number of retries upon send failures.                                                                                                                |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | retryInterval                         | 1500                   | Retry interval, in milliseconds. **Recommended: 200**.                                                                                                       |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | clientName                            | null                   | Client name.                                                                                                                                                 |
-   +---------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Parameter                             | Default Value          | Description                                                                                                                                                          |
+   +=======================================+========================+======================================================================================================================================================================+
+   | nodeAddress                           | ``-``                  | Connection addresses of cluster nodes. Each address uses the redis://*ip*\ **:**\ *port* format. Use commas (,) to separate connection addresses of different nodes. |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | password                              | null                   | Password for logging in to the cluster.                                                                                                                              |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | scanInterval                          | 1000                   | Interval for periodically checking the cluster node status, in milliseconds.                                                                                         |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | readMode                              | SLAVE                  | Read mode. By default, read traffic is distributed to replica nodes. The value can be **MASTER** (recommended), **SLAVE**, or **MASTER_SLAVE**.                      |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | loadBalancer                          | RoundRobinLoadBalancer | Load balancing algorithm. This parameter is valid only when **readMode** is set to **SLAVE** or **MASTER_SLAVE**. Read traffic is distributed evenly.                |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | masterConnectionMinimumIdleSize       | 32                     | Minimum number of connections to the master node of each shard.                                                                                                      |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | masterConnectionPoolSize              | 64                     | Maximum number of connections to the master node of each shard.                                                                                                      |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | slaveConnectionMinimumIdleSize        | 32                     | Minimum number of connections to each replica node of each shard. If **readMode** is set to **MASTER**, the value of this parameter is invalid.                      |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | slaveConnectionPoolSize               | 64                     | Maximum number of connections to each replica node of each shard. If **readMode** is set to **MASTER**, the value of this parameter is invalid.                      |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | subscriptionMode                      | SLAVE                  | Subscription mode. By default, only replica nodes handle subscription. The value can be **SLAVE** or **MASTER** (recommended).                                       |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | subscriptionConnectionMinimumIdleSize | 1                      | Minimum number of connections to the target node for pub/sub.                                                                                                        |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | subscriptionConnectionPoolSize        | 50                     | Maximum number of connections to the target node for pub/sub.                                                                                                        |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | subcriptionPerConnection              | 5                      | Maximum number of subscriptions on each subscription connection.                                                                                                     |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | connectionTimeout                     | 10000                  | Connection timeout interval, in milliseconds.                                                                                                                        |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | idleConnectionTimeout                 | 10000                  | Maximum time (in milliseconds) for reclaiming idle connections.                                                                                                      |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | pingConnectionInterval                | 30000                  | Heartbeat for detecting available connections, in milliseconds. **Recommended: 3000**.                                                                               |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | timeout                               | 3000                   | Timeout interval for waiting for a response, in milliseconds.                                                                                                        |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | retryAttemps                          | 3                      | Maximum number of retries upon send failures.                                                                                                                        |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | retryInterval                         | 1500                   | Retry interval, in milliseconds. **Recommended: 200**.                                                                                                               |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | clientName                            | null                   | Client name.                                                                                                                                                         |
+   +---------------------------------------+------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Suggestion for Configuring DCS Instances
 ----------------------------------------

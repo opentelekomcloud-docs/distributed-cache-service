@@ -43,7 +43,7 @@ Pom Configuration
    <dependency>
        <groupId>redis.clients</groupId>
        <artifactId>jedis</artifactId>
-       <version>3.6.0</version>
+       <version>3.10.0</version>
    </dependency>
 
 application.properties Configuration
@@ -100,6 +100,8 @@ application.properties Configuration
       spring.redis.jedis.pool.max-wait=3000
       #Interval for checking and evicting idle connections. Default: 60s.
       spring.redis.jedis.pool.time-between-eviction-runs=60S
+
+.. _dcs-ug-0713005__en-us_topic_0148195198_section12244191616:
 
 Bean Configuration
 ------------------
@@ -321,6 +323,50 @@ Bean Configuration
           }
       }
 
+(Optional) Configuring SSL Connections
+--------------------------------------
+
+If SSL is enabled for the instance, use the following content to replace the JedisClientConfiguration construction method clientConfiguration() in :ref:`Bean Configuration <dcs-ug-0713005__en-us_topic_0148195198_section12244191616>` for connecting to the instance with SSL. For details about whether your DCS Redis instances support SSL, see :ref:`Configuring SSL <dcs-ug-023129>`.
+
+.. code-block::
+
+   @Bean
+   public JedisClientConfiguration clientConfiguration() throws Exception {
+       JedisClientConfiguration.JedisClientConfigurationBuilder configurationBuilder
+           = JedisClientConfiguration.builder()
+           .connectTimeout(Duration.ofMillis(redisConnectTimeout))
+           .readTimeout(Duration.ofMillis(redisReadTimeout));
+
+       configurationBuilder.usePooling().poolConfig(redisPoolConfig());
+       configurationBuilder.useSsl().sslSocketFactory(getTrustStoreSslSocketFactory());
+       return configurationBuilder.build();
+   }
+
+   private SSLSocketFactory getTrustStoreSslSocketFactory() throws Exception{
+       //Load the CA certificate in the user-defined path based on service requirements.
+       CertificateFactory cf = CertificateFactory.getInstance("X.509");
+       Certificate ca;
+       try (InputStream is = new FileInputStream("./ca.crt")) {
+           ca = cf.generateCertificate(is);
+       }
+
+       //Create keystore.
+       String keyStoreType = KeyStore.getDefaultType();
+       KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+       keyStore.load(null, null);
+       keyStore.setCertificateEntry("ca", ca);
+
+       //Create TrustManager.
+       TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(
+           TrustManagerFactory.getDefaultAlgorithm());
+       trustManagerFactory.init(keyStore);
+
+       //Create SSLContext.
+       SSLContext context = SSLContext.getInstance("TLS");
+       context.init(null, trustManagerFactory.getTrustManagers(), new SecureRandom());
+       return context.getSocketFactory();
+   }
+
 Parameter Description
 ---------------------
 
@@ -354,33 +400,33 @@ Parameter Description
 
 .. table:: **Table 3** JedisPoolConfig parameters
 
-   +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Parameter                      | Default Value | Description                                                                                                                                                                                                                                                  |
-   +================================+===============+==============================================================================================================================================================================================================================================================+
-   | minIdle                        | ``-``         | Minimum connections in the connection pool                                                                                                                                                                                                                   |
-   +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | maxIdle                        | ``-``         | Maximum idle connections in the connection pool                                                                                                                                                                                                              |
-   +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | maxTotal                       | ``-``         | Maximum total connections in the connection pool                                                                                                                                                                                                             |
-   +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | blockWhenExhausted             | true          | Indicates whether to wait after the connection pool is exhausted. **true**: Wait. **false**: Do not wait. To validate **maxWaitMillis**, this parameter must be set to **true**.                                                                             |
-   +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | maxWaitMillis                  | -1            | Maximum amount of time (in milliseconds) to wait for connection after the connection pool is exhausted. The default value **-1** indicates to wait indefinitely.                                                                                             |
-   +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | testOnCreate                   | false         | Indicates whether to enable connectivity test on creating connections. **false**: Disable. **true**: Enable.                                                                                                                                                 |
-   +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | testOnBorrow                   | false         | Indicates whether to enable connectivity test on obtaining connections. **false**: Disable. **true**: Enable. For heavy-traffic services, set this parameter to **false** to reduce overhead.                                                                |
-   +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | testOnReturn                   | false         | Indicates whether to enable connectivity test on returning connections. **false**: Disable. **true**: Enable. For heavy-traffic services, set this parameter to **false** to reduce overhead.                                                                |
-   +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | testWhileIdle                  | false         | Indicates whether to check for idle connections. If this parameter is set to **false**, idle connections are not evicted. Recommended value: **true**.                                                                                                       |
-   +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | softMinEvictableIdleTimeMillis | 1800000       | Duration (in milliseconds) after which idle connections are evicted. If the idle duration is greater than this value and the maximum number of idle connections is reached, idle connections are directly evicted.                                           |
-   +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | minEvictableIdleTimeMillis     | 60000         | Minimum amount of time (in milliseconds) a connection may remain idle in the pool before it is eligible for eviction. The recommended value is **-1**, indicating that **softMinEvictableIdleTimeMillis** is used instead of **minEvictableIdleTimeMillis**. |
-   +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | timeBetweenEvictionRunsMillis  | 60000         | Interval (in milliseconds) for checking and evicting idle connections.                                                                                                                                                                                       |
-   +--------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Parameter                      | Default Value | Description                                                                                                                                                                                                                |
+   +================================+===============+============================================================================================================================================================================================================================+
+   | minIdle                        | ``-``         | Minimum connections in the connection pool                                                                                                                                                                                 |
+   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | maxIdle                        | ``-``         | Maximum idle connections in the connection pool                                                                                                                                                                            |
+   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | maxTotal                       | ``-``         | Maximum total connections in the connection pool                                                                                                                                                                           |
+   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | blockWhenExhausted             | true          | Indicates whether to wait after the connection pool is exhausted. **true**: Wait. **false**: Do not wait. To validate **maxWaitMillis**, this parameter must be set to **true**.                                           |
+   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | maxWaitMillis                  | -1            | Maximum amount of time (in milliseconds) to wait for connection after the connection pool is exhausted. The default value **-1** indicates to wait indefinitely.                                                           |
+   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | testOnCreate                   | false         | Indicates whether to enable connectivity test on creating connections. **false**: Disable. **true**: Enable.                                                                                                               |
+   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | testOnBorrow                   | false         | Indicates whether to enable connectivity test on obtaining connections. **false**: Disable. **true**: Enable. For heavy-traffic services, set this parameter to **false** to reduce overhead.                              |
+   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | testOnReturn                   | false         | Indicates whether to enable connectivity test on returning connections. **false**: Disable. **true**: Enable. For heavy-traffic services, set this parameter to **false** to reduce overhead.                              |
+   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | testWhileIdle                  | false         | Indicates whether to check for idle connections. If this parameter is set to **false**, idle connections are not evicted. Recommended value: **true**.                                                                     |
+   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | softMinEvictableIdleTimeMillis | 1800000       | Duration (in milliseconds) after which idle connections are evicted. If the idle duration is greater than this value and the maximum number of idle connections is reached, idle connections are directly evicted.         |
+   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | minEvictableIdleTimeMillis     | 60000         | Minimum amount of time (in milliseconds) a connection may remain idle in the pool before it is eligible for eviction. The recommended value is **-1**, indicating that **softMinEvictableIdleTimeMillis** is used instead. |
+   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | timeBetweenEvictionRunsMillis  | 60000         | Interval (in milliseconds) for checking and evicting idle connections.                                                                                                                                                     |
+   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. table:: **Table 4** JedisClientConfiguration parameters
 

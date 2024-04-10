@@ -105,7 +105,7 @@ Procedure
 
          <?php
              $redis_host = "{redis_instance_address}";
-             $redis_port = 6379;
+             $redis_port = {port};
              $user_pwd = "{password}";
              $redis = new Redis();
              if ($redis->connect($redis_host, $redis_port) == false) {
@@ -122,6 +122,6 @@ Procedure
              $redis->close();
          ?>
 
-      *{redis_instance_address}* indicates the IP address/domain name of DCS instance and **6379** is an example port number of DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312009__en-us_topic_0148195315_li8233164074413>`. Change them as required. *{password}* indicates the password used to log in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation. If password-free access is enabled, shield the **if** statement for password authentication.
+      *{redis_instance_address}* indicates the example IP address/domain name of the DCS instance and *{port}* indicates the port number of the DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312009__en-us_topic_0148195315_li8233164074413>`. Change them as required. *{password}* indicates the password used to log in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation. If password-free access is enabled, shield the **if** statement for password authentication.
 
    b. Run the **php redis.php** command to access the DCS instance.

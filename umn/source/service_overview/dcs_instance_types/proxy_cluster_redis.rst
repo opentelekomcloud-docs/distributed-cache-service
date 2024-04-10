@@ -22,7 +22,7 @@ Proxy Cluster DCS Redis 3.0 instances are compatible with `codis <https://github
 
 Each Proxy Cluster instance consists of load balancers, proxies, cluster managers, and :ref:`shards <dcs-pd-200312004__en-us_topic_0145956240_section20999323134412>`.
 
-.. table:: **Table 1** Specifications of Proxy Cluster DCS Redis 3.0 instances
+.. table:: **Table 1** Total memory, proxies, and shards of Proxy Cluster DCS Redis 3.0 instances
 
    ============ ======= ======
    Total Memory Proxies Shards
