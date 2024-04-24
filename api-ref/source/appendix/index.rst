@@ -6,9 +6,10 @@ Appendix
 ========
 
 -  :ref:`Status Codes <dcs-api-0312043>`
--  :ref:`Error Codes <dcs-api-0312044>`
+-  :ref:`Error Codes <errorcode>`
 -  :ref:`Obtaining a Project ID <dcs-api-0312045>`
 -  :ref:`DCS Instance Statuses <dcs-api-0312047>`
+-  :ref:`Instance Diagnosis IDs <dcs-api-0312050>`
 
 .. toctree::
    :maxdepth: 1
@@ -18,3 +19,4 @@ Appendix
    error_codes
    obtaining_a_project_id
    dcs_instance_statuses
+   instance_diagnosis_ids
