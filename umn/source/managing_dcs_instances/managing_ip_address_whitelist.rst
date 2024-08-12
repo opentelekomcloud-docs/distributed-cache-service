@@ -38,7 +38,7 @@ Creating a Whitelist Group
       +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
       | IP Address/Range      | A maximum of 20 IP addresses or IP address ranges can be added to an instance. Separate multiple IP addresses or IP address ranges with commas. | 10.10.10.1,10.10.10.10 |
       |                       |                                                                                                                                                 |                        |
-      |                       | Unsupported IP address and IP address range: 0.0.0.0 and 0.0.0/0.                                                                               |                        |
+      |                       | Unsupported IP address and IP address range: 0.0.0.0 and 0.0.0.0/0.                                                                             |                        |
       +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
 
 #. Click **OK**.

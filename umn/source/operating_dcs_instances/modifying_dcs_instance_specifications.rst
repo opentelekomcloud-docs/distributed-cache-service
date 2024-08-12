@@ -44,46 +44,60 @@ Scaling
 
    .. table:: **Table 1** Scaling options supported by different DCS instances
 
-      +--------------+-----------------+-----------------+-------------------------+---------------+
-      | Cache Engine | Single-Node     | Master/Standby  | Redis Cluster           | Proxy Cluster |
-      +==============+=================+=================+=========================+===============+
-      | Redis 3.0    | Scaling up/down | Scaling up/down | N/A                     | Scaling up    |
-      +--------------+-----------------+-----------------+-------------------------+---------------+
-      | Redis 4.0    | Scaling up/down | Scaling up/down | Scaling up              | N/A           |
-      +--------------+-----------------+-----------------+-------------------------+---------------+
-      | Redis 5.0    | Scaling up/down | Scaling up/down | Scaling up              | N/A           |
-      +--------------+-----------------+-----------------+-------------------------+---------------+
-      | Redis 6.0    | Scaling up/down | Scaling up/down | Scaling up/down, out/in | N/A           |
-      +--------------+-----------------+-----------------+-------------------------+---------------+
+      +--------------+-----------------+-----------------+------------------------------------------------------+---------------+
+      | Cache Engine | Single-Node     | Master/Standby  | Redis Cluster                                        | Proxy Cluster |
+      +==============+=================+=================+======================================================+===============+
+      | Redis 3.0    | Scaling up/down | Scaling up/down | N/A                                                  | Scaling out   |
+      +--------------+-----------------+-----------------+------------------------------------------------------+---------------+
+      | Redis 4.0    | Scaling up/down | Scaling up/down | Scaling up/out, down/in, and replica quantity change | N/A           |
+      +--------------+-----------------+-----------------+------------------------------------------------------+---------------+
+      | Redis 5.0    | Scaling up/down | Scaling up/down | Scaling up/out, down/in, and replica quantity change | N/A           |
+      +--------------+-----------------+-----------------+------------------------------------------------------+---------------+
+      | Redis 6.0    | Scaling up/down | Scaling up/down | Scaling up/down, out/in, and replica quantity change | N/A           |
+      +--------------+-----------------+-----------------+------------------------------------------------------+---------------+
 
    .. note::
 
       If the reserved memory of a DCS Redis 3.0 instance is insufficient, the scaling may fail when the memory is used up.
 
--  **Impact of scaling:**
+      Change the replica quantity and capacity separately.
 
-   -  Single-node and master/standby
+-  **Impact of scaling**
 
-      -  A DCS Redis 4.0/5.0/6.0 instance will be disconnected for several seconds and remain read-only for about 1 minute.
-      -  A DCS Redis 3.0 instance will be disconnected and remain read-only for 5 to 30 minutes.
-      -  For scaling up, only the memory of the instance is expanded. The CPU processing capability is not improved.
-      -  Data of single-node instances may be lost because they do not support data persistence. After scaling, check whether the data is complete and import data if required.
-      -  Backup records of master/standby instances cannot be used after scaling down.
+   .. table:: **Table 2** Impact of scaling
 
-   -  Cluster
-
-      -  If the shard quantity is not decreased, the instance can always be connected, but the CPU usage will increase, compromising performance by up to 20%, and the latency will increase during data migration.
-      -  During scaling up, new Redis Server nodes are added, and data is automatically balanced to the new nodes.
-      -  Nodes will be deleted if the shard quantity decreases. To prevent disconnection, ensure that the deleted nodes are not directly referenced in your application.
-      -  Ensure that the used memory of each node is less than 70% of the maximum memory per node of the new flavor. Otherwise, you cannot perform the scale-in.
-      -  If the memory becomes full during scaling due to a large amount of data being written, scaling will fail. Modify specifications during off-peak hours.
-      -  Scaling involves data migration. The latency for accessing the key being migrated increases. For a Redis Cluster instance, ensure that the client can properly process the **MOVED** and **ASK** commands. Otherwise, requests will fail.
-      -  Before scaling, perform cache analysis to ensure that no big keys (>= 512 MB) exist in the instance. Otherwise, scaling may fail.
-      -  Backup records created before scaling cannot be restored.
-
--  **Notes on changing the number of replicas of a DCS Redis instance:**
-
-   Deleting replicas interrupts connections. If your application cannot reconnect to Redis or handle exceptions, you need to restart the application after scaling.
+      +---------------------------------+-----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+      | Instance Type                   | Scaling Type          | Impact                                                                                                                                                                                                                                                                                                                                                   |
+      +=================================+=======================+==========================================================================================================================================================================================================================================================================================================================================================+
+      | Single-node and master/standby  | Scaling up/down       | -  During scaling up, a DCS Redis 4.0/5.0/6.0 instance will be disconnected for several seconds and remain read-only for about 1 minute. During scaling down, connections will not be interrupted.                                                                                                                                                       |
+      |                                 |                       | -  A DCS Redis 3.0 instance will be disconnected for several seconds and remain read-only for 5 to 30 minutes.                                                                                                                                                                                                                                           |
+      |                                 |                       | -  For scaling up, only the memory of the instance is expanded. The CPU processing capability is not improved.                                                                                                                                                                                                                                           |
+      |                                 |                       | -  Single-node DCS instances do not support data persistence. Scaling may compromise data reliability. After scaling, check whether the data is complete and import data if required. If there is important data, use a migration tool to migrate the data to other instances for backup.                                                                |
+      |                                 |                       | -  For master/standby instances, backup records created before scale-down cannot be used after scale-down. If necessary, download the backup file in advance or back up the data again after scale-down.                                                                                                                                                 |
+      +---------------------------------+-----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+      | Proxy Cluster and Redis Cluster | Scaling up/down       | -  Scaling out by adding shards:                                                                                                                                                                                                                                                                                                                         |
+      |                                 |                       |                                                                                                                                                                                                                                                                                                                                                          |
+      |                                 |                       |    -  **Scaling out does not interrupt connections but will occupy CPU resources, decreasing performance by up to 20%.**                                                                                                                                                                                                                                 |
+      |                                 |                       |    -  If the shard quantity increases, new Redis Server nodes are added, and data is automatically balanced to the new nodes, increasing the access latency.                                                                                                                                                                                             |
+      |                                 |                       |                                                                                                                                                                                                                                                                                                                                                          |
+      |                                 |                       | -  Scaling in by reducing shards:                                                                                                                                                                                                                                                                                                                        |
+      |                                 |                       |                                                                                                                                                                                                                                                                                                                                                          |
+      |                                 |                       |    -  If the shard quantity decreases, nodes will be deleted. **Before scaling in a Redis Cluster instance, ensure that the deleted nodes are not directly referenced in your application, to prevent service access exceptions.**                                                                                                                       |
+      |                                 |                       |    -  **Nodes will be deleted**, and connections will be interrupted. If your application cannot reconnect to Redis or handle exceptions, you may need to restart the application after scaling.                                                                                                                                                         |
+      |                                 |                       |                                                                                                                                                                                                                                                                                                                                                          |
+      |                                 |                       | -  Scaling up by shard size without changing the shard quantity:                                                                                                                                                                                                                                                                                         |
+      |                                 |                       |                                                                                                                                                                                                                                                                                                                                                          |
+      |                                 |                       |    -  **Insufficient memory of the node's VM will cause the node to migrate. Service connections may stutter and the instance may become read-only during the migration.**                                                                                                                                                                               |
+      |                                 |                       |    -  Increasing the node capacity when the VM memory is sufficient does not affect services.                                                                                                                                                                                                                                                            |
+      |                                 |                       |                                                                                                                                                                                                                                                                                                                                                          |
+      |                                 |                       | -  Scaling down by reducing the shard size without changing the shard quantity has no impact.                                                                                                                                                                                                                                                            |
+      |                                 |                       | -  To scale down an instance, ensure that the used memory of each node is less than 70% of the maximum memory per node of the new flavor.                                                                                                                                                                                                                |
+      |                                 |                       | -  **The flavor changing operation may involve data migration, and the latency may increase. For a Redis Cluster instance, ensure that the client can process the MOVED and ASK commands. Otherwise, the request will fail.**                                                                                                                            |
+      |                                 |                       | -  If the memory becomes full during scaling due to a large amount of data being written, scaling will fail.                                                                                                                                                                                                                                             |
+      |                                 |                       | -  Before scaling, **check for big keys through Cache Analysis**. Redis has a limit on key migration. If the instance has any single key greater than 512 MB, scaling will fail when big key migration between nodes times out. The bigger the key, the more likely the migration will fail.                                                             |
+      |                                 |                       | -  **Before scaling a Redis Cluster instance, ensure that automated cluster topology refresh is enabled.** If it is disabled, you will need to restart the client after scaling. For details about how to enable automated refresh if you use Lettuce, see :ref:`an example of using Lettuce to connect to a Redis Cluster instance <dcs-ug-211105002>`. |
+      |                                 |                       | -  Backup records created before scaling cannot be used. If necessary, download the backup file in advance or back up the data again after scaling.                                                                                                                                                                                                      |
+      +---------------------------------+-----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Procedure
 ---------
@@ -96,7 +110,65 @@ Procedure
 
 5. On the **Modify Specifications** page, select the desired specification.
 
-6. Click **Submit** to start modifying the DCS instance.
+   .. note::
+
+      For a master/standby DCS Redis 4.0/5.0 instance or a Redis Cluster DCS Redis 4.0/5.0/6.0 instance, you can choose to change by specification or replica quantity.
+
+6. Set **Apply Change** to **Now** or **During maintenance**.
+
+   Select **During maintenance** if the modification interrupts connections.
+
+   .. table:: **Table 3** Scenarios where specification modification interrupts connections
+
+      +---------------------------------------------------------+-----------------------------------------------------------------------+
+      | Change                                                  | When Connections Are Interrupted                                      |
+      +=========================================================+=======================================================================+
+      | Scaling up a single-node or master/standby instance     | Memory is increased from a size smaller than 8 GB to 8 GB or larger.  |
+      +---------------------------------------------------------+-----------------------------------------------------------------------+
+      | Scaling down a Proxy Cluster and Redis Cluster instance | The number of shards is decreased.                                    |
+      +---------------------------------------------------------+-----------------------------------------------------------------------+
+      | Deleting replicas                                       | Replicas are deleted from a master/standby or Redis Cluster instance. |
+      +---------------------------------------------------------+-----------------------------------------------------------------------+
+
+   .. note::
+
+      -  If the modification does not interrupt connections, it will be applied immediately even if you select **During maintenance**.
+      -  The modification cannot be withdrawn once submitted. To reschedule a modification, you can change the maintenance window. The maintenance window can be changed up to three times.
+      -  Modifications on DCS Redis 3.0 instances can only be applied immediately.
+      -  If you apply the change during maintenance, the change starts at any time within the maintenance window, rather than at the start time of the window.
+      -  If a large amount of data needs to be migrated when you scale down a cluster instance, the operation may not be completed within the maintenance window.
+
+7. Click **Next**. In the dialog box that is displayed, click **Yes**.
+
+8. Confirm the change details and view the risk check result.
+
+   If any risk is found in the check, the instance may fail to be modified. For details, see :ref:`Table 4 <dcs-ug-0326011__table2414162318507>`.
+
+   .. _dcs-ug-0326011__table2414162318507:
+
+   .. table:: **Table 4** Risk check items
+
+      +-------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
+      | Check Item                                                                    | Reason for Check                                                                                                                                                                                                  | Solution                                                                                                                       |
+      +===============================================================================+===================================================================================================================================================================================================================+================================================================================================================================+
+      | Dataset memory distribution check                                             | Specification modification of a cluster instance involves data migration between nodes. If an instance has any key bigger than 512 MB, the modification will fail when big key migration between nodes times out. | :ref:`Analyze big keys <dcs-ug-190808001>` and :ref:`Handle big keys <dcs-faq-0521005>` before proceeding with the change.     |
+      |                                                                               |                                                                                                                                                                                                                   |                                                                                                                                |
+      | .. note::                                                                     | If the instance dataset memory is unevenly distributed among nodes and the difference is greater than 512 MB, the instance has a big key and the change may fail.                                                 |                                                                                                                                |
+      |                                                                               |                                                                                                                                                                                                                   |                                                                                                                                |
+      |    This check item applies only to Proxy Cluster and Redis Cluster instances. |                                                                                                                                                                                                                   |                                                                                                                                |
+      +-------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
+      | Memory usage check                                                            | If the memory usage of a node is greater than 90%, keys may be evicted or the change may fail.                                                                                                                    | If the memory usage is too high, optimize the memory by optimizing big keys, scanning for expired keys, or deleting some keys. |
+      +-------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
+      | Network input traffic check                                                   | The change may fail if the network input traffic is too heavy and the write buffer overflows.                                                                                                                     | Perform the change during off-peak hours.                                                                                      |
+      |                                                                               |                                                                                                                                                                                                                   |                                                                                                                                |
+      | .. note::                                                                     |                                                                                                                                                                                                                   |                                                                                                                                |
+      |                                                                               |                                                                                                                                                                                                                   |                                                                                                                                |
+      |    This check item applies only to single-node, and master/standby instances. |                                                                                                                                                                                                                   |                                                                                                                                |
+      +-------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
+      | CPU usage check                                                               | If the node CPU usage within 5 minutes is greater than 90%, the change may fail.                                                                                                                                  | Perform the change during off-peak hours.                                                                                      |
+      +-------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
+
+9. Click **Submit** to start modifying the DCS instance.
 
    You can go to **Background Tasks** page to view the modification status. For more information, see :ref:`Viewing Background Tasks <dcs-ug-0312028>`.
 

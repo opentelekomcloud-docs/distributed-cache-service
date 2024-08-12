@@ -53,7 +53,12 @@ Creating a DCS Redis Instance
 
       This parameter is displayed only when you select Redis 4.0/5.0/6.0 and the instance type is master/standby or Redis Cluster.
 
-   f. Select an AZ.
+   f. If **4.0** or later, and **Proxy Cluster** or **Redis Cluster** are selected, the **Sharding** parameter is displayed. Options:
+
+      -  **Use default**: Use the default sharding specifications.
+      -  **Customize**: Customize the size of each shard and then select corresponding instance specifications.
+
+   g. Select an AZ.
 
       If the instance type is master/standby, Proxy Cluster, or Redis Cluster, **Standby AZ** is displayed. Select a standby AZ for the standby node of the instance.
 
@@ -62,7 +67,7 @@ Creating a DCS Redis Instance
          -  To accelerate access, deploy your instance and your application in the same AZ.
          -  There are multiple AZs in each region. If resources are insufficient in an AZ, the AZ will be unavailable. In this case, select another AZ.
 
-   g. **Instance Specification**:
+   h. **Instance Specification**:
 
       The remaining quota is displayed on the console.
 

@@ -5,11 +5,11 @@
 Should I Use a Domain Name or an IP Address to Connect to a DCS Redis Instance?
 ===============================================================================
 
--  Single-node and Proxy Cluster:
+-  Single-node, and Proxy Cluster:
 
    Each instance has only one IP address and one domain name address. The addresses remain unchanged before and after master/standby switchover. You can use either address to connect to the instance.
 
--  Master/standby:
+-  Master/Standby:
 
    Each instance has one IP address and two domain name addresses. One of the domain name addresses is used only for processing read requests. The addresses remain unchanged after master/standby switchover. You can use any address to connect to the instance.
 

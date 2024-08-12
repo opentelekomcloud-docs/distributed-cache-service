@@ -21,16 +21,16 @@ There are two ways to delete a key in Redis.
 
          To avoid prolonged blocks on the Redis main thread, not all keys are checked in each time event. Instead, a random collection of keys are checked each time. As a result, the memory used by expired keys cannot be released quickly.
 
-Expired Key Scan
-----------------
+Expired DCS Key Scan
+--------------------
 
 DCS integrates these strategies and allows you to periodically release the memory used by expired keys. You can configure scheduled scans on the master nodes of your instances. The entire keyspace is traversed during the scans, triggering Redis to check whether the keys have expired and to remove expired keys if any.
 
 .. note::
 
-   This function is supported only by DCS Redis 4.0, 5.0, and 6.0 instances.
-
-   Perform expired key scans during off-peak hours to avoid 100% CPU usage.
+   -  This function is supported only by DCS Redis 4.0, 5.0, and 6.0 instances.
+   -  Perform expired key scans during off-peak hours to avoid 100% CPU usage.
+   -  Released expired keys cannot be queried.
 
 Procedure
 ---------
