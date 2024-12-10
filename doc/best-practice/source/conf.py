@@ -110,7 +110,7 @@ html_copy_source = False
 latex_documents = [
     ('index',
      'dcs-best-practice.tex',
-     u'Distributed Cache Service - Best Practice',
+    u'Distributed Cache Service - Best Practice',
      u'OpenTelekomCloud', 'manual'),
 ]
 

@@ -110,7 +110,7 @@ html_copy_source = False
 latex_documents = [
     ('index',
      'dcs-api-ref.tex',
-     u'Distributed Cache Service - API Reference',
+    u'Distributed Cache Service - API Reference',
      u'OpenTelekomCloud', 'manual'),
 ]
 
