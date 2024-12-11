@@ -110,7 +110,7 @@ html_copy_source = False
 latex_documents = [
     ('index',
      'dcs-umn.tex',
-     u'Distributed Cache Service - User Guide',
+    u'Distributed Cache Service - User Guide',
      u'OpenTelekomCloud', 'manual'),
 ]
 
