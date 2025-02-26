@@ -12,7 +12,7 @@ Procedure
 
 #. Log in to the management console.
 
-#. Click |image1| in the upper left corner of the management console and select a region and a project.
+#. Click |image1| in the upper left corner of the console and select a region and a project.
 
    .. note::
 
@@ -58,5 +58,5 @@ Procedure
 
       **Figure 2** Viewing traces
 
-.. |image1| image:: /_static/images/en-us_image_0266235405.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png
 .. |image2| image:: /_static/images/en-us_image_0266235373.png

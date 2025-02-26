@@ -16,21 +16,18 @@ Procedure
 
 #. In the navigation pane, choose **Cache Manager**.
 
-#. Click the name of the DCS instance whose background task you want to manage.
+#. Click the name of the desired instance on the left.
 
-#. Click the **Background Tasks** tab.
+#. Choose **Background Tasks**.
 
-   A list of background tasks is displayed.
+   Filter tasks by specifying the time, property, or keyword.
 
-#. Click |image2|, specify **Start Date** and **End Date**, and click **OK** to view tasks started in the corresponding time segment.
-
-   -  Click |image3| to refresh the task status.
+   -  Click |image2| to refresh the task status.
    -  To clear the record of a background task, click **Delete** in the **Operation** column.
 
       .. note::
 
          You can only delete the records of tasks in the **Successful** or **Failed** state.
 
-.. |image1| image:: /_static/images/en-us_image_0000001148603246.png
-.. |image2| image:: /_static/images/en-us_image_0266235508.png
-.. |image3| image:: /_static/images/en-us_image_0266235430.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png
+.. |image2| image:: /_static/images/en-us_image_0000001974534420.png

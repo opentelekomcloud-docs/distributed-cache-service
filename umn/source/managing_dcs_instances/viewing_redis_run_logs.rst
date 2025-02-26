@@ -24,10 +24,10 @@ Procedure
 
 #. Click **Create Log File**.
 
-   For a master/standby or cluster instance, logs will be collected from the specified shard and replica. If the instance is the single-node type, logs of the only node of the instance will be collected.
+   For a master/standby, read/write splitting, or cluster instance, logs will be collected from the specified shard and replica. If the instance is the single-node type, logs of the only node of the instance will be collected.
 
    Select the collection period and click **OK**.
 
 #. After the log file is successfully collected, click **Download** to download it.
 
-.. |image1| image:: /_static/images/en-us_image_0000001148443452.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png

@@ -7,7 +7,7 @@ Redis Usage
 
 -  :ref:`Why Is CPU Usage of a DCS Redis Instance 100%? <dcs-faq-0730012>`
 -  :ref:`Can I Change the VPC and Subnet for a DCS Redis Instance? <dcs-faq-0730013>`
--  :ref:`Why Aren't Security Groups Configured for DCS Redis 4.0/5.0/6.0 Instances? <dcs-faq-0730014>`
+-  :ref:`Why Aren't Security Groups Configured for DCS Redis 4.0 and Later Instances? <dcs-faq-0730014>`
 -  :ref:`Do DCS Redis Instances Limit the Size of a Key or Value? <dcs-faq-0730015>`
 -  :ref:`Can I Obtain the Addresses of the Nodes in a Cluster DCS Redis Instance? <dcs-faq-0730017>`
 -  :ref:`Why Is Available Memory Smaller Than Instance Cache Size? <dcs-faq-0730018>`
@@ -34,7 +34,7 @@ Redis Usage
 
    why_is_cpu_usage_of_a_dcs_redis_instance_100pct
    can_i_change_the_vpc_and_subnet_for_a_dcs_redis_instance
-   why_arent_security_groups_configured_for_dcs_redis_4.0_5.0_6.0_instances
+   why_arent_security_groups_configured_for_dcs_redis_4.0_and_later_instances
    do_dcs_redis_instances_limit_the_size_of_a_key_or_value
    can_i_obtain_the_addresses_of_the_nodes_in_a_cluster_dcs_redis_instance
    why_is_available_memory_smaller_than_instance_cache_size

@@ -5,7 +5,7 @@
 Can I Migrate Data from a Multi-DB Source Redis Instance to a Cluster DCS Redis Instance?
 =========================================================================================
 
-A total of 256 DBs (DB 0 to DB 255) can be configured for a single-node or master/standby DCS instance.
+A total of 256 DBs (DB 0 to DB 255) can be configured for a single-node, read/write splitting, or master/standby DCS instance.
 
 -  If the target is a cluster instance (a cluster instance has only one DB):
 

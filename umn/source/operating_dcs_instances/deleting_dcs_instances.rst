@@ -62,5 +62,5 @@ Deleting Instance Creation Tasks That Have Failed to Run
    -  To delete all failed tasks, click **Delete All** above the task list.
    -  To delete a single failed task, click **Delete** in the same row as the task.
 
-.. |image1| image:: /_static/images/en-us_image_0000001194403157.png
-.. |image2| image:: /_static/images/en-us_image_0000001148603250.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png
+.. |image2| image:: /_static/images/en-us_image_0143929918.png

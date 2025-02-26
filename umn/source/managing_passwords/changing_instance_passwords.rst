@@ -45,4 +45,4 @@ Procedure
 
 #. In the **Change Password** dialog box, click **OK** to confirm the password change.
 
-.. |image1| image:: /_static/images/en-us_image_0000001195353813.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png

@@ -7,7 +7,7 @@ Downloading a Backup File
 
 Automatically backed up data can be retained for a maximum of 7 days. Manually backed up data is not free of charge and takes space in OBS. Due to these limitations, you are advised to download the RDB and AOF backup files and permanently save them on the local host.
 
-This function is supported only by master/standby and cluster instances, and not by single-node instances. To export the data of a single-node instance to an RDB file, you can use redis-cli. For details, see :ref:`How Do I Export DCS Redis Instance Data? <dcs-faq-0730053>`
+This function is supported only by master/standby, read/write splitting, and cluster instances, and not by single-node instances. To export the data of a single-node instance to an RDB file, you can use redis-cli. For details, see :ref:`How Do I Export DCS Redis Instance Data? <dcs-faq-0730053>`
 
 Prerequisites
 -------------
@@ -54,4 +54,4 @@ Procedure
 
       Perform the procedure as prompted.
 
-.. |image1| image:: /_static/images/en-us_image_0000001194403147.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png

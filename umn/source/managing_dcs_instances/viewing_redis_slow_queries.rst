@@ -33,7 +33,7 @@ Viewing Slow Queries on the Console
 
 #. Choose **Analysis and Diagnosis** > **Slow Queries**.
 
-#. Select a start date and an end date to view slow queries within the specified period.
+#. Select a start date and an end date and click the refresh icon to view slow queries within the specified period.
 
    .. note::
 

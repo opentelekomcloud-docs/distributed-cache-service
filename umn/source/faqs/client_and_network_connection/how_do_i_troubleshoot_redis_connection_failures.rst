@@ -29,7 +29,7 @@ How Do I Troubleshoot Redis Connection Failures?
 
    For details, see :ref:`Security Group Configurations <en-us_topic_0090662012>`.
 
--  For a DCS Redis 4.0/5.0/6.0 instance, check the whitelist configuration.
+-  For a DCS Redis 4.0 or later instance, check the whitelist configuration.
 
    If the instance has a whitelist, ensure that the client IP address is included in the whitelist. Otherwise, the connection will fail.
 

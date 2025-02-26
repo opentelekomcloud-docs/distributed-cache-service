@@ -35,7 +35,7 @@ Procedure
 
    The modification will take effect immediately, that is, the new maintenance time window will appear on the **Basic Information** tab page immediately.
 
-.. |image1| image:: /_static/images/en-us_image_0000001194403153.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png
 .. |image2| image:: /_static/images/en-us_image_0266235582.png
 .. |image3| image:: /_static/images/en-us_image_0266235377.png
 .. |image4| image:: /_static/images/en-us_image_0266235369.png

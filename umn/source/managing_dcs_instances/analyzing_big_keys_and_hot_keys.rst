@@ -17,7 +17,7 @@ By performing big key analysis and hot key analysis, you will have a picture of 
 
 **Notes on hot key analysis:**
 
--  Only DCS Redis 4.0/5.0/6.0 instances support hot key analysis, and the **maxmemory-policy** parameter of the instances must be set to **allkeys-lfu** or **volatile-lfu**.
+-  Supported only by DCS Redis 4.0 and later instances, and the **maxmemory-policy** parameter of the instances must be set to **allkeys-lfu** or **volatile-lfu**.
 -  During hot key analysis, all keys will be traversed. The larger the number of keys, the longer the analysis takes.
 -  Perform hot key analysis shortly after peak hours to ensure the accuracy of the analysis results.
 -  The hot key analysis is performed on the master node of each instance and will reduce the instance access performance by up to 10%.
@@ -115,5 +115,5 @@ Hot Key Analysis Procedure
       | DataBase                          | Database where a hot key is located.                                                                                                                                                                                                                                                                                                 |
       +-----------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. |image1| image:: /_static/images/en-us_image_0000001194403151.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png
 .. |image2| image:: /_static/images/en-us_image_0000001148603244.png

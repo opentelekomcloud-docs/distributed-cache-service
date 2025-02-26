@@ -22,7 +22,7 @@ Creating a DCS Redis Instance
 
 #. Log in to the DCS console.
 
-#. Click |image1| in the upper left corner of the management console and select a region and a project.
+#. Click |image1| in the upper left corner of the console and select a region and a project.
 
 #. Click **Create DCS Instance**.
 
@@ -36,12 +36,11 @@ Creating a DCS Redis Instance
 
    b. **Version**:
 
-      Currently, versions 3.0/4.0/5.0/6.0 are supported.
+      Currently, versions 4.0/5.0/6.0/7.0 are supported.
 
       .. note::
 
-         -  When creating a Proxy Cluster instance, you can only select version 3.0.
-         -  When creating a Redis Cluster instance, you can select versions 4.0, 5.0, or 6.0.
+         -  To compare Redis versions, see :ref:`Comparing Redis Versions <redisdifference>`.
          -  The Redis version cannot be changed once the instance is created. To use a later Redis version, create another DCS Redis instance and then migrate data from the old instance to the new one.
          -  The method of connecting a client to a Redis Cluster instance is different from that of connecting a client to other types of instances. For details, see :ref:`Accessing a DCS Redis Instance Through redis-cli <dcs-ug-0326009>`.
 
@@ -51,16 +50,16 @@ Creating a DCS Redis Instance
 
    e. Set **Replicas**. The default value is **2** (including the master).
 
-      This parameter is displayed only when you select Redis 4.0/5.0/6.0 and the instance type is master/standby or Redis Cluster.
+      This parameter is displayed only when you select Redis 4.0 or later and the instance type is master/standby, read/write splitting, or Redis Cluster.
 
-   f. If **4.0** or later, and **Proxy Cluster** or **Redis Cluster** are selected, the **Sharding** parameter is displayed. Options:
+   f. If the version is **4.0** or later, and **Proxy Cluster** or **Redis Cluster** are selected, the **Sharding** parameter is displayed. Options:
 
       -  **Use default**: Use the default sharding specifications.
       -  **Customize**: Customize the size of each shard and then select corresponding instance specifications.
 
    g. Select an AZ.
 
-      If the instance type is master/standby, Proxy Cluster, or Redis Cluster, **Standby AZ** is displayed. Select a standby AZ for the standby node of the instance.
+      If the instance type is master/standby, Proxy Cluster, read/write splitting, or Redis Cluster, **Standby AZ** is displayed. Select a standby AZ for the standby node of the instance.
 
       .. note::
 
@@ -81,13 +80,13 @@ Creating a DCS Redis Instance
 
       Redis Cluster instances only support automatically-assigned IP addresses. The other instance types support both automatically-assigned IP addresses and manually-specified IP addresses. You can manually specify an IP address available in your subnet.
 
-      For a DCS Redis 4.0 or later instance, you can specify a port number in the range from 1 to 65535. If no port is specified, the default port 6379 will be used. For a DCS Redis 3.0 instance, the port cannot be customized. Port 6379 will be used.
+      DCS Redis 4.0/5.0/6.0 instances support automatic IP address assignment and port customization. You can specify a port number in the range from 1 to 65535. The default port number is 6379.
 
    c. Select a security group.
 
       A security group is a set of rules that control access to ECSs. It provides access policies for mutually trusted ECSs with the same security protection requirements in the same VPC.
 
-      This parameter is displayed only for DCS Redis 3.0 instances. DCS Redis 4.0/5.0/6.0 instances are based on VPC endpoints and do not support security groups. To control access to a DCS Redis 4.0/5.0/6.0 instance, configure a whitelist after instance creation. For details, see :ref:`Managing IP Address Whitelist <dcs-ug-190812001>`.
+      DCS for Redis 4.0/5.0/6.0 are based on VPC Endpoint and do not support security groups. Configure the whitelist after creating such an instance by referring to :ref:`Managing IP Address Whitelist <dcs-ug-190812001>`.
 
 #. Set the instance password.
 
@@ -114,7 +113,7 @@ Creating a DCS Redis Instance
 
 #. Choose whether to enable **Auto Backup**.
 
-   This parameter is displayed only when the instance type is master/standby or cluster. For more information on how to configure a backup policy, see :ref:`Overview <en-us_topic_0079835992>`.
+   This parameter is displayed only when the instance type is master/standby, read/write splitting, or cluster. For more information on how to configure a backup policy, see :ref:`Overview <en-us_topic_0079835992>`.
 
 #. Specify the number of instances to create.
 
@@ -128,7 +127,7 @@ Creating a DCS Redis Instance
 
    b. Rename critical commands.
 
-      **Command Renaming** is displayed for Redis 4.0 and later. Currently, you can only rename the **COMMAND**, **KEYS**, **FLUSHDB**, **FLUSHALL**, **HGETALL**, **SCAN**, **HSCAN**, **SSCAN**, and **ZSCAN** commands.
+      **Command Renaming** is displayed for Redis 4.0 and later. Currently, you can only rename the **COMMAND**, **KEYS**, **FLUSHDB**, **FLUSHALL**, **HGETALL**, **SCAN**, **HSCAN**, **SSCAN**, and **ZSCAN** commands. For Proxy Cluster instances, you can also rename the **DBSIZE** and **DBSTATS** commands.
 
    c. Specify the maintenance window.
 
@@ -142,7 +141,7 @@ Creating a DCS Redis Instance
 
 #. Return to the **Cache Manager** page to view and manage your DCS instances.
 
-   a. Creating a single-node or master/standby DCS Redis 3.0 instance takes 5 to 15 minutes. Creating a cluster DCS Redis 3.0 instance takes 30 minutes.DCS Redis 4.0 and later instances are containerized and can be created within seconds.
+   a. DCS Redis 4.0 and later instances are containerized and can be created within seconds.
    b. After a DCS instance has been successfully created, it enters the **Running** state by default.
 
    .. note::

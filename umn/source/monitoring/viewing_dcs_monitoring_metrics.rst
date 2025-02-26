@@ -20,4 +20,4 @@ Procedure
 
       You can also click **View Metric** in the **Operation** column on the **Cache Manager** page. You will be redirected to the Cloud Eye console. The metrics displayed on the Cloud Eye console are the same as those displayed on the **Performance Monitoring** page of the DCS console.
 
-.. |image1| image:: /_static/images/en-us_image_0000001196710703.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png

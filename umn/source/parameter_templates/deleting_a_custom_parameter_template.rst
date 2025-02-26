@@ -17,4 +17,4 @@ Procedure
 #. Click **Delete** in the **Operation** column.
 #. Click **Yes**.
 
-.. |image1| image:: /_static/images/en-us_image_0000001408112658.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png

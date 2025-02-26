@@ -9,7 +9,7 @@ On the DCS console, you can restart one or multiple DCS instances at a time.
 
 .. important::
 
-   -  After a single-node DCS instance is restarted, data will be deleted from the instance.
+   -  Restarting a single-node DCS instance or other types of DCS instances with AOF persistence disabled (**appendonly** set to **no**) clears the instance data. Exercise caution.
    -  While a DCS instance is restarting, it cannot be read from or written to.
    -  An attempt to restart a DCS instance while it is being backed up may result in a failure.
    -  Restarting a DCS instance will disconnect the original client. You are advised to configure automatic reconnection in your application.
@@ -41,4 +41,4 @@ Procedure
       -  To restart a single instance, you can also click **Restart** in the same row as the instance.
       -  The time required for restarting a DCS instance depends on the cache size of the instance.
 
-.. |image1| image:: /_static/images/en-us_image_0000001148443460.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png

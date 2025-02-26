@@ -8,7 +8,7 @@ Security Group Configurations
 DCS helps you control access to your DCS instances in the following ways, depending on the deployment mode:
 
 -  To control access to DCS Redis 3.0 instances, you can use security groups. Whitelists are not supported. Security group operations are described in this section.
--  To control access to DCS Redis 4.0/5.0/6.0 instances, you can use whitelists. Security groups are not supported. Whitelist operations are described in :ref:`Managing IP Address Whitelist <dcs-ug-190812001>`.
+-  To control access to DCS Redis 4.0 and later instances, you can use whitelists. Security groups are not supported. Whitelist operations are described in :ref:`Managing IP Address Whitelist <dcs-ug-190812001>`.
 
 The following describes how to configure security groups for **intra-VPC access** to DCS Redis 3.0 instances.
 

@@ -60,3 +60,8 @@ The Redis Cluster instance type provided by DCS is compatible with the `native R
       :alt: **Figure 2** Redis Cluster presharding
 
       **Figure 2** Redis Cluster presharding
+
+   .. note::
+
+      -  Each shard of a Redis Cluster is a master/standby Redis instance. When the master node on a shard is faulty, the connections on the shard are interrupted in seconds, and the shard becomes unavailable. The standby node is automatically switched over within 15 to 30 seconds. The fault only affects the shard itself.
+      -  When a master node on a single shard in a redis cluster is faulty, after a master/standby switchover is complete, the master node (already switched to the replica) is not recovered immediately and services will fail to access it. In this case, configure a Redis SDK by referring to :ref:`Access in Different Languages <dcs-ug-0512002>`.

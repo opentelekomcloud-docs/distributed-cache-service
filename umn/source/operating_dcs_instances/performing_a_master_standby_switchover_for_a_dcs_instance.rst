@@ -7,7 +7,7 @@ Performing a Master/Standby Switchover for a DCS Instance
 
 On the DCS console, you can manually switch the master and standby nodes of a DCS instance. This operation is used for special purposes, for example, releasing all service connections or terminating ongoing service operations.
 
-Only master/standby instances support a master/standby node switchover.
+Only master/standby and read/write splitting instances support a master/standby node switchover.
 
 .. important::
 
@@ -28,4 +28,4 @@ Procedure
 #. In the navigation pane, choose **Cache Manager**.
 #. In the **Operation** column of the instance, choose **More** > **Master/Standby Switchover**, then click **OK**.
 
-.. |image1| image:: /_static/images/en-us_image_0000001194523047.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png
