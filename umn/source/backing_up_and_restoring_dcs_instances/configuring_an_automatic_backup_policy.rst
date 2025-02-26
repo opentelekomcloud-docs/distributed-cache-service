@@ -14,7 +14,7 @@ If automatic backup is not required, disable the automatic backup function in th
 Prerequisites
 -------------
 
-A master/standby or cluster DCS instance is in the **Running** state.
+A master/standby, read/write splitting, or cluster DCS instance is in the **Running** state.
 
 Procedure
 ---------
@@ -61,5 +61,5 @@ Procedure
 
    After the backup is complete, click **Download**, **Restore**, or **Delete** next to the backup record as required.
 
-.. |image1| image:: /_static/images/en-us_image_0000001194403149.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png
 .. |image2| image:: /_static/images/en-us_image_0000001256735725.png

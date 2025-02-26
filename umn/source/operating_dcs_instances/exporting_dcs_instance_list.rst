@@ -13,6 +13,6 @@ Procedure
 #. Log in to the DCS console.
 #. Click |image1| in the upper left corner and select a region and a project.
 #. In the navigation pane, choose **Cache Manager**.
-#. Click **Import** above the instance list to export the DCS instance list.
+#. Click **Export** above the instance list to export the DCS instance list.
 
-.. |image1| image:: /_static/images/en-us_image_0000001194403155.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png

@@ -17,7 +17,7 @@ The following error messages may be displayed during online migration:
 
    |image2|
 
-   Solution: Set the **client-output-buffer-limit** parameter of the source Redis instance to 20% of the maximum memory of the instance.
+Solution: Set the **client-output-buffer-limit** parameter of the source Redis instance to 20% of the maximum memory of the instance. For a DCS source, set the **client-output-buffer-slave-hard-limit** and **client-output-buffer-slave-soft-limit** parameters to 20% of the maximum memory of the instance.
 
 .. |image1| image:: /_static/images/en-us_image_0000001227082869.png
 .. |image2| image:: /_static/images/en-us_image_0000001226966281.png

@@ -33,7 +33,7 @@ Plan the following information about DCS instances based on the collected inform
 
 .. note::
 
-   **redis-cli -h ${redis_address} -p ${port}**
+   **redis-cli -h $\ {redis_address} -p $\ {port}**
 
    -  Run the following command to query the data distribution and obtain the IDs of DBs with data and the number of keys in each DB:
 
@@ -68,7 +68,7 @@ After completing the evaluation, prepare the following items:
 
 #. DCS instances
 
-   Create DCS instances based on the migration planning. If the number of instances exceeds the default quota, submit a service ticket or contact technical support.
+   Create DCS instances based on the migration planning. If the number of instances exceeds the default quota, submit a service ticket or contact customer service.
 
 #. Related tools
 

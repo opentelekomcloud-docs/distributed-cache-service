@@ -17,6 +17,7 @@ Commands in the Server Group
 
 -  While running commands that take a long time to run, such as **FLUSHALL**, DCS instances may not respond to other commands and may change to the faulty state. After the command finishes executing, the instance will return to normal.
 -  When the **FLUSHDB** or **FLUSHALL** command is run, execution of other service commands may be blocked for a long time in case of a large amount of cached data.
+-  You are not advised to run the **MONITOR** command in high-concurrency scenarios or during peak hours.
 
 EVAL and EVALSHA Commands
 -------------------------
@@ -37,4 +38,4 @@ When you debug Lua scripts for Proxy Cluster and read/write splitting instances,
 Other Restrictions
 ------------------
 
--  The time limit for executing a Redis command is 15 seconds. To prevent other services from failing, a master/replica switchover will be triggered after the command execution times out.
+The time limit for executing a Redis command is 15 seconds. To prevent other services from failing, a master/replica switchover will be triggered after the command execution times out.

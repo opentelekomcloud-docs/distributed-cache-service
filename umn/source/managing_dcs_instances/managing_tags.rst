@@ -47,11 +47,9 @@ Procedure
 
    -  Add a tag
 
-      a. Click **Add/Edit Tag**.
+      a. Click **Add/Edit Tag**. You can create new tags by entering **Tag key** and **Tag value**.
 
          If you have created predefined tags, select a predefined pair of tag key and value. To view predefined tags or create tags, click **View predefined tags**. You will be directed to the TMS console.
-
-         You can also create new tags by entering **Tag key** and **Tag value**.
 
       b. Click **OK**.
 
@@ -63,4 +61,4 @@ Procedure
 
       In the row containing the tag to be deleted, click **Delete** in the **Operation** column. Then click **Yes**.
 
-.. |image1| image:: /_static/images/en-us_image_0000001148443454.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png

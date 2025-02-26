@@ -9,27 +9,27 @@ Access a DCS Redis instance through redis-cli on an ECS in the same VPC. For mor
 
 .. note::
 
-   -  Redis 3.0 does not support port customization and allows only port 6379. For Redis 4.0 and later, you can specify a port or use the default port 6379. The following uses the default port 6379. If you have specified a port, replace 6379 with the actual port.
+   -  The following uses the default port 6379. If you have specified a port, replace 6379 with the actual port.
 
    -  **When connecting to a Redis Cluster instance, ensure that** **-c** **is added to the command.** Otherwise, the connection will fail.
 
       -  Run the following command to connect to a Redis Cluster instance:
 
-         ./redis-cli -h *{dcs_instance_address}* -p *6379* -a *{password}* **-c**
+         ./redis-cli -h {dcs_instance_address} -p 6379 -a {password} **-c**
 
       -  Run the following command to connect to a single-node, master/standby, or Proxy Cluster instance:
 
-         *./redis-cli -h* *{dcs_instance_address} -p 6379* -a *{password}*
+         ./redis-cli -h {dcs_instance_address} -p 6379 -a {password}
 
       For details, see :ref:`3 <dcs-ug-0326009__en-us_topic_0148195299_li1511472544119>` and :ref:`4 <dcs-ug-0326009__en-us_topic_0148195299_li126171140194317>`.
 
    -  If SSL is enabled for a single-node or master/standby DCS Redis 6.0 instance, set an SSL certificate path.
 
-      *./redis-cli -h* *{dcs_instance_address} -p 6379* -a *{password}* **--tls --cacert {certification file path}**
+      ./redis-cli *-*\ h {dcs_instance_address} *-*\ p 6379 -a {password} **--tls --cacert {certification file path}**
 
    -  If SSL is enabled for a Redis Cluster DCS Redis 6.0 instance, set a certificate path.
 
-      ./redis-cli -h *{dcs_instance_address}* -p *6379* -a *{password}* -c **--tls --cacert {certification file path}**
+      ./redis-cli -h {dcs_instance_address} -p 6379 -a {password} -c **--tls --cacert {certification file path}**
 
    -  To connect to Redis with SSL encryption, use redis-cli 6.x or later.
 
@@ -37,8 +37,19 @@ Prerequisites
 -------------
 
 -  The DCS Redis instance you want to access is in the **Running** state.
+
 -  An ECS has been created. For more information on how to create ECSs, see the `Elastic Cloud Server User Guide <https://docs.otc.t-systems.com/en-us/usermanual/ecs/en-us_topic_0163572588.html>`__.
--  If the ECS runs the Linux OS, ensure that the GCC compilation environment has been installed on the ECS.
+
+-  If the ECS runs the Linux OS, ensure that the GCC compilation environment has been installed on the ECS. Run the following command to install GCC if needed:
+
+   .. code-block::
+
+      yum install -y make
+      yum install -y pcre-devel
+      yum install -y zlib-devel
+      yum install -y libevent-devel
+      yum install -y openssl-devel
+      yum install -y gcc-c++
 
 Procedure (Linux)
 -----------------
@@ -47,7 +58,7 @@ Procedure (Linux)
 
    View the IP address/domain name and port number of the DCS Redis instance to be accessed.
 
-   For details, see :ref:`Viewing Details of a DCS Instance <dcs-ug-0312016>`.
+   For details, see :ref:`Viewing and Modifying DCS Instance Information <dcs-ug-0312016>`.
 
 #. Install redis-cli.
 
@@ -79,9 +90,9 @@ Procedure (Linux)
 
    Access a DCS instance of a type other than Redis Cluster.
 
-   Perform the following procedure to access a single-node, master/standby instance.
+   Perform the following procedure to access a single-node, master/standby, read/write splitting, or Proxy Cluster instance.
 
-   ./redis-cli -h ${dcs_instance_address} -p 6379 -a ${password}
+   **./redis-cli -h $\ {dcs_instance_address} -p 6379 -a $\ {password}**
 
    .. note::
 
@@ -133,7 +144,7 @@ Procedure (Linux)
 
       Write operations can only be performed on master nodes. The CRC16 of the key modulo 16384 is taken to compute what is the hash slot of a given key.
 
-      As shown in the following, the value of **CRC16 (KEY) mode 16384** determines the hash slot that a given key is located at and redirects the client to the node where the hash slot is located at.
+      As shown in the following, the value of **CRC16 (KEY) mod 16384** determines the hash slot that a given key is located at and redirects the client to the node where the hash slot is located at.
 
       .. code-block::
 
@@ -160,6 +171,6 @@ Procedure (Windows)
 
 **redis-cli.exe -h XXX -p 6379**
 
-**XXX** indicates the IP address/domain name of the DCS instance and **6379** is an example port number used for accessing the DCS instance. For details about how to obtain the IP address/domain name and port number, see :ref:`Viewing Details of a DCS Instance <dcs-ug-0312016>`. Change the address and port as required.
+**XXX** indicates the IP address/domain name of the DCS instance and **6379** is an example port number used for accessing the DCS instance. For details about how to obtain the IP address/domain name and port number, see :ref:`Viewing and Modifying DCS Instance Information <dcs-ug-0312016>`. Change the address and port as required.
 
 .. |image1| image:: /_static/images/en-us_image_0000001538860065.png

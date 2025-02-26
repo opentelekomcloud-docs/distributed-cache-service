@@ -31,7 +31,7 @@ Features
 
    Single-node instances are 40% cheaper than master/standby DCS instances, suitable for setting up development or testing environments.
 
-In summary, single-node DCS instances support highly concurrent read/write operations, but do not support data persistence. Data will be deleted after instances are restarted. They are suitable for scenarios which do not require data persistence, such as database front-end caching, to accelerate access and ease the concurrency load off the backend. If the desired data does not exist in the cache, requests will go to the database. When restarting the service or the DCS instance, you can pre-generate cache data from the disk database to relieve pressure on the backend during startup.
+In summary, single-node DCS instances support highly concurrent read/write operations, but do not support data persistence. Data will be deleted after instances are restarted or stopped. They are suitable for scenarios which do not require data persistence, such as database front-end caching, to accelerate access and ease the concurrency load off the backend. If the desired data does not exist in the cache, requests will go to the database. When restarting the service or the DCS instance, you can pre-generate cache data from the disk database to relieve pressure on the backend during startup.
 
 Architecture
 ------------
@@ -40,7 +40,7 @@ Architecture
 
 .. note::
 
-   To access a DCS Redis 3.0 instance, you must use port 6379. To access a DCS Redis 4.0/5.0/6.0 instance, you can customize the port. If no port is specified, the default port 6379 will be used. In the following architecture, port 6379 is used. If you have customized a port, replace **6379** with the actual port.
+   To access a DCS Redis 3.0 instance, you must use port 6379. To access a DCS Redis 4.0 or later instance, you can customize the port. If no port is specified, the default port 6379 will be used. In the following architecture, port 6379 is used. If you have customized a port, replace **6379** with the actual port.
 
 .. _cachesinglenode__fig15457185394718:
 
@@ -57,9 +57,7 @@ Architecture description:
 
    .. note::
 
-      For intra-VPC access, the client and the instance must be in the same VPC with specified security group rule configurations.
-
-      For details, see :ref:`Security Group Configurations <en-us_topic_0090662012>`.
+      For intra-VPC access, the client and the instance must be in the same VPC. For a Redis 3.0 instance, security group rules are required.
 
 -  **Application**
 

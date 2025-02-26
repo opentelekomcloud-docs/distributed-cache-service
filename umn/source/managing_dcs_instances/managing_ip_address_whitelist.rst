@@ -8,9 +8,9 @@ Managing IP Address Whitelist
 DCS helps you control access to your DCS instances in the following ways, depending on the deployment mode:
 
 -  To control access to DCS Redis 3.0 instances, you can use security groups. Whitelists are not supported. For details about how to configure a security group, see :ref:`Security Group Configurations <en-us_topic_0090662012>`.
--  To control access to DCS Redis 4.0/5.0/6.0 instances, you can use whitelists. Security groups are not supported.
+-  To control access to DCS Redis 4.0 and later instances, you can use whitelists. Security groups are not supported.
 
-The following describes how to manage whitelists of a Redis 4.0/5.0/6.0 instance to allow access only from whitelisted IP addresses. If no whitelists are added for the instance or the whitelist function is disabled, all IP addresses that can communicate with the VPC can access the instance.
+The following describes how to manage whitelists of a Redis 4.0 or later instance to allow access only from whitelisted IP addresses. If no whitelists are added for the instance or the whitelist function is disabled, all IP addresses that can communicate with the VPC can access the instance.
 
 Creating a Whitelist Group
 --------------------------
@@ -50,4 +50,4 @@ Creating a Whitelist Group
       -  In the whitelist group list, click **Modify** to modify the IP addresses or IP address ranges in a group, and click **Delete** to delete a whitelist group.
       -  After whitelist has been enabled, you can click **Disable Whitelist** above the whitelist group list to allow all IP addresses connected to the VPC to access the instance.
 
-.. |image1| image:: /_static/images/en-us_image_0000001681129365.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png
