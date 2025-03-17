@@ -29,7 +29,7 @@ Procedure
 
    .. note::
 
-      After 5 consecutive incorrect password attempts, the account for accessing the chosen DCS instance will be locked for 5 minutes. Passwords cannot be changed during the lockout period.
+      After 5 consecutive incorrect password attempts, the account for accessing the chosen DCS instance will be locked for 5 minutes. Passwords cannot be changed during the lockout period. You can continue other operations.
 
       The password must meet the following requirements:
 

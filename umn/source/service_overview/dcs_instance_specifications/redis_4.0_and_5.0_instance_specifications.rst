@@ -11,7 +11,7 @@ The following metrics are related to the instance specifications:
 
 -  Used memory: You can check the memory usage of an instance by viewing the **Memory Usage** and **Used Memory** metrics.
 
--  Maximum connections: The maximum number of connections allowed is the maximum number of clients that can be connected to an instance. To check the number of connections to an instance, view the **Connected Clients** metric. After an instance is created, you can change the maximum number of connections of the instance by modifying the **maxclients** parameter on the **Instance Configuration** > **Parameters** page on the console.
+-  Maximum connections: The maximum number of connections allowed is the maximum number of clients that can be connected to an instance. This metric is implemented by the **maxclients** parameter (unavailable for read/write splitting instances). To modify this parameter, go to the **Instance Configuration > Parameters** page on the console. To check the number of connections to an instance, view the **Connected Clients** metric.
 
 -  QPS represents queries per second, which is the number of commands processed per second.
 
@@ -186,7 +186,7 @@ In addition to larger memory, Redis Cluster instances feature more connections a
    |               |                  |                       |                                  |                           |                       |                                           |
    |               |                  |                       | /4,800,000                       |                           |                       |                                           |
    +---------------+------------------+-----------------------+----------------------------------+---------------------------+-----------------------+-------------------------------------------+
-   | 1024          | 1024             | 128                   | 1,280,000                        | 98,304/98,304             | > 2,000,000           | redis.cluster.xu1.large.r2.1024           |
+   | 1,024         | 1,024            | 128                   | 1,280,000                        | 98,304/98,304             | > 2,000,000           | redis.cluster.xu1.large.r2.1024           |
    |               |                  |                       |                                  |                           |                       |                                           |
    |               |                  |                       | /6,400,000                       |                           |                       |                                           |
    +---------------+------------------+-----------------------+----------------------------------+---------------------------+-----------------------+-------------------------------------------+
