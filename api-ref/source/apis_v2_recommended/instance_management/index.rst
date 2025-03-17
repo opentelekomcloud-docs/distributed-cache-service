@@ -7,6 +7,7 @@ Instance Management
 
 -  :ref:`Master/Standby Switchover <changemasterstandby>`
 -  :ref:`Changing the Password <updatepassword>`
+-  :ref:`Resetting a Password <resetpassword>`
 -  :ref:`Restarting DCS Instances or Clearing DCS Instance Data <restartorflushinstances>`
 -  :ref:`Querying Statistics of All Running Instances <liststatisticsofrunninginstances>`
 
@@ -16,5 +17,6 @@ Instance Management
 
    master_standby_switchover
    changing_the_password
+   resetting_a_password
    restarting_dcs_instances_or_clearing_dcs_instance_data
    querying_statistics_of_all_running_instances

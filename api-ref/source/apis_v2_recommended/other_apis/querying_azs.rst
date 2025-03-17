@@ -55,12 +55,6 @@ Response Parameters
    |                       |                       | -  **true**: There are available resources in the AZ. |
    |                       |                       |                                                       |
    |                       |                       | -  **false**: No resource is available                |
-   |                       |                       |                                                       |
-   |                       |                       | Enumeration values:                                   |
-   |                       |                       |                                                       |
-   |                       |                       | -  **true**                                           |
-   |                       |                       |                                                       |
-   |                       |                       | -  **false**                                          |
    +-----------------------+-----------------------+-------------------------------------------------------+
 
 Example Requests
