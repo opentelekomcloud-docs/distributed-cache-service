@@ -10,15 +10,17 @@ Managing DCS Instances
 -  :ref:`Modifying Maintenance Time Window <dcs-ug-0312025>`
 -  :ref:`Modifying the Security Group <dcs-ug-0312026>`
 -  :ref:`Viewing Background Tasks <dcs-ug-0312028>`
--  :ref:`Viewing Data Storage Statistics of a DCS Redis 3.0 Proxy Cluster Instance <dcs-ug-0312029>`
 -  :ref:`Managing Tags <tagmanagement>`
 -  :ref:`Managing Shards and Replicas <dcs-ug-210107001>`
 -  :ref:`Analyzing Big Keys and Hot Keys <dcs-ug-190808001>`
--  :ref:`Scanning Expired Keys <dcs-ug-210330002>`
+-  :ref:`Scanning and Deleting Expired Keys in a DCS Redis Instance <dcs-ug-210330002>`
 -  :ref:`Managing IP Address Whitelist <dcs-ug-190812001>`
 -  :ref:`Viewing Redis Slow Queries <dcs-ug-190926001>`
 -  :ref:`Viewing Redis Run Logs <dcs-ug-1009001>`
--  :ref:`Configuring SSL <dcs-ug-023129>`
+-  :ref:`Diagnosing an Instance <dcs-ug-210818001>`
+-  :ref:`Transmitting DCS Redis Data with Encryption Using SSL <dcs-ug-023129>`
+-  :ref:`Managing Sessions <dcs-ug-22121>`
+-  :ref:`Managing Users <dcs-ug-221220>`
 
 .. toctree::
    :maxdepth: 1
@@ -29,12 +31,14 @@ Managing DCS Instances
    modifying_maintenance_time_window
    modifying_the_security_group
    viewing_background_tasks
-   viewing_data_storage_statistics_of_a_dcs_redis_3.0_proxy_cluster_instance
    managing_tags
    managing_shards_and_replicas
    analyzing_big_keys_and_hot_keys
-   scanning_expired_keys
+   scanning_and_deleting_expired_keys_in_a_dcs_redis_instance
    managing_ip_address_whitelist
    viewing_redis_slow_queries
    viewing_redis_run_logs
-   configuring_ssl
+   diagnosing_an_instance
+   transmitting_dcs_redis_data_with_encryption_using_ssl
+   managing_sessions
+   managing_users

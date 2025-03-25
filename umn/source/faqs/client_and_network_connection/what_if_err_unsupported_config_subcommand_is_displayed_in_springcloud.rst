@@ -25,16 +25,15 @@ For security purposes, DCS does not support the **CONFIG** command initiated by 
 
 #. Modify the related Spring code. Enable the **ConfigureRedisAction.NO_OP** bean component to forbid a client to invoke the **CONFIG** command.
 
-   @Bean
+   .. code-block::
 
-   public static ConfigureRedisAction configureRedisAction() {
-
-   return ConfigureRedisAction.NO_OP;
-
-   }
+      @Bean
+      public static ConfigureRedisAction configureRedisAction() {
+          return ConfigureRedisAction.NO_OP;
+      }
 
 For more information, see the `Spring Session Documentation <https://docs.spring.io/spring-session/docs/current/api/>`__.
 
 .. important::
 
-   Session sharing is supported only by **single-node** and **master/standby** DCS Redis instances, but not by cluster DCS Redis instances.
+   Session sharing is supported by single-node, read/write splitting, and master/standby DCS Redis instances, but not by cluster DCS Redis instances.

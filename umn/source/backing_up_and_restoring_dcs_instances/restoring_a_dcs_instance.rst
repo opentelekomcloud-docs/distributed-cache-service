@@ -42,4 +42,4 @@ Procedure
 
       While being restored, DCS instances do not accept data operation requests from clients because existing data is being overwritten by the backup data.
 
-.. |image1| image:: /_static/images/en-us_image_0000001194523039.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png

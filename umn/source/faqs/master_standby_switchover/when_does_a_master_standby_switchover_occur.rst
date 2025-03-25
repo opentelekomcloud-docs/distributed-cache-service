@@ -15,7 +15,7 @@ A master/standby switchover may occur in the following scenarios:
 
 -  If you restart a master/standby instance on the DCS console, a master/standby switchover will be triggered.
 
--  If you scale up a single-node or master/standby instance, a master/standby switchover will be triggered.
+-  If you scale up a single-node, read/write splitting, or master/standby instance, a master/standby switchover will be triggered.
 
    During scale-up, a new standby node with the new specifications is created. After full and incremental data on the master node is synchronized to the standby node, a master/standby switchover is performed and the original node is deleted.
 

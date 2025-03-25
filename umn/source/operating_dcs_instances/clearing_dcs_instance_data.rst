@@ -24,4 +24,4 @@ Procedure
 #. Click **Clear data** above the instance list.
 #. In the displayed dialog box, click **Yes**.
 
-.. |image1| image:: /_static/images/en-us_image_0000001148443458.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png

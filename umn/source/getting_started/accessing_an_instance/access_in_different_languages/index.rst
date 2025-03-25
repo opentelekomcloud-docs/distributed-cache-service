@@ -6,21 +6,21 @@ Access in Different Languages
 =============================
 
 -  :ref:`Java <dcs-ug-211105003>`
--  :ref:`Clients in Python <dcs-ug-0312011>`
--  :ref:`go-redis <dcs-ug-211105001>`
--  :ref:`hiredis in C++ <dcs-ug-0312010>`
--  :ref:`C# <dcs-ug-0312013>`
+-  :ref:`Connecting to Redis on redis-py (Python) <dcs-ug-0312011>`
+-  :ref:`Connecting to Redis on go-redis (Go) <dcs-ug-211105001>`
+-  :ref:`Connecting to Redis on hiredis (C++) <dcs-ug-0312010>`
+-  :ref:`Connecting to Redis on StackExchange.Redis (C#) <dcs-ug-0312013>`
 -  :ref:`PHP <dcs-ug-211202001>`
--  :ref:`Node.js <dcs-ug-0312012>`
+-  :ref:`Connecting to Redis on ioredis (Node.js) <dcs-ug-0312012>`
 
 .. toctree::
    :maxdepth: 1
    :hidden: 
 
    java/index
-   clients_in_python
-   go-redis
-   hiredis_in_c
-   csharp
+   connecting_to_redis_on_redis-py_python
+   connecting_to_redis_on_go-redis_go
+   connecting_to_redis_on_hiredis_c_plus_plus
+   connecting_to_redis_on_stackexchange.redis_csharp
    php/index
-   node.js
+   connecting_to_redis_on_ioredis_node.js

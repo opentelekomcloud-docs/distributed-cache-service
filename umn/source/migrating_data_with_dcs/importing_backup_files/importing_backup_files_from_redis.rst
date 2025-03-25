@@ -12,6 +12,11 @@ Use the DCS console to migrate Redis data from self-hosted Redis to DCS for Redi
 
 Simply back up your Redis data, create a migration task on the DCS console, and then import the backup to a DCS Redis instance.
 
+Notes and Constraints
+---------------------
+
+To migrate to an instance with SSL enabled, disable the SSL setting first. For details, see :ref:`Transmitting DCS Redis Data with Encryption Using SSL <dcs-ug-023129>`.
+
 Prerequisites
 -------------
 
@@ -55,7 +60,7 @@ Step 3: Create a Migration Task
 
 #. Select the backup task whose data is to be migrated.
 
-#. Select the target instance created in :ref:`Step 2: Prepare the Target DCS Redis Instance <dcs-ug-210226001__en-us_topic_0179456697_dcs-migration-190703002_section1128152020384>`.
+#. For **Target Instance**, select the DCS Redis prepared in :ref:`Step 2: Prepare the Target DCS Redis Instance <dcs-ug-210226001__en-us_topic_0179456697_dcs-migration-190703002_section1128152020384>`.
 
 #. Enter the password of the target instance. Click **Test Connection** to verify the password. If the instance is not password-protected, click **Test Connection** directly.
 
@@ -65,4 +70,4 @@ Step 3: Create a Migration Task
 
    Go back to the data migration task list. After the migration is successful, the task status changes to **Successful**.
 
-.. |image1| image:: /_static/images/en-us_image_0000001148443514.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png

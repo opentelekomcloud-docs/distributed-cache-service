@@ -5,7 +5,7 @@
 Command Renaming
 ================
 
-After creating a DCS Redis 4.0 or later instance, you can rename the following critical commands: Currently, you can only rename the **COMMAND**, **KEYS**, **FLUSHDB**, **FLUSHALL**, **HGETALL**, **SCAN**, **HSCAN**, **SSCAN**, and **ZSCAN** commands.
+After creating a DCS Redis 4.0 or later instance, you can rename the following critical commands: Currently, you can only rename the **COMMAND**, **KEYS**, **FLUSHDB**, **FLUSHALL**, **HGETALL**, **SCAN**, **HSCAN**, **SSCAN**, and **ZSCAN** commands. For Proxy Cluster instances, you can also rename the **DBSIZE** and **DBSTATS** commands.
 
 Procedure
 ---------
@@ -29,4 +29,4 @@ Procedure
       -  To use the original name of a command, rename the command again.
       -  The new name can contain 4 to 64 characters including letters, digits, underscores (_), and hyphens (-), and must start with a letter.
 
-.. |image1| image:: /_static/images/en-us_image_0000001148603248.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png

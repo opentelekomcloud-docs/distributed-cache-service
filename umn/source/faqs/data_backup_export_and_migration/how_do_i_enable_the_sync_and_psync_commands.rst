@@ -7,9 +7,9 @@ How Do I Enable the SYNC and PSYNC Commands?
 
 -  Migration within DCS:
 
+   -  If the online migration task uses the same account and region as the source instance, select a DCS instance (cloud Redis) as the source. The **SYNC** and **PSYNC** commands will be automatically allowed on the source instance.
+   -  If the online migration task uses a different account or in a different region from the source instance, the source instance cannot be a DCS instance (cloud Redis) and the **SYNC** and **PSYNC** commands are disabled on the source instance. In this case, online migration on the console is unavailable. You can migrate data using backup import.
    -  By default, the **SYNC** and **PSYNC** commands can be used when self-hosted Redis is migrated to DCS.
-   -  During online migration between DCS Redis instances in the same region under the same account, the **SYNC** and **PSYNC** commands are automatically enabled.
-   -  During online migration between DCS Redis instances in different regions or under different accounts within a region, the **SYNC** and **PSYNC** commands are not automatically enabled, and online migration cannot be used. You can migrate data using backup files.
 
 -  Migration from other cloud vendors to DCS:
 

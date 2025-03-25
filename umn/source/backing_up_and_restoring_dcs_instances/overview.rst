@@ -35,6 +35,15 @@ DCS instances support the following backup modes:
 
    When a DCS instance is in use, its backup data will not be automatically deleted. You can manually delete backup data as required. When you delete the instance, its backup data is deleted along with the instance. If you need the backup data, download and save it in advance.
 
+Impact on DCS Instances During Backup
+-------------------------------------
+
+**Backup tasks are run on standby cache nodes, without incurring any downtime.**
+
+In the event of full synchronization of master and standby nodes or heavy instance load, it takes a few minutes to complete data synchronization. If instance backup starts before data synchronization is complete, the backup data will be slightly behind the data in the master cache node.
+
+New data changes on the master node during an ongoing backup are not included in the backup.
+
 Additional Information About Data Backup
 ----------------------------------------
 
@@ -44,9 +53,9 @@ Additional Information About Data Backup
 
 -  Backup mechanisms
 
-   DCS for Redis 3.0 persists data with Redis AOF. DCS for Redis 4.0 and 5.0 persist data to RDB or AOF files in manual backup mode, and to RDB files in automatic backup mode.
+   DCS for Redis 3.0 persists data with Redis AOF. DCS for Redis 4.0 and later persist data to RDB or AOF files in manual backup mode, and to RDB files in automatic backup mode.
 
-   Backup tasks run on standby cache nodes. DCS instance data is backed up by compressing and storing the data persistence files from the standby cache node to SwiftAdapter.
+   Backup tasks run on standby cache nodes. DCS instance data is backed up by compressing and storing the data persistence files from the standby cache node to OBS.
 
    DCS checks instance backup policies once an hour. If a backup policy is matched, DCS runs a backup task for the corresponding DCS instance.
 
@@ -74,9 +83,14 @@ Additional Information About Data Backup
 
 -  Retention period of backup data
 
-   Scheduled backup files are retained for up to seven days. You can configure the retention period. At the end of the retention period, most backup files of the DCS instance will be automatically deleted, but at least one backup file will be retained.
+   Scheduled backup: Files can be retained for up to seven days. Overdue backup files that are created earlier will be automatically deleted, but at least one backup file will be retained.
 
-   Manual backup files are retained permanently and need to be manually deleted.
+   Manual backup: The latest backup files (up to 24) are always stored unless they are manually deleted.
+
+   .. note::
+
+      -  A total of 24 latest backups (automatic and manual) can be stored. To store the 25th backup, the earliest one will be automatically deleted.
+      -  When you delete the instance, its backup data is deleted along with the instance. If you need the backup data, download and save it in advance.
 
 Data Restoration
 ----------------

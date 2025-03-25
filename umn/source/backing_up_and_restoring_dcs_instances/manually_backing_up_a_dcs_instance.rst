@@ -43,4 +43,4 @@ Procedure
 
       Instance backup takes 10 to 15 minutes. The data added or modified during the backup process will not be backed up.
 
-.. |image1| image:: /_static/images/en-us_image_0000001148603242.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png

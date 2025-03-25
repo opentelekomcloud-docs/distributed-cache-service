@@ -5,12 +5,12 @@
 PHP
 ===
 
--  :ref:`phpredis <dcs-ug-0312009>`
--  :ref:`Predis <dcs-ug-211202002>`
+-  :ref:`Connecting to Redis on phpredis (PHP) <dcs-ug-0312009>`
+-  :ref:`Connecting to Redis on predis (PHP) <dcs-ug-211202002>`
 
 .. toctree::
    :maxdepth: 1
    :hidden: 
 
-   phpredis
-   predis
+   connecting_to_redis_on_phpredis_php
+   connecting_to_redis_on_predis_php

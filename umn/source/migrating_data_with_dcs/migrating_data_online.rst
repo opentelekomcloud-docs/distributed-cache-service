@@ -10,31 +10,32 @@ Scenario
 
 If the source and target instances are interconnected and the **SYNC** and **PSYNC** commands are supported in the source instance, data can be migrated online in full or incrementally from the source to the target.
 
-.. caution::
-
-   -  If the **SYNC** and **PSYNC** commands are disabled on the source Redis instance, enable them before performing online migration. Otherwise, the migration fails. If you use a DCS Redis instance for online migration, the **SYNC** command is automatically enabled.
-   -  During online migration, you are advised to set **repl-timeout** on the source instance to 300s and **client-output-buffer-limit** to 20% of the maximum memory of the instance.
-
 .. note::
 
-   During online migration, results of the **FLUSHDB** and **FLUSHALL** commands executed on the source will not be synchronized to the target.
+   During online migration, data is essentially synchronized in full to a new replica. Therefore, perform online migration during low-demand hours. Otherwise, source instance CPU usage may surge and latency may increase.
 
-Impacts on Services
--------------------
+Notes and Constraints
+---------------------
 
-During online migration, data is essentially synchronized in full to a new replica. Therefore, perform online migration during low-demand hours.
+-  Migrating a later Redis instance to an earlier one may fail.
+-  For earlier instances whose passwords contain single quotation marks ('), modify the password for online migration or try other methods.
+-  If the **SYNC** and **PSYNC** commands are disabled on the source Redis instance, enable them before performing online migration. Otherwise, the migration fails. If you use a DCS Redis instance for online migration, the **SYNC** command is automatically enabled.
+-  During online migration, you are advised to set **repl-timeout** on the source instance to 300s and **client-output-buffer-slave-hard-limit** and **client-output-buffer-slave-soft-limit** to 20% of the maximum memory of the instance.
+-  To migrate to an instance with SSL enabled, disable the SSL setting first. For details, see :ref:`Transmitting DCS Redis Data with Encryption Using SSL <dcs-ug-023129>`.
 
 Prerequisites
 -------------
 
 -  Before migrating data, read through :ref:`Introduction to Migration with DCS <dcs-ug-0312036>` to learn about the DCS data migration function and select an appropriate target instance.
--  To migrate data from a single-node or master/standby instance to a cluster instance, check if any data exists in DBs other than DB0 in the source instance. If yes, move the data to DB0 by using the open-source tool Rump. Otherwise, the migration will fail because a cluster instance has only one DB. For details about the migration operations, see :ref:`Online Migration with Rump <dcs-migration-090626001>`.
+-  To migrate data from a single-node, read/write splitting, or master/standby instance to a cluster instance, check if any data exists in DBs other than DB0 in the source instance. If yes, move the data to DB0 by using the open-source tool Rump. Otherwise, the migration will fail because a cluster instance has only one DB. For details about the migration operations, see :ref:`Online Migration with Rump <dcs-migration-090626001>`.
 
 Step 1: Obtain Information About the Source Redis Instance
 ----------------------------------------------------------
 
 -  If the source is a cloud Redis instance, obtain its name.
 -  If the source is self-hosted Redis, obtain its IP address or domain name and port number.
+
+.. _dcs-ug-0312038__en-us_topic_0179456698_dcs-migration-190703003_section1128152020384:
 
 Step 2: Prepare the Target DCS Redis Instance
 ---------------------------------------------
@@ -44,6 +45,8 @@ Step 2: Prepare the Target DCS Redis Instance
 -  If a target instance is available, you do not need to create a new one. However, you must clear the instance data before the migration. For details, see :ref:`Clearing DCS Instance Data <dcs-ug-0312018>`.
 
    If the target instance data is not cleared before the migration and the source and target instances contain the same key, the key in the target instance will be overwritten by the key in the source instance after the migration.
+
+.. _dcs-ug-0312038__section858595915281:
 
 Step 3: Check the Network
 -------------------------
@@ -102,6 +105,8 @@ Step 4: Create a Migration Task
 #. Click **Next**.
 
 #. Click **Submit**.
+
+.. _dcs-ug-0312038__section1329517563912:
 
 Configuring the Online Migration Task
 -------------------------------------
@@ -165,5 +170,5 @@ After the migration is complete, use redis-cli to connect the source and target 
 
 During full migration, source Redis data updated during the migration will not be migrated to the target instance.
 
-.. |image1| image:: /_static/images/en-us_image_0000001206970621.png
+.. |image1| image:: /_static/images/en-us_image_0143929918.png
 .. |image2| image:: /_static/images/en-us_image_0000001539798309.png
