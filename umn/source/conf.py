@@ -38,7 +38,9 @@ otcdocs_doc_type = 'umn'
 otcdocs_service_category = 'database'
 otcdocs_service_title = 'Distributed Cache Service'
 otcdocs_service_type = 'dcs'
+otcdocs_cloud_environment = 'eu_de'
 otcdocs_search_environment = 'hc_de'
+otcdocs_search_index = 'search_index_de'
 otcdocs_search_url = "https://opensearch.eco.tsi-dev.otc-service.com/"
 
 # If extensions (or modules to document with autodoc) are in another directory,
