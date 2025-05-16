@@ -29,6 +29,6 @@ Procedure
 
    .. note::
 
-      If no operation is performed for more than 5 minutes, the connection times out. You must enter the access password to connect to the instance again.
+      If no operation is performed for more than 15 minutes, the connection times out. You must enter the access password to connect to the instance again.
 
 .. |image1| image:: /_static/images/en-us_image_0143929918.png
