@@ -15,10 +15,10 @@ DCS for Redis provides Proxy Cluster instances, which use Linux Virtual Server (
 
    -  A Proxy Cluster instance can be connected in the same way that a single-node or master/standby instance is connected, without any special settings on the client. You can use the IP address of the instance, and do not need to know or use the proxy or shard addresses.
 
-Proxy Cluster DCS Redis 4.0/5.0 Instances
------------------------------------------
+Proxy Cluster DCS Redis 4.0/5.0/6.0 Instances
+---------------------------------------------
 
-Proxy Cluster DCS Redis 4.0/5.0 instances are built based on open-source Redis 4.0/5.0 and compatible with `open source codis <https://github.com/CodisLabs/codis>`__. They provide multiple large-capacity specifications ranging from 4 GB to 1024 GB and .
+Proxy Cluster DCS Redis 4.0/5.0/6.0 instances are built based on open-source Redis 4.0/5.0/6.0 and compatible with `open source codis <https://github.com/CodisLabs/codis>`__. They provide multiple large-capacity specifications ranging from 4 GB to 1024 GB and .
 
 :ref:`Table 1 <cachecluster__table3552324111>` lists the number of shards corresponding to different specifications. You can customize the shard size when creating an instance. Currently, the number of shards and replicas cannot be customized. By default, each shard has two replicas.
 
@@ -26,7 +26,7 @@ Proxy Cluster DCS Redis 4.0/5.0 instances are built based on open-source Redis 4
 
 .. _cachecluster__table3552324111:
 
-.. table:: **Table 1** Specifications of Proxy Cluster DCS Redis 4.0/5.0 instances
+.. table:: **Table 1** Specifications of Proxy Cluster DCS Redis 4.0/5.0/6.0 instances
 
    ============ ======= ====== =====================
    Total Memory Proxies Shards Memory per Shard (GB)
@@ -50,9 +50,9 @@ Proxy Cluster DCS Redis 4.0/5.0 instances are built based on open-source Redis 4
 
 
 .. figure:: /_static/images/en-us_image_0000001433519397.png
-   :alt: **Figure 1** Architecture of a Proxy Cluster DCS Redis 4.0/5.0 instance
+   :alt: **Figure 1** Architecture of a Proxy Cluster DCS Redis 4.0/5.0/6.0 instance
 
-   **Figure 1** Architecture of a Proxy Cluster DCS Redis 4.0/5.0 instance
+   **Figure 1** Architecture of a Proxy Cluster DCS Redis 4.0/5.0/6.0 instance
 
 Architecture description:
 

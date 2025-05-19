@@ -30,4 +30,9 @@ Procedure
 
 #. After the log file is successfully collected, click **Download** to download it.
 
+   .. note::
+
+      -  Log files are retained for seven days. Download them if necessary.
+      -  The Redis kernel generates few logs, so your selected period may contain no log.
+
 .. |image1| image:: /_static/images/en-us_image_0143929918.png

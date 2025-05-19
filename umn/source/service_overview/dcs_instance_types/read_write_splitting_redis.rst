@@ -5,7 +5,7 @@
 Read/Write Splitting Redis
 ==========================
 
-This section describes read/write splitting DCS Redis 4.0/5.0 instances. Read/write splitting is implemented on the server side by default. Proxies distinguish between read requests and write requests, and forward write requests to the master node and read requests to the standby node.
+This section describes read/write splitting DCS Redis 4.0/5.0/6.0 instances. Read/write splitting is implemented on the server side by default. Proxies distinguish between read requests and write requests, and forward write requests to the master node and read requests to the standby node.
 
 Read/write splitting is suitable for scenarios with high read concurrency and few write requests, aiming to improve the performance of high concurrency and reducing O&M costs.
 
