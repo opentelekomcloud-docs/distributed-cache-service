@@ -7,7 +7,6 @@
     vars:
       sphinx_pdf_files:
         - dcs-api-ref.pdf
-        - dcs-best-practice.pdf
         - dcs-umn.pdf
     check:
       jobs:
