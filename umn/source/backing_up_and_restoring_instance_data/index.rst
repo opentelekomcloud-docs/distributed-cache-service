@@ -2,7 +2,7 @@
 
 .. _dcs-ug-0312030:
 
-Backing Up and Restoring DCS Instances
+Backing Up and Restoring Instance Data
 ======================================
 
 -  :ref:`Overview <en-us_topic_0079835992>`

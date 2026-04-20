@@ -20,7 +20,7 @@ If the instance and the client use different security groups, you must configure
 Customizing a Port
 ------------------
 
-When creating a DCS Redis 4.0, 5.0, or 6.0 instance, you can enter a port number for **IP Address**. If you do not specify a port, the default port 6379 is used.
+When creating a DCS Redis 4.0 or later instance, you can enter a port for **IP Address**. If you do not specify a port, the default port 6379 is used.
 
 Changing the Port
 -----------------

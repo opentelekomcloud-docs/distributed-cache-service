@@ -9,23 +9,37 @@ This section describes how to connect to Redis on phpredis. For more information
 
 The following operations are based on an example of accessing a Redis instance on a client on an elastic cloud server (ECS).
 
-.. note::
+Notes and Constraints
+---------------------
 
-   The operations described in this section apply only to single-node, master/standby, and Proxy Cluster instances. To use phpredis to connect to a Redis Cluster instance, see the `phpredis description <https://github.com/phpredis/phpredis#readme>`__.
+The operations described in this section apply only to single-node, master/standby, and Proxy Cluster instances. To use phpredis to connect to a Redis Cluster instance, see the `phpredis description <https://github.com/phpredis/phpredis#readme>`__.
 
 Prerequisites
 -------------
 
 -  A Redis instance is created, and is in the **Running** state.
+
 -  An ECS has been created. For details about how to create an ECS, see `Elastic Cloud Server User Guide <https://docs.otc.t-systems.com/en-us/usermanual/ecs/en-us_topic_0163572588.html>`__
--  If the ECS runs the Linux OS, ensure that the GCC compilation environment has been installed on the ECS.
+
+-  The Linux ECS must have GNU Compiler Collection (GCC) installed. To query the GCC version, run the **gcc --version** command.
+
+   Run the following command to install GCC on the ECS if needed, CentOS is used as an example:
+
+   .. code-block::
+
+      yum install -y make
+      yum install -y pcre-devel
+      yum install -y zlib-devel
+      yum install -y libevent-devel
+      yum install -y openssl-devel
+      yum install -y gcc-c++
 
 Connecting to Redis on phpredis
 -------------------------------
 
 #. .. _dcs-ug-0312009__en-us_topic_0148195315_li8233164074413:
 
-   View the IP address/domain name and port number of the DCS Redis instance to be accessed.
+   View the IP address/domain name and port of the DCS Redis instance to be accessed.
 
    For details, see :ref:`Viewing and Modifying DCS Instance Information <dcs-ug-0312016>`.
 

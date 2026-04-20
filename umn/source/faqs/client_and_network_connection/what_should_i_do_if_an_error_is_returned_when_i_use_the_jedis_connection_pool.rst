@@ -27,6 +27,8 @@ If this error message is displayed, check whether your instance is running prope
 
          For intra-VPC access to a DCS Redis 3.0 instance, ensure that the client and your DCS instance belong to the same VPC and security group, or the security group of your DCS instance allows access through port 6379. For details, see :ref:`Security Group Configurations <en-us_topic_0090662012>`.
 
+         For intra-VPC access to a DCS Redis instance, ensure that the client and your DCS instance belong to the same VPC.
+
       -  If the IP address can be pinged but telnet failed, restart your instance. If the problem persists after the restart, contact technical support.
 
 #. Check the number of connections.

@@ -9,17 +9,18 @@ This section describes how to access a Redis instance on Jedis. For more informa
 
 Spring Data Redis is already integrated with `Jedis <https://github.com/redis/jedis>`__ and `Lettuce <https://github.com/lettuce-io/lettuce-core>`__ for Spring Boot projects. Spring Boot 1.x is integrated with Jedis, and Spring Boot 2.x is integrated with Lettuce. To use Jedis in Spring Boot 2.x and later, you need to solve Lettuce dependency conflicts.
 
-.. note::
+Notes and Constraints
+---------------------
 
-   Springboot 2.3.12.RELEASE or later is required. Jedis `3.10.0 <https://github.com/redis/jedis/releases/tag/v3.10.0>`__ or later is required.
+Springboot 2.3.12.RELEASE or later is required. Jedis `3.10.0 <https://github.com/redis/jedis/releases/tag/v3.10.0>`__ or later is required.
 
-   To access a Redis 7.0 instance, use a Jedis `5.0.0 <https://github.com/redis/jedis/releases/tag/v5.0.0>`__ or later client. `5.1.1 <https://github.com/redis/jedis/releases/tag/v5.1.1>`__ and later versions are recommended.
+To access a Redis 7.0 instance, use a Jedis `5.0.0 <https://github.com/redis/jedis/releases/tag/v5.0.0>`__ or later client. `5.1.1 <https://github.com/redis/jedis/releases/tag/v5.1.1>`__ and later versions are recommended.
 
 Prerequisites
 -------------
 
 -  A Redis instance is created, and is in the **Running** state.
--  View the IP address/domain name and port number of the DCS Redis instance to be accessed. For details, see :ref:`Viewing and Modifying DCS Instance Information <dcs-ug-0312016>`.
+-  View the IP address/domain name and port of the DCS Redis instance to be accessed. For details, see :ref:`Viewing and Modifying DCS Instance Information <dcs-ug-0312016>`.
 
 Pom Configuration
 -----------------
@@ -42,7 +43,7 @@ Pom Configuration
    <dependency>
        <groupId>redis.clients</groupId>
        <artifactId>jedis</artifactId>
-       <version>${jedis.version}<version>
+       <version>${jedis.version}</version>
    </dependency>
 
 application.properties Configuration
@@ -73,7 +74,7 @@ application.properties Configuration
       #Maximum amount of time a connection allocation should block before throwing an exception when the pool is exhausted. The default value -1 indicates to wait indefinitely.
       spring.redis.jedis.pool.max-wait=3000
       #Interval for checking and evicting idle connection. Default: 60s.
-      spring.redis.jedis.pool.time-between-eviction-runs=60S
+      spring.redis.jedis.pool.time-between-eviction-runs=60s
 
 -  Redis Cluster
 
@@ -98,7 +99,7 @@ application.properties Configuration
       #Maximum amount of time a connection allocation should block before throwing an exception when the pool is exhausted. The default value -1 indicates to wait indefinitely.
       spring.redis.jedis.pool.max-wait=3000
       #Interval for checking and evicting idle connections. Default: 60s.
-      spring.redis.jedis.pool.time-between-eviction-runs=60S
+      spring.redis.jedis.pool.time-between-eviction-runs=60s
 
 .. _dcs-ug-0713005__en-us_topic_0148195198_section12244191616:
 
@@ -202,7 +203,7 @@ Bean Configuration
               poolConfig.setTestOnReturn(false);
               //Indicates whether to check for idle connections. If this is set to false, idle connections are not evicted.
               poolConfig.setTestWhileIdle(true);
-              //Duration after which idle connections are evicted. If the idle duration is greater than this value and the maximum number of idle connections is reached, idle connections are directly evicted.
+              //Duration after which idle connections are evicted. If the idle duration is greater than this value and the minimum number of idle connections is exceeded, idle connections are directly evicted.
               poolConfig.setSoftMinEvictableIdleTimeMillis(redisPoolSoftMinEvictableIdleTimeMillis);
               //Disable MinEvictableIdleTimeMillis().
               poolConfig.setMinEvictableIdleTimeMillis(-1);
@@ -312,7 +313,7 @@ Bean Configuration
               poolConfig.setTestOnReturn(false);
               //Indicates whether to check for idle connections. If this is set to false, idle connections are not evicted.
               poolConfig.setTestWhileIdle(true);
-              //Duration after which idle connections are evicted. If the idle duration is greater than this value and the maximum number of idle connections is reached, idle connections are directly evicted.
+              //Duration after which idle connections are evicted. If the idle duration is greater than this value and the minimum number of idle connections is exceeded, idle connections are directly evicted.
               poolConfig.setSoftMinEvictableIdleTimeMillis(redisPoolSoftMinEvictableIdleTimeMillis);
               //Disable MinEvictableIdleTimeMillis().
               poolConfig.setMinEvictableIdleTimeMillis(-1);
@@ -371,29 +372,29 @@ Parameter Description
 
 .. table:: **Table 1** RedisStandaloneConfiguration parameters
 
-   +-----------+---------------+---------------------------------------------------------------+
-   | Parameter | Default Value | Description                                                   |
-   +===========+===============+===============================================================+
-   | hostName  | localhost     | IP address/domain name for connecting to a DCS Redis instance |
-   +-----------+---------------+---------------------------------------------------------------+
-   | port      | 6379          | Port number                                                   |
-   +-----------+---------------+---------------------------------------------------------------+
-   | database  | 0             | Database number. Default: 0.                                  |
-   +-----------+---------------+---------------------------------------------------------------+
-   | password  | ``-``         | Redis instance password                                       |
-   +-----------+---------------+---------------------------------------------------------------+
+   +-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Parameter | Default Value | Description                                                                                                                                                               |
+   +===========+===============+===========================================================================================================================================================================+
+   | hostName  | localhost     | IP address/domain name for connecting to a DCS Redis instance                                                                                                             |
+   +-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | port      | 6379          | Port number                                                                                                                                                               |
+   +-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | database  | 0             | Database number. Default: 0.                                                                                                                                              |
+   +-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | password  | ``-``         | Redis instance password. Needless for password-free instances. If you forget your password or need to reset it, see :ref:`Resetting Instance Passwords <dcs-ug-0312041>`. |
+   +-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. table:: **Table 2** RedisClusterConfiguration parameters
 
-   +--------------+------------------------------------------------------------------------------------+
-   | Parameter    | Description                                                                        |
-   +==============+====================================================================================+
-   | clusterNodes | Cluster node connection information, including the node IP address and port number |
-   +--------------+------------------------------------------------------------------------------------+
-   | maxRedirects | Maximum redirecting times                                                          |
-   +--------------+------------------------------------------------------------------------------------+
-   | password     | Password                                                                           |
-   +--------------+------------------------------------------------------------------------------------+
+   +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Parameter    | Description                                                                                                                                                               |
+   +==============+===========================================================================================================================================================================+
+   | clusterNodes | Cluster node connection information, including the node IP address and port                                                                                               |
+   +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | maxRedirects | Maximum redirecting times                                                                                                                                                 |
+   +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | password     | Redis instance password. Needless for password-free instances. If you forget your password or need to reset it, see :ref:`Resetting Instance Passwords <dcs-ug-0312041>`. |
+   +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. _dcs-ug-0713005__en-us_topic_0148195198_table1153832317251:
 
@@ -420,7 +421,7 @@ Parameter Description
    +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | testWhileIdle                  | false         | Indicates whether to check for idle connections. If this parameter is set to **false**, idle connections are not evicted. Recommended value: **true**.                                                                     |
    +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | softMinEvictableIdleTimeMillis | 1800000       | Duration (in milliseconds) after which idle connections are evicted. If the idle duration is greater than this value and the maximum number of idle connections is reached, idle connections are directly evicted.         |
+   | softMinEvictableIdleTimeMillis | 1800000       | Duration (in milliseconds) after which idle connections are evicted. If the idle duration is greater than this value and the minimum number of idle connections is exceeded, idle connections are directly evicted.        |
    +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | minEvictableIdleTimeMillis     | 60000         | Minimum amount of time (in milliseconds) a connection may remain idle in the pool before it is eligible for eviction. The recommended value is **-1**, indicating that **softMinEvictableIdleTimeMillis** is used instead. |
    +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

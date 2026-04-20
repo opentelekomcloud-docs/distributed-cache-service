@@ -12,20 +12,18 @@ There are two ways to delete a key in Redis.
 
    -  Lazy free deletion: The deletion strategy is controlled in the main I/O event loop. Before a read/write command is executed, a function is called to check whether the key to be accessed has expired. If it has expired, it will be deleted and a response will be returned indicating that the key does not exist. If the key has not expired, the command execution resumes.
 
-   -  Scheduled deletion: A time event function is executed at certain intervals. Each time the function is executed, a random collection of keys are checked, and expired keys are deleted. Instead of checking all keys each time, open-source Redis randomly checks 20 keys each time, 10 times per second by default. This avoids prolonging blocks on the Redis main thread, but the memory used by expired keys cannot be released quickly.
+   -  Scheduled deletion: A time event function is executed at certain intervals. Each time the function is executed, a random collection of keys are checked, and expired keys are deleted. Instead of checking all keys each time, open-source Redis randomly checks 20 keys each time (specified by parameter **active-expire-num**), 10 times per second by default. This avoids prolonging blocks on the Redis main thread, but the memory used by expired keys cannot be released quickly.
 
 DCS integrates these strategies, and provides a common expired key query method to allow you to periodically release the memory used by expired keys. You can configure scheduled scans on the master nodes of your instances. The entire keyspace is traversed during the scans, triggering Redis to check whether the keys have expired and to remove expired keys if any.
-
-.. note::
-
-   Perform expired key scans during off-peak hours to avoid 100% CPU usage.
 
 Notes and Constraints
 ---------------------
 
-Expired keys can be scanned only for DCS Redis 4.0 and later instances.
-
-Released expired keys cannot be queried.
+-  Expired keys can be scanned only for DCS Redis 4.0 and later instances.
+-  Released expired keys cannot be queried.
+-  Deleted expired keys cannot be viewed.
+-  **This scan is on the master node of the instance and will affect instance performance.**
+-  **Perform expired key scans during off-peak hours to avoid 100% CPU usage.**
 
 
 Scanning and Deleting Expired Keys in a DCS Redis Instance
@@ -43,7 +41,9 @@ Scanning and Deleting Expired Keys in a DCS Redis Instance
 
 #. On the **Expired Key Scan** tab page, scan for expired keys and release them.
 
-   -  Click **Start Scanning** to scan for expired keys immediately.
+   The keyspace will be scanned to release the memory used by expired keys that were not released due to the lazy free mechanism.
+
+   -  Click **Start Analysis** to manually scan expired keys with preset parameters (number of keys to iterate: 100; scan timeout: 360 minutes).
    -  Enable **Scheduled** to schedule automatic scans at a specified time. For details about how to configure automatic scans, see :ref:`Table 1 <dcs-ug-210330002__en-us_topic_0000001094742130_table74477042711>` and :ref:`Automated Scan Performance and Suggestions <dcs-ug-210330002__en-us_topic_0000001094742130_section169111727182515>`.
 
    .. _dcs-ug-210330002__en-us_topic_0000001094742130_table74477042711:
@@ -61,10 +61,7 @@ Scanning and Deleting Expired Keys in a DCS Redis Instance
       |                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
       |                                   | -  If the previous scan is not complete when the start time arrives, the upcoming scan will be skipped.                                                                                                                                                                                                                                                                                                                                 |
       |                                   | -  If the previous scan is complete within five minutes after the start time, the upcoming scan will not be skipped.                                                                                                                                                                                                                                                                                                                    |
-      |                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-      |                                   | .. note::                                                                                                                                                                                                                                                                                                                                                                                                                               |
-      |                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-      |                                   |    Continuous scans may cause high CPU usage. Set this parameter based on the total number of keys in the instance and the increase of keys. For details, see :ref:`Automated Scan Performance and Suggestions <dcs-ug-210330002__en-us_topic_0000001094742130_section169111727182515>`.                                                                                                                                                |
+      |                                   | -  Continuous scans may cause high CPU usage. Set this parameter based on the total number of keys in the instance and the increase of keys. For details, see :ref:`Automated Scan Performance and Suggestions <dcs-ug-210330002__en-us_topic_0000001094742130_section169111727182515>`.                                                                                                                                                |
       |                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
       |                                   | Value range: 0-43,200                                                                                                                                                                                                                                                                                                                                                                                                                   |
       |                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -89,7 +86,7 @@ Scanning and Deleting Expired Keys in a DCS Redis Instance
       |                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
       |                                   | Value range: 10-1,000                                                                                                                                                                                                                                                                                                                                                                                                                   |
       |                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-      |                                   | Default value: 10                                                                                                                                                                                                                                                                                                                                                                                                                       |
+      |                                   | Default value: 50                                                                                                                                                                                                                                                                                                                                                                                                                       |
       |                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
       |                                   | Unit: number                                                                                                                                                                                                                                                                                                                                                                                                                            |
       +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -102,12 +99,10 @@ Scanning and Deleting Expired Keys in a DCS Redis Instance
 
       **Figure 1** Expired key scan tasks
 
-   .. note::
+   The scan fails in the following scenarios:
 
-      The scan fails in the following scenarios:
-
-      -  An exception occurred.
-      -  There are too many keys, resulting in a timeout. Some keys have already been deleted before the timeout.
+   -  An exception occurred.
+   -  There are too many keys, resulting in a timeout. Some keys have already been deleted before the timeout.
 
 .. _dcs-ug-210330002__en-us_topic_0000001094742130_section169111727182515:
 
@@ -140,9 +135,6 @@ A master/standby instance is scanned. There are 10 million keys that will not ex
 -  If you want to accelerate the scanning, set **Keys to Iterate** to **100**. It takes about 12.5 minutes to complete the scanning. Therefore, set the scan interval to more than 30 minutes.
 -  The larger the number of keys to iterate, the faster the scanning, and the higher the CPU usage. There is a trade-off between time and CPU usage.
 -  If the number of expired keys does not increase rapidly, you can scan expired keys once a day.
+-  **Perform scans during off-peak hours. Set intervals to one day and timeouts to two days.**
 
-   .. note::
-
-      Start scanning during off-peak hours. Set the interval to one day and the timeout to two days.
-
-.. |image1| image:: /_static/images/en-us_image_0000001681179997.png
+.. |image1| image:: /_static/images/en-us_image_0000001549115173.png

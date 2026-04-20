@@ -9,25 +9,45 @@ This section describes how to access a Redis instance on ioredis. For more infor
 
 The following operations are based on an example of accessing a Redis instance on a client on an elastic cloud server (ECS).
 
-.. note::
+Notes and Constraints
+---------------------
 
-   The operations described in this section apply only to single-node, master/standby, and Proxy Cluster instances. To access a Redis Cluster instance on ioredis, see `Node.js Redis client description <https://github.com/NodeRedis/cluster-key-slot>`__.
+The operations described in this section apply only to single-node, master/standby, and Proxy Cluster instances. To access a Redis Cluster instance on ioredis, see `Node.js Redis client description <https://github.com/NodeRedis/cluster-key-slot>`__.
 
 Prerequisites
 -------------
 
 -  A Redis instance is created, and is in the **Running** state.
+
 -  An ECS has been created. For details about how to create an ECS, see `Elastic Cloud Server User Guide <https://docs.otc.t-systems.com/en-us/usermanual/ecs/en-us_topic_0163572588.html>`__
--  If the ECS runs the Linux OS, ensure that the GCC compilation environment has been installed on the ECS.
+
+-  The Linux ECS must have GNU Compiler Collection (GCC) installed. To query the GCC version, run the **gcc --version** command.
+
+   Run the following command to install GCC on the ECS if needed, CentOS is used as an example:
+
+   .. code-block::
+
+      yum install -y make
+      yum install -y pcre-devel
+      yum install -y zlib-devel
+      yum install -y libevent-devel
+      yum install -y openssl-devel
+      yum install -y gcc-c++
 
 Connecting to Redis on ioredis
 ------------------------------
 
--  **For client servers running Ubuntu (Debian series):**
+-  For a client server running Ubuntu (Debian series), see :ref:`For Client Servers Running Ubuntu (Debian Series) <dcs-ug-0312012__en-us_topic_0148195323_section10247113513274>`.
+-  For a client server running CentOS (Red Hat series), see :ref:`For client servers running CentOS (Red Hat series) <dcs-ug-0312012__en-us_topic_0148195323_section485881815286>`.
 
-#. .. _dcs-ug-0312012__en-us_topic_0148195323_li5233248151213:
+.. _dcs-ug-0312012__en-us_topic_0148195323_section10247113513274:
 
-   View the IP address/domain name and port number of the DCS Redis instance to be accessed.
+For Client Servers Running Ubuntu (Debian Series)
+-------------------------------------------------
+
+#. .. _dcs-ug-0312012__en-us_topic_0148195323_li41311414288:
+
+   View the IP address/domain name and port of the DCS Redis instance to be accessed.
 
    For details, see :ref:`Viewing and Modifying DCS Instance Information <dcs-ug-0312016>`.
 
@@ -43,16 +63,14 @@ Connecting to Redis on ioredis
 
    .. code-block::
 
-      wget https://nodejs.org/dist/v0.12.4/node-v0.12.4.tar.gz --no-check-certificate
+      wget https://nodejs.org/dist/v4.28.5/node-v4.28.5.tar.gz --no-check-certificate
       tar -xvf node-v4.28.5.tar.gz
       cd node-v4.28.5
       ./configure
       make
       make install
 
-   .. note::
-
-      After the installation is complete, run the **node --version** command to query the Node.js version to check whether the installation is successful.
+   After the installation is complete, run the **node --version** command to query the Node.js version to check whether the installation is successful.
 
 #. Install the node package manager (npm).
 
@@ -94,7 +112,7 @@ Connecting to Redis on ioredis
       // All arguments are passed directly to the redis server:
       redis.set('key', 100, 'EX', 10);
 
-   *host* indicates the example IP address/domain name of the DCS instance and *port* indicates the port number of the DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312012__en-us_topic_0148195323_li5233248151213>`. Change them as required. ``******`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
+   **host** indicates the example IP address/domain name of the DCS instance and **port** indicates the port of the DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312012__en-us_topic_0148195323_li41311414288>`. Change them as required. **\*****\*** indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation. Omit the password setting in the command for a password-free instance.
 
 #. Run the sample script to access the chosen DCS Redis instance.
 
@@ -102,11 +120,14 @@ Connecting to Redis on ioredis
 
       node ioredisdemo.js
 
--  **For client servers running CentOS (Red Hat series):**
+.. _dcs-ug-0312012__en-us_topic_0148195323_section485881815286:
 
-#. .. _dcs-ug-0312012__en-us_topic_0148195323_li11511175651212:
+For client servers running CentOS (Red Hat series)
+--------------------------------------------------
 
-   View the IP address/domain name and port number of the DCS Redis instance to be accessed.
+#. .. _dcs-ug-0312012__en-us_topic_0148195323_li10535549122814:
+
+   View the IP address/domain name and port of the DCS Redis instance to be accessed.
 
    For details, see :ref:`Viewing and Modifying DCS Instance Information <dcs-ug-0312016>`.
 
@@ -122,18 +143,16 @@ Connecting to Redis on ioredis
 
    .. code-block::
 
-      wget https://nodejs.org/dist/v0.12.4/node-v0.12.4.tar.gz --no-check-certificate
-      tar -xvf node-v0.12.4.tar.gz
-      cd node-v0.12.4
+      wget https://nodejs.org/dist/v4.28.5/node-v4.28.5.tar.gz --no-check-certificate
+      tar -xvf node-v4.28.5.tar.gz
+      cd node-v4.28.5
       ./configure
       make
       make install
 
-   .. note::
+   After the installation is complete, run the **node -v** command to query the Node.js version to check whether the installation is successful.
 
-      After the installation is complete, run the **node --version** command to query the Node.js version to check whether the installation is successful.
-
-#. Install npm.
+#. Install the node package manager (npm).
 
    .. code-block::
 
@@ -173,7 +192,7 @@ Connecting to Redis on ioredis
       // All arguments are passed directly to the redis server:
       redis.set('key', 100, 'EX', 10);
 
-   *host* indicates the example IP address/domain name of the DCS instance and *port* indicates the port number of the DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312012__en-us_topic_0148195323_li11511175651212>`. Change them as required. ``******`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
+   **host** indicates the example IP address/domain name of the DCS instance and **port** indicates the port of the DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312012__en-us_topic_0148195323_li10535549122814>`. Change them as required. **\*****\*** indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation. Omit the password setting in the command for a password-free instance.
 
 #. Run the sample script to access the chosen DCS Redis instance.
 

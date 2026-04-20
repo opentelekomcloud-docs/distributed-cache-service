@@ -31,7 +31,3 @@ Viewing or Changing Eviction Policies
 -------------------------------------
 
 You can view or change the eviction policy with the **maxmemory-policy** parameter.
-
-|image1|
-
-.. |image1| image:: /_static/images/en-us_image_0000001591550122.png

@@ -11,7 +11,7 @@ Redis Usage
 -  :ref:`Do DCS Redis Instances Limit the Size of a Key or Value? <dcs-faq-0730015>`
 -  :ref:`Can I Obtain the Addresses of the Nodes in a Cluster DCS Redis Instance? <dcs-faq-0730017>`
 -  :ref:`Why Is Available Memory Smaller Than Instance Cache Size? <dcs-faq-0730018>`
--  :ref:`Does DCS for Redis Support Multiple Databases? <dcs-faq-0730019>`
+-  :ref:`Does DCS for Redis Support Multi-DB? <dcs-faq-0427028>`
 -  :ref:`Does DCS for Redis Support Redis Clusters? <dcs-faq-0730020>`
 -  :ref:`Does DCS for Redis Support Sentinel? <dcs-faq-0730021>`
 -  :ref:`What Is the Default Data Eviction Policy? <dcs-faq-0730022>`
@@ -25,8 +25,10 @@ Redis Usage
 -  :ref:`Can I Recover Data from Deleted DCS Instances? <dcs-faq-0730034>`
 -  :ref:`Why Is "Error in execution" Returned When I Access Redis? <dcs-faq-210223001>`
 -  :ref:`Why Does a Key Disappear in Redis? <dcs-faq-210409001>`
+-  :ref:`Notes and Procedure for Enabling Multi-DB for Proxy Cluster Instances <dcs-faq-210804001>`
 -  :ref:`Explaining and Using Hash Tags <dcs-faq-211228001>`
 -  :ref:`Will Cached Data Be Retained After an Instance Is Restarted? <dcs-faq-0220330>`
+-  :ref:`How Do I Create a Multi-DB Proxy Cluster Instance? <dcs-faq-020220331>`
 
 .. toctree::
    :maxdepth: 1
@@ -38,7 +40,7 @@ Redis Usage
    do_dcs_redis_instances_limit_the_size_of_a_key_or_value
    can_i_obtain_the_addresses_of_the_nodes_in_a_cluster_dcs_redis_instance
    why_is_available_memory_smaller_than_instance_cache_size
-   does_dcs_for_redis_support_multiple_databases
+   does_dcs_for_redis_support_multi-db
    does_dcs_for_redis_support_redis_clusters
    does_dcs_for_redis_support_sentinel
    what_is_the_default_data_eviction_policy
@@ -52,5 +54,7 @@ Redis Usage
    can_i_recover_data_from_deleted_dcs_instances
    why_is_error_in_execution_returned_when_i_access_redis
    why_does_a_key_disappear_in_redis
+   notes_and_procedure_for_enabling_multi-db_for_proxy_cluster_instances
    explaining_and_using_hash_tags
    will_cached_data_be_retained_after_an_instance_is_restarted
+   how_do_i_create_a_multi-db_proxy_cluster_instance

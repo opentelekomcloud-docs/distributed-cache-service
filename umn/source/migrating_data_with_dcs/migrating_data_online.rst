@@ -102,7 +102,7 @@ Step 4: Create a Migration Task
       -  The migration task uses a tenant IP address (**Migration ECS** displayed on the **Basic Information** page of the task.) If a whitelist is configured for the source or target instance, add the migration IP address to the whitelist or disable the whitelist.
       -  To allow the VM used by the migration task to access the source and target instances, set an outbound rule for the task's security group to allow traffic through the IP addresses and ports of the source and target instances. By default, all outbound traffic is allowed.
 
-#. Click **Next**.
+#. Click or **Create**.
 
 #. Click **Submit**.
 

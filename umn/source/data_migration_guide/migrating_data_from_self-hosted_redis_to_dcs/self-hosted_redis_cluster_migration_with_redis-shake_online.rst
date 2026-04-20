@@ -40,7 +40,7 @@ Obtaining Information of the Source and Target Redis Nodes
 
    *{redis_address}* indicates the Redis connection address, *{redis_port}* indicates the Redis port, and *{redis_password}* indicates the Redis connection password.
 
-   In the command output similar to the following, obtain the IP addresses and ports of all masters.
+   In the output, obtain the IP addresses and ports of all the master nodes.
 
    |image1|
 
@@ -49,46 +49,51 @@ Configuring the redis-shake Tool
 
 #. Log in to the ECS.
 
-#. Run the following command on the ECS to download the redis-shake: This section uses v2.1.2 as an example. You can also download `other redis-shake versions <https://github.com/alibaba/RedisShake/releases>`__ as required.
+#. Run the following command on the ECS to download the redis-shake: This section uses v4.3.2 as an example. You can also download `other redis-shake versions <https://github.com/alibaba/RedisShake/releases>`__ as required.
 
    .. code-block::
 
-      wget https://github.com/tair-opensource/RedisShake/releases/download/release-v2.1.2-20220329/release-v2.1.2-20220329.tar.gz
+      wget https://github.com/tair-opensource/RedisShake/releases/download/v4.3.2/redis-shake-v4.3.2-linux-amd64.tar.gz
 
 #. Decompress the redis-shake file.
 
    .. code-block::
 
-      tar -xvf redis-shake-v2.1.2.tar.gz
+      mkdir redis-shake-v4.3.2
+      tar -C redis-shake-v4.3.2 -xzvf redis-shake-v4.3.2-linux-amd64.tar.gz
 
    |image2|
 
-#. Go to the redis-shake directory.
+#. Go to the decompressed directory.
 
    .. code-block::
 
-      cd redis-shake-v2.0.3
+      cd redis-shake-v4.3.2
 
-#. Edit the **redis-shake.conf** file by providing the following information about all the masters of both the source and the target:
+#. Edit the **shake.toml** file by providing the following information of both the source and the target.
 
    .. code-block::
 
-      vim redis-shake.conf
+      vim shake.toml
 
    The modification is as follows:
 
    .. code-block::
 
-      source.type = cluster
-      # If there is no password, skip the following parameter.
-      source.password_raw = {source_redis_password}
-      # IP addresses and port numbers of all masters of the source Redis Cluster, which are separated by semicolons (;).
-      source.address = {master1_ip}:{master1_port};{master2_ip}:{master2_port}...{masterN_ip}:{masterN_port}
-      target.type = cluster
-      # If there is no password, skip the following parameter.
-      target.password_raw = {target_redis_password}
-      # IP addresses and port numbers of all masters of the target instance, which are separated by semicolons (;).
-      target.address = {master1_ip}:{master1_port};{master2_ip}:{master2_port}...{masterN_ip}:{masterN_port}
+      [sync_reader]
+      # If the source instance type is a Redis Cluster, set the value to true.
+      cluster = true
+      # IP address and port of any node in the source Redis Cluster
+      address = {redis_ip}:{redis_port}
+      # If there is no password, skip the following parameter
+      password = {source_redis_password}
+      [redis_writer]
+      # If the target instance type is a Redis Cluster, set the value to true.
+      cluster = true
+      # IP address and port of any node in the target Redis Cluster
+      address = {redis_ip}:{redis_port}
+      # If there is no password, skip the following parameter
+      password = {target_redis_password}
 
    Press **Esc** to exit the editing mode and enter **:wq!**. Press **Enter** to save the configuration and exit the editing interface.
 
@@ -99,19 +104,19 @@ Run the following command to synchronize data between the source and the target 
 
 .. code-block::
 
-   ./redis-shake -type sync -conf redis-shake.conf
+   ./redis-shake shake.toml
 
 If the following information is displayed, the full synchronization has been completed and incremental synchronization begins.
 
 .. code-block::
 
-   sync rdb done.
+   syncing aof
 
 If the following information is displayed, no new data is incremented. You can stop the incremental synchronization by pressing **Ctrl**\ +\ **C**.
 
 .. code-block::
 
-   sync:  +forwardCommands=0  +filterCommands=0  +writeBytes=0
+   write_ops=[0.00], src-*, syncing aof, diff=[0]
 
 
 .. figure:: /_static/images/en-us_image_0000002000818973.png
@@ -128,7 +133,7 @@ Verifying the Migration
 
    If the data has not been fully imported, run the **flushall** or **flushdb** command to clear the cached data in the target instance, and migrate data again.
 
-#. After the verification is complete, delete the redis shake configuration file.
+#. After the verification is complete, you are advised to clear the redis-shake configuration in time.
 
 .. |image1| image:: /_static/images/en-us_image_0000002001365365.png
 .. |image2| image:: /_static/images/en-us_image_0000001964418130.png

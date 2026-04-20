@@ -12,7 +12,7 @@ You can create custom policies in either of the following ways:
 -  Visual editor: Select cloud services, actions, resources, and request conditions. This does not require knowledge of policy syntax.
 -  JSON: Edit JSON policies from scratch or based on an existing policy.
 
-For details, see section "Creating a Custom Policy" in the *Identity and Access Management API Reference*. The following section contains examples of common DCS custom policies.
+For details, see "Creating a Custom Policy" in the *Identity and Access Management API Reference*. The following section contains examples of common DCS custom policies.
 
 .. note::
 

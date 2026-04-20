@@ -10,6 +10,11 @@ Scenario
 
 If a fault or performance issue occurs, you can ask DCS to diagnose your instance to learn about the cause and impact of the issue and how to handle it.
 
+Restrictions
+------------
+
+Available for DCS Redis 4.0 and later instances.
+
 Procedure
 ---------
 

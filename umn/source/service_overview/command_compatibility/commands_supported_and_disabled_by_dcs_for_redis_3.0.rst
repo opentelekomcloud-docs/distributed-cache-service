@@ -30,7 +30,7 @@ The following lists commands supported by DCS for Redis 3.0.
       -  **List** group: **BLPOP**, **BRPOP**, and **BRPOPLRUSH**
       -  **CLIENT** commands in the **Server** group: **CLIENT KILL**, **CLIENT GETNAME**, **CLIENT LIST**, **CLIENT SETNAME**, **CLIENT PAUSE**, and **CLIENT REPLY**.
       -  **Server** group: **MONITOR**
-      -  **Key** group: **RANDOMKE** (for old Proxy Cluster instances)
+      -  **Key** group: **RANDOMKEY** (for old Proxy Cluster instances)
 
 .. table:: **Table 1** Commands supported by DCS Redis 3.0 instances (1)
 

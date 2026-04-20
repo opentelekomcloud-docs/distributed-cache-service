@@ -106,9 +106,9 @@ Procedure
 
 
       .. figure:: /_static/images/en-us_image_0000001299155037.png
-         :alt: **Figure 2** Configuration location
+         :alt: **Figure 2** Configuration location 1
 
-         **Figure 2** Configuration location
+         **Figure 2** Configuration location 1
 
    c. Restart Nginx.
 
@@ -126,9 +126,9 @@ Procedure
 
 
       .. figure:: /_static/images/en-us_image_0000001299513869.png
-         :alt: **Figure 3** Verification result
+         :alt: **Figure 3** Verification result 1
 
-         **Figure 3** Verification result
+         **Figure 3** Verification result 1
 
 #. Configure Nginx forwarding for the ECS.
 
@@ -158,9 +158,9 @@ Procedure
 
 
       .. figure:: /_static/images/en-us_image_0000001299274493.png
-         :alt: **Figure 4** Configuration location
+         :alt: **Figure 4** Configuration location 2
 
-         **Figure 4** Configuration location
+         **Figure 4** Configuration location 2
 
    c. Restart Nginx.
 
@@ -178,9 +178,9 @@ Procedure
 
 
       .. figure:: /_static/images/en-us_image_0000001299354449.png
-         :alt: **Figure 5** Verification result
+         :alt: **Figure 5** Verification result 2
 
-         **Figure 5** Verification result
+         **Figure 5** Verification result 2
 
 #. Run the following command on the ECS to test the network connection of port 6666:
 
@@ -284,6 +284,6 @@ Procedure
 
    c. Calculate the differences between the values of **keys** and **expires** of the source Redis and the target Redis. If the differences are the same, the data is complete and the migration is successful.
 
-#. Delete the redis-shake configuration file.
+#. After the verification is complete, you are advised to clear the redis-shake configuration in time.
 
 .. |image1| image:: /_static/images/en-us_image_0000001253074986.png

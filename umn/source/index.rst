@@ -10,7 +10,7 @@ Distributed Cache Service - User Guide
    getting_started/index
    operating_dcs_instances/index
    managing_dcs_instances/index
-   backing_up_and_restoring_dcs_instances/index
+   backing_up_and_restoring_instance_data/index
    migrating_data_with_dcs/index
    managing_passwords/index
    parameter_templates/index

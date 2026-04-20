@@ -9,11 +9,11 @@ Before creating a DCS instance, identify your requirements and complete the foll
 
 #. Decide on the required cache engine version.
 
-   Different Redis versions have different features. For details, see :ref:`Comparing Redis Versions <redisdifference>`.
+   Different Redis versions have different features. For details, see :ref:`Comparing DCS Redis Versions <redisdifference>`.
 
 #. Decide on the required instance type.
 
-   DCS provides single-node, master/standby, read/write splitting, Proxy Cluster, and Redis Cluster types of instances. Each type has its own architecture. For details about the instance architectures, see :ref:`DCS Instance Types <dcs-pd-200312001>`.
+   DCS provides read/write splitting, single-node, master/standby, Proxy Cluster, and Redis Cluster types of instances. Each type has its own architecture. For details about the instance architectures, see :ref:`DCS Instance Types <dcs-pd-200312001>`.
 
 #. Decide on the required instance specification.
 
@@ -23,7 +23,7 @@ Before creating a DCS instance, identify your requirements and complete the foll
 
    Choose a region closest to your application to reduce latency.
 
-   A region consists of multiple availability zones (AZs) with physically isolated power supplies and networks. Master/Standby, read/write splitting, and cluster DCS instances can be deployed across AZs.
+   A region consists of multiple availability zones (AZs) with physically isolated power supplies and networks. Master/Standby, read/write splitting, and cluster DCS instances can be deployed across AZs. Applications can also be deployed across AZs to achieve HA for both data and applications.
 
    .. note::
 

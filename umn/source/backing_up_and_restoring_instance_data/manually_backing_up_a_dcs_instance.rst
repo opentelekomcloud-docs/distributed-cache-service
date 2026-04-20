@@ -5,7 +5,7 @@
 Manually Backing Up a DCS Instance
 ==================================
 
-You need to manually back up data in DCS instances in a timely manner. This section describes how to manually back up data in master/standby instances using the DCS console.
+You need to manually back up data in DCS instances in a timely manner. This section describes how to manually back up data in master/standby instances on the DCS console.
 
 By default, manually backed up data is permanently retained. If backup data is no longer in use, you can delete it manually.
 

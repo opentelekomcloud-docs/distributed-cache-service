@@ -11,17 +11,18 @@ For Spring Boot projects, Spring Data Redis is already integrated with `Jedis <h
 
 Spring Boot 1.x is integrated with Jedis, and Spring Boot 2.x is integrated with Lettuce.
 
-.. note::
+Notes and Constraints
+---------------------
 
-   -  If a password was set during DCS Redis instance creation, configure the password for connecting to Redis using Redisson. Do not hard code the plaintext password.
-   -  To connect to a single-node, read/write splitting, or Proxy Cluster instance, use the **useSingleServer** method of the **SingleServerConfig** object of Redisson. To connect to a master/standby instance, use the **useMasterSlaveServers** method of the **MasterSlaveServersConfig** object of Redisson. To connect to a Redis Cluster instance, use the **useClusterServers** method of the **ClusterServersConfig** object.
-   -  Springboot 2.3.12.RELEASE or later is required. Redisson `3.37.0 <https://github.com/redisson/redisson/releases/tag/redisson-3.37.0>`__ or later is required.
+-  If a password was set during DCS Redis instance creation, configure the password for connecting to Redis using Redisson. Do not hard code the plaintext password.
+-  To connect to a single-node, read/write splitting, or Proxy Cluster instance, use the **useSingleServer** method of the **SingleServerConfig** object of Redisson. To connect to a master/standby instance, use the **useMasterSlaveServers** method of the **MasterSlaveServersConfig** object of Redisson. To connect to a Redis Cluster instance, use the **useClusterServers** method of the **ClusterServersConfig** object.
+-  Springboot 2.3.12.RELEASE or later is required. Redisson `3.37.0 <https://github.com/redisson/redisson/releases/tag/redisson-3.37.0>`__ or later is required.
 
 Prerequisites
 -------------
 
 -  A Redis instance is created, and is in the **Running** state.
--  View the IP address/domain name and port number of the DCS Redis instance to be accessed. For details, see :ref:`Viewing and Modifying DCS Instance Information <dcs-ug-0312016>`.
+-  View the IP address/domain name and port of the DCS Redis instance to be accessed. For details, see :ref:`Viewing and Modifying DCS Instance Information <dcs-ug-0312016>`.
 
 Pom Configuration
 -----------------
@@ -352,12 +353,12 @@ Parameter Description
    | keepPubSubOrder     | true                                | Indicates whether to receive messages in the publish sequence. **If messages can be processed concurrently, you are advised to set this parameter to false.**                                          |
    +---------------------+-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. table:: **Table 2** SingleServerConfig parameters (single-node, read/write splitting,, or Proxy Cluster)
+.. table:: **Table 2** SingleServerConfig parameters (single-node, read/write splitting, or Proxy Cluster)
 
    +---------------------------------------+---------------+-------------------------------------------------------------------------------------------+
    | Parameter                             | Default Value | Description                                                                               |
    +=======================================+===============+===========================================================================================+
-   | address                               | ``-``         | Node connection information, in redis://*ip*\ **:**\ *port* format.                       |
+   | address                               | ``-``         | Node connection information, in redis://*ip*:*port* format.                               |
    +---------------------------------------+---------------+-------------------------------------------------------------------------------------------+
    | database                              | 0             | ID of the database to be used.                                                            |
    +---------------------------------------+---------------+-------------------------------------------------------------------------------------------+
@@ -391,9 +392,9 @@ Parameter Description
    +---------------------------------------+------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | Parameter                             | Default Value          | Description                                                                                                                                                                                                   |
    +=======================================+========================+===============================================================================================================================================================================================================+
-   | masterAddress                         | ``-``                  | Master node connection information, in redis://*ip*\ **:**\ *port* format.                                                                                                                                    |
+   | masterAddress                         | ``-``                  | Master node connection information, in redis://*ip*:*port* format.                                                                                                                                            |
    +---------------------------------------+------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | slaveAddresses                        | ``-``                  | Standby node connection information, in Set<redis://*ip:port*> format.                                                                                                                                        |
+   | slaveAddresses                        | ``-``                  | Standby node connection information, in Set<redis://*ip*:*port*> format.                                                                                                                                      |
    +---------------------------------------+------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | readMode                              | SLAVE                  | Read mode. By default, read traffic is distributed to replica nodes. The value can be **MASTER** (recommended), **SLAVE**, or **MASTER_SLAVE**. Other values may cause access failures in failover scenarios. |
    +---------------------------------------+------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -435,9 +436,9 @@ Parameter Description
    +---------------------------------------+------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | Parameter                             | Default Value          | Description                                                                                                                                                                                                   |
    +=======================================+========================+===============================================================================================================================================================================================================+
-   | nodeAddress                           | ``-``                  | Connection addresses of cluster nodes. Each address uses the redis://*ip*\ **:**\ *port* format. Use commas (,) to separate connection addresses of different nodes.                                          |
+   | nodeAddress                           | ``-``                  | Connection addresses of cluster nodes. Each address uses the redis://*ip*:*port* format. Use commas (,) to separate connection addresses of different nodes.                                                  |
    +---------------------------------------+------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | password                              | null                   | Password for logging in to the cluster.                                                                                                                                                                       |
+   | password                              | null                   | Redis instance password. Needless for password-free instances. If you forget your password or need to reset it, see :ref:`Resetting Instance Passwords <dcs-ug-0312041>`.                                     |
    +---------------------------------------+------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | scanInterval                          | 1000                   | Interval for periodically checking the cluster node status, in milliseconds.                                                                                                                                  |
    +---------------------------------------+------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

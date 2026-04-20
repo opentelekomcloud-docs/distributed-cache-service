@@ -30,9 +30,7 @@ Creating a DCS Redis Instance
 
 #. Specify the following instance parameters based on the information collected in :ref:`Identifying Requirements <purchasepreparation>`.
 
-   a. **Cache Engine**:
-
-      Select **Redis**.
+   a. In **Cache Engine**, select an engine. Default: **Redis**.
 
    b. **Version**:
 
@@ -44,7 +42,7 @@ Creating a DCS Redis Instance
          -  The Redis version cannot be changed once the instance is created. To use a later Redis version, create another DCS Redis instance and then migrate data from the old instance to the new one.
          -  The method of connecting a client to a Redis Cluster instance is different from that of connecting a client to other types of instances. For details, see :ref:`Accessing a DCS Redis Instance Through redis-cli <dcs-ug-0326009>`.
 
-   c. Set **Instance Type** to **Single-node**, **Master/Standby**, **Proxy Cluster** or **Redis Cluster**.
+   c. Set **Instance Type** to **Single-node**, **Master/Standby**, **Proxy Cluster**, **Redis Cluster**, or **Read/Write splitting**.
 
    d. Set **CPU Architecture** to **x86**.
 
@@ -59,10 +57,12 @@ Creating a DCS Redis Instance
 
    g. Select an AZ.
 
-      If the instance type is master/standby, Proxy Cluster, read/write splitting, or Redis Cluster, **Standby AZ** is displayed. Select a standby AZ for the standby node of the instance.
+      Instances other than single-node ones support both **AZ** and **Standby AZ**.
 
       .. note::
 
+         -  If instance nodes in an AZ are faulty, nodes in other AZs will not be affected. The standby node automatically becomes the master node to continue to operate, ensuring disaster recovery (DR).
+         -  Deploying a DCS instance across AZs slightly reduces network efficiency compared with deploying an instance within an AZ. Therefore, if a DCS instance is deployed across AZs, synchronization between master and standby cache nodes is slightly less efficient.
          -  To accelerate access, deploy your instance and your application in the same AZ.
          -  There are multiple AZs in each region. If resources are insufficient in an AZ, the AZ will be unavailable. In this case, select another AZ.
 
@@ -80,13 +80,13 @@ Creating a DCS Redis Instance
 
       Redis Cluster instances only support automatically-assigned IP addresses. The other instance types support both automatically-assigned IP addresses and manually-specified IP addresses. You can manually specify an IP address available in your subnet.
 
-      DCS Redis 4.0/5.0/6.0 instances support automatic IP address assignment and port customization. You can specify a port number in the range from 1 to 65535. The default port number is 6379.
+      DCS Redis 4.0 and later instances support automatic IP address assignment and port customization. You can specify a port in the range from 1 to 65535. The default port is 6379.
 
    c. Select a security group.
 
       A security group is a set of rules that control access to ECSs. It provides access policies for mutually trusted ECSs with the same security protection requirements in the same VPC.
 
-      DCS for Redis 4.0/5.0/6.0 are based on VPC Endpoint and do not support security groups. Configure the whitelist after creating such an instance by referring to :ref:`Managing IP Address Whitelist <dcs-ug-190812001>`.
+      DCS for Redis 4.0 and later are based on VPC Endpoint and do not support security groups. Configure the whitelist after creating such an instance by referring to :ref:`Managing IP Address Whitelist <dcs-ug-190812001>`.
 
 #. Set the instance password.
 

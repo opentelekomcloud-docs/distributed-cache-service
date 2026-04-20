@@ -10,7 +10,7 @@ After CTS is enabled, the tracker starts recording operations on cloud resources
 Procedure
 ---------
 
-#. Log in to the management console.
+#. Log in to the console.
 
 #. Click |image1| in the upper left corner of the console and select a region and a project.
 

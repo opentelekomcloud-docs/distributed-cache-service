@@ -13,6 +13,7 @@ Operating DCS Instances
 -  :ref:`Clearing DCS Instance Data <dcs-ug-0312018>`
 -  :ref:`Exporting DCS Instance List <dcs-ug-0312019>`
 -  :ref:`Command Renaming <dcs-ug-1009002>`
+-  :ref:`Upgrading the Minor or Proxy Version of a DCS Instance <dcs_03_0016>`
 
 .. toctree::
    :maxdepth: 1
@@ -26,3 +27,4 @@ Operating DCS Instances
    clearing_dcs_instance_data
    exporting_dcs_instance_list
    command_renaming
+   upgrading_the_minor_or_proxy_version_of_a_dcs_instance

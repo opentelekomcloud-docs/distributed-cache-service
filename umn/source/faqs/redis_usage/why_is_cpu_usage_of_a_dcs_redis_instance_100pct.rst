@@ -12,3 +12,7 @@ Why Is CPU Usage of a DCS Redis Instance 100%?
 -  Possible cause 2:
 
    You have run commands that consume a lot of resources, such as **KEYS**. This will make CPU usage spike and can easily trigger a master/standby switchover.
+
+-  Possible cause 3:
+
+   Redis rewrite was triggered, increasing CPU usage.

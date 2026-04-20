@@ -55,8 +55,6 @@ Procedure
 
          tar -xvf redis-shake-v2.0.3.tar.gz
 
-   .. note::
-
       If the source Redis is deployed in the data center intranet, install redis-shake on the intranet server. Export data and then upload the data to the cloud server as instructed by the following steps.
 
 #. Export the RDB file from the source Redis console. If the RDB file cannot be exported, contact customer service of the source.
@@ -99,8 +97,15 @@ Procedure
 
 #. Verify the migration.
 
-   After data synchronization, access the target Redis Cluster DCS instance using redis-cli. Run the **info** command to query the number of keys in the **Keyspace** section to confirm that data has been fully imported.
+   Before data migration, if the target Redis has no data, check data integrity after the migration is complete in the following way:
 
-   If the data has not been fully imported, run the **flushall** or **flushdb** command to clear the cached data in the instance, and synchronize data again.
+   a. Connect to the source Redis and the target Redis. Connect to Redis by referring to :ref:`Accessing a DCS Redis Instance Through redis-cli <dcs-ug-0326009>`.
+
+   b. Run the **info keyspace** command to check the values of **keys** and **expires**.
+
+      |image2|
+
+   c. Calculate the differences between the values of **keys** and **expires** of the source Redis and the target Redis. If the differences are the same, the data is complete and the migration is successful.
 
 .. |image1| image:: /_static/images/en-us_image_0293282053.png
+.. |image2| image:: /_static/images/en-us_image_0293255709.png

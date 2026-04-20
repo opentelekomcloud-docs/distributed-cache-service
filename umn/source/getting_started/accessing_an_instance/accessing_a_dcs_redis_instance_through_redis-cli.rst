@@ -15,21 +15,21 @@ Access a DCS Redis instance through redis-cli on an ECS in the same VPC. For mor
 
       -  Run the following command to connect to a Redis Cluster instance:
 
-         ./redis-cli -h {dcs_instance_address} -p 6379 -a {password} **-c**
+         ./redis-cli -h *{dcs_instance_address}* -p 6379 -a *{password}* **-c**
 
       -  Run the following command to connect to a single-node, master/standby, or Proxy Cluster instance:
 
-         ./redis-cli -h {dcs_instance_address} -p 6379 -a {password}
+         ./redis-cli -h *{dcs_instance_address}* -p 6379 -a *{password}*
 
       For details, see :ref:`3 <dcs-ug-0326009__en-us_topic_0148195299_li1511472544119>` and :ref:`4 <dcs-ug-0326009__en-us_topic_0148195299_li126171140194317>`.
 
    -  If SSL is enabled for a single-node or master/standby DCS Redis 6.0 instance, set an SSL certificate path.
 
-      ./redis-cli *-*\ h {dcs_instance_address} *-*\ p 6379 -a {password} **--tls --cacert {certification file path}**
+      ./redis-cli -h *{dcs_instance_address}* -p 6379 -a *{password}* --tls --cacert *{certification file path}*
 
    -  If SSL is enabled for a Redis Cluster DCS Redis 6.0 instance, set a certificate path.
 
-      ./redis-cli -h {dcs_instance_address} -p 6379 -a {password} -c **--tls --cacert {certification file path}**
+      ./redis-cli -h *{dcs_instance_address}* -p 6379 -a *{password}* -c --tls --cacert *{certification file path}*
 
    -  To connect to Redis with SSL encryption, use redis-cli 6.x or later.
 
@@ -82,9 +82,11 @@ Procedure (Linux)
 
       **cd redis-6.2.13**
 
+      **cd src**
+
       **make**
 
-      **cd src**
+      **make install**
 
 #. .. _dcs-ug-0326009__en-us_topic_0148195299_li1511472544119:
 
