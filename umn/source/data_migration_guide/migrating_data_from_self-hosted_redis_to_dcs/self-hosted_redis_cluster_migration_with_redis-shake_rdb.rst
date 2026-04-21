@@ -5,13 +5,9 @@
 Self-Hosted Redis Cluster Migration with redis-shake (RDB)
 ==========================================================
 
-redis-shake is an open-source tool for migrating data online or offline (by importing backup files) between Redis Clusters. Data can be migrated to DCS Redis Cluster instances seamlessly because DCS Redis Cluster inherits the native Redis Cluster design.
+redis-shake is an open-source tool for migrating data online or offline (by importing backup files) between Redis Clusters. Data can be migrated to DCS Redis Cluster instances seamlessly because DCS Redis Cluster inherits the native Redis Cluster design. If the source Redis and the target Redis cannot be connected, or the source Redis is deployed on other clouds, you can migrate data by importing backup files.
 
 The following describes how to use Linux redis-shake to migrate self-hosted Redis Cluster to a DCS Redis Cluster instance offline.
-
-.. note::
-
-   If the source Redis and the target Redis cannot be connected, or the source Redis is deployed on other clouds, you can migrate data by importing backup files.
 
 Notes and Constraints
 ---------------------
@@ -40,7 +36,7 @@ Obtaining Information of the Source and Target Redis Nodes
 
    *{redis_address}* indicates the Redis connection address, *{redis_port}* indicates the Redis port, and *{redis_password}* indicates the Redis connection password.
 
-   In the command output similar to the following, obtain the IP addresses and ports of all masters.
+   In the output, obtain the IP addresses and ports of all the master nodes.
 
    |image1|
 
@@ -59,13 +55,11 @@ Installing RedisShake
 
    .. code-block::
 
-      tar -xvf redis-shake-v2.1.2.tar.gz
+      tar -xvf release-v2.1.2-20220329.tar.gz
 
    |image2|
 
-.. note::
-
-   If the source cluster is deployed in the data center intranet, install redis-shake on the intranet server. Export the source cluster backup file by referring to :ref:`Exporting the Backup File <dcs-migrate-demo03__section03191023122013>`. Upload the backup to the cloud server as instructed by the following steps
+   If the source cluster is deployed in the data center intranet, install redis-shake on the intranet server. Export the source cluster backup file by referring to :ref:`Exporting the Backup File <dcs-migrate-demo03__section03191023122013>`. Upload the backup to the ECS.
 
 .. _dcs-migrate-demo03__section03191023122013:
 
@@ -76,7 +70,9 @@ Exporting the Backup File
 
    .. code-block::
 
-      cd redis-shake-v2.0.3
+      cd bin
+
+   |image3|
 
 #. Edit the **redis-shake.conf** file by providing the following information about all the masters of the source:
 
@@ -154,7 +150,8 @@ Verifying the Migration
 
    If the data has not been fully imported, run the **flushall** or **flushdb** command to clear the cached data in the target instance, and migrate data again.
 
-#. After the verification is complete, delete the redis shake configuration file.
+#. After the verification is complete, you are advised to clear the redis-shake configuration in time.
 
 .. |image1| image:: /_static/images/en-us_image_0000002001365365.png
 .. |image2| image:: /_static/images/en-us_image_0000001964888588.png
+.. |image3| image:: /_static/images/en-us_image_0000002289570913.png

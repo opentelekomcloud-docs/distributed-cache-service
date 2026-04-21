@@ -9,25 +9,39 @@ This section describes how to access a Redis instance on StackExchange.Redis. Fo
 
 The following operations are based on an example of accessing a Redis instance on a client on an elastic cloud server (ECS).
 
-.. note::
+Notes and Constraints
+---------------------
 
-   If you use the StackExchange client to connect to a Proxy Cluster instance, the multi-DB function cannot be used.
+If you use the StackExchange client to connect to a Proxy Cluster instance, the multi-DB function cannot be used.
 
-   To access a Redis 7.0 instance, use a hiredis `2.6.111 <https://github.com/StackExchange/StackExchange.Redis/releases/tag/2.6.111>`__ or later client. `2.7.0 <https://github.com/StackExchange/StackExchange.Redis/blob/2.8.16/docs/ReleaseNotes.md#2710>`__ and later versions are recommended.
+To access a Redis 7.0 instance, use a hiredis `2.6.111 <https://github.com/StackExchange/StackExchange.Redis/releases/tag/2.6.111>`__ or later client. `2.7.0 <https://github.com/StackExchange/StackExchange.Redis/blob/2.8.16/docs/ReleaseNotes.md#2710>`__ and later versions are recommended.
 
 Prerequisites
 -------------
 
 -  A Redis instance is created, and is in the **Running** state.
+
 -  An ECS has been created. For details about how to create an ECS, see `Elastic Cloud Server User Guide <https://docs.otc.t-systems.com/en-us/usermanual/ecs/en-us_topic_0163572588.html>`__
--  If the ECS runs the Linux OS, ensure that the GCC compilation environment has been installed on the ECS.
+
+-  The Linux ECS must have GNU Compiler Collection (GCC) installed. To query the GCC version, run the **gcc --version** command.
+
+   Run the following command to install GCC on the ECS if needed, CentOS is used as an example:
+
+   .. code-block::
+
+      yum install -y make
+      yum install -y pcre-devel
+      yum install -y zlib-devel
+      yum install -y libevent-devel
+      yum install -y openssl-devel
+      yum install -y gcc-c++
 
 Connecting to Redis on StackExchange.Redis
 ------------------------------------------
 
 #. .. _dcs-ug-0312013__en-us_topic_0148195355_li457118182512:
 
-   View the IP address/domain name and port number of the DCS Redis instance to be accessed.
+   View the IP address/domain name and port of the DCS Redis instance to be accessed.
 
    For details, see :ref:`Viewing and Modifying DCS Instance Information <dcs-ug-0312016>`.
 
@@ -98,7 +112,7 @@ Connecting to Redis on StackExchange.Redis
           }
       }
 
-   *{instance_ip_address}* and *{port}* are the IP address/domain name and port number of the DCS Redis instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312013__en-us_topic_0148195355_li457118182512>`. Change them as required. ``********`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
+   *{instance_ip_address}* and *{port}* are the IP address/domain name and port of the DCS Redis instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312013__en-us_topic_0148195355_li457118182512>`. Change them as required. ``********`` indicates the password used for logging in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation. Omit the password setting in the command for a password-free instance.
 
 #. Run the code. You have successfully accessed the instance if the following command output is displayed:
 

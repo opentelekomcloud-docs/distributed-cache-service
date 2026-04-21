@@ -9,25 +9,39 @@ This section describes how to access a Redis instance on hiredis (C++). For more
 
 The following operations are based on an example of accessing a Redis instance on a client on an elastic cloud server (ECS).
 
-.. note::
+Notes and Constraints
+---------------------
 
-   The operations described in this section apply only to single-node, master/standby, and Proxy Cluster instances. To use C++ to connect to a Redis Cluster instance, see the `C++ Redis client description <https://github.com/sewenew/redis-plus-plus?_ga=2.64990636.268662337.1603553558-977760105.1588733325#redis-cluster>`__.
+The operations described in this section apply only to single-node, master/standby, and Proxy Cluster instances. To use C++ to connect to a Redis Cluster instance, see the `C++ Redis client description <https://github.com/sewenew/redis-plus-plus?_ga=2.64990636.268662337.1603553558-977760105.1588733325#redis-cluster>`__.
 
-   To access a Redis 7.0 instance, use a hiredis `1.1.0-rc1 <https://github.com/redis/hiredis/releases/tag/v1.1.0-rc1>`__ or later client. For example, valkey 7.2.5 and later are recommended.
+To access a Redis 7.0 instance, use a hiredis `1.1.0-rc1 <https://github.com/redis/hiredis/releases/tag/v1.1.0-rc1>`__ or later client. For example, valkey 7.2.5 and later are recommended.
 
 Prerequisites
 -------------
 
 -  A Redis instance is created, and is in the **Running** state.
+
 -  An ECS has been created. For details about how to create an ECS, see `Elastic Cloud Server User Guide <https://docs.otc.t-systems.com/en-us/usermanual/ecs/en-us_topic_0163572588.html>`__
--  If the ECS runs the Linux OS, ensure that the GCC compilation environment has been installed on the ECS.
+
+-  The Linux ECS must have GNU Compiler Collection (GCC) installed. To query the GCC version, run the **gcc --version** command.
+
+   Run the following command to install GCC on the ECS if needed, CentOS is used as an example:
+
+   .. code-block::
+
+      yum install -y make
+      yum install -y pcre-devel
+      yum install -y zlib-devel
+      yum install -y libevent-devel
+      yum install -y openssl-devel
+      yum install -y gcc-c++
 
 Connecting to Redis on hiredis
 ------------------------------
 
 #. .. _dcs-ug-0312010__en-us_topic_0148195243_li1655151054317:
 
-   View the IP address/domain name and port number of the DCS Redis instance to be accessed.
+   View the IP address/domain name and port of the DCS Redis instance to be accessed.
 
    For details, see :ref:`Viewing and Modifying DCS Instance Information <dcs-ug-0312016>`.
 
@@ -133,7 +147,7 @@ Connecting to Redis on hiredis
 
          ./connRedis {redis_instance_address} 6379 {password}
 
-      *{redis_instance_address}* indicates the IP address/domain name of DCS instance and **6379** is an example port number of DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312010__en-us_topic_0148195243_li1655151054317>`. Change them as required. *{password}* indicates the password used to log in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation.
+      *{redis_instance_address}* indicates the IP address/domain name of DCS instance and **6379** is an example port number of DCS instance. For details about how to obtain the IP address/domain name and port, see :ref:`1 <dcs-ug-0312010__en-us_topic_0148195243_li1655151054317>`. Change them as required. *{password}* indicates the password used to log in to the chosen DCS Redis instance. This password is defined during DCS Redis instance creation. Omit the password setting in the command for a password-free instance.
 
       You have successfully accessed the instance if the following command output is displayed:
 
@@ -143,7 +157,7 @@ Connecting to Redis on hiredis
          SET: OK
          GET welcome: Hello, DCS for Redis!
 
-   .. important::
+   .. caution::
 
       If an error is reported, indicating that the hiredis library files cannot be found, run the following commands to copy related files to the system directories and add dynamic links:
 

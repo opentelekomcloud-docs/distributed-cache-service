@@ -9,9 +9,9 @@ Some Redis commands are supported by Redis Cluster DCS instances for multi-key o
 
 Some commands support multiple keys but do not support cross-slot access. For details, see :ref:`Table 2 <dcs-pd-200813003__table152098710112>`.
 
-:ref:`Table 3 <dcs-pd-200813003__table10266172324619>` lists commands restricted for Proxy Cluster DCS Redis 4.0 instances.
+:ref:`Table 3 <dcs-pd-200813003__table10266172324619>` lists commands restricted for Proxy Cluster DCS Redis instances.
 
-:ref:`Table 4 <dcs-pd-200813003__table1626238165>` lists commands restricted for read/write splitting DCS Redis 4.0 instances.
+:ref:`Table 4 <dcs-pd-200813003__table1626238165>` lists commands restricted for read/write splitting DCS Redis instances.
 
 .. _dcs-pd-200813003__table7589193113396:
 
@@ -71,13 +71,13 @@ Some commands support multiple keys but do not support cross-slot access. For de
 
 .. table:: **Table 2** Multi-key commands of Proxy Cluster instances
 
-   +----------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Category                                                 | Command                                                                                                                                               |
-   +==========================================================+=======================================================================================================================================================+
-   | Multi-key commands that support cross-slot access        | DEL, MGET, MSET, EXISTS, SUNION, SINTER, SDIFF, SUNIONSTORE, SINTERSTORE, SDIFFSTORE, ZUNIONSTORE, ZINTERSTORE                                        |
-   +----------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Multi-key commands that do not support cross-slot access | SMOVE, SORT, BITOP, MSETNX, RENAME, RENAMENX, BLPOP, BRPOP, RPOPLPUSH, BRPOPLPUSH, PFMERGE, PFCOUNT, BLMOVE, COPY, GEOSEARCHSTORE, LMOVE, ZRANGESTORE |
-   +----------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+   +----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Category                                                 | Command                                                                                                                                                                  |
+   +==========================================================+==========================================================================================================================================================================+
+   | Multi-key commands that support cross-slot access        | DEL, MGET, MSET, EXISTS, SUNION, SINTER, SDIFF, SUNIONSTORE, SINTERSTORE, SDIFFSTORE, ZUNIONSTORE, ZINTERSTORE                                                           |
+   +----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Multi-key commands that do not support cross-slot access | SMOVE, SORT, BITOP, MSETNX, RENAME, RENAMENX, BLPOP, BRPOP, RPOPLPUSH, BRPOPLPUSH, PFMERGE, PFCOUNT, BLMOVE, COPY, GEOSEARCHSTORE, LMOVE, ZRANGESTORE, XREAD, XREADGROUP |
+   +----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. _dcs-pd-200813003__table10266172324619:
 
@@ -135,7 +135,7 @@ Some commands support multiple keys but do not support cross-slot access. For de
    +-----------------------+-----------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    |                       | RENAMENX              |                                                                                                                                                                                                                                                                                                |
    +-----------------------+-----------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   |                       | SCAN                  | Proxy Cluster instances do not support the **SCAN** command in pipelines.                                                                                                                                                                                                                      |
+   |                       | SCAN                  | Proxy Cluster instances do not support the **SCAN** command in transactions.                                                                                                                                                                                                                   |
    |                       |                       |                                                                                                                                                                                                                                                                                                |
    |                       |                       | For a Proxy Cluster instance, you can issue the **SCAN** command to a specific shard by adding *ip*:*port*. (Shard IP addresses and ports can be queried through the **icluster nodes** command.)                                                                                              |
    |                       |                       |                                                                                                                                                                                                                                                                                                |

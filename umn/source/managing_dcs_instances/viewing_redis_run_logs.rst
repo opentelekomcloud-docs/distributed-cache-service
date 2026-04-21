@@ -22,11 +22,11 @@ Procedure
 
 #. Click **Run Logs**.
 
-#. Click **Create Log File**.
+#. Click **Collect Logs**, configure log collection information, specify the collection period, and click **OK**.
 
-   For a master/standby, read/write splitting, or cluster instance, logs will be collected from the specified shard and replica. If the instance is the single-node type, logs of the only node of the instance will be collected.
+   For a master/standby, read/write splitting, or cluster instance, you can collect logs by shard and replica. The shard and replica must be specified. If the instance is the single-node type, logs of the only node of the instance will be collected.
 
-   Select the collection period and click **OK**.
+   A log file contains logs of one day. For example, if you select last 3 days, three log files will be generated.
 
 #. After the log file is successfully collected, click **Download** to download it.
 

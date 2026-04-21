@@ -7,10 +7,6 @@ Migrating Redis from Another Cloud Online
 
 If the source and target instances are interconnected and the **SYNC** and **PSYNC** commands are supported by the source instance, data can be migrated online in full or incrementally from another cloud to the target DCS.
 
-.. note::
-
-   During online migration, data is essentially synchronized in full to a new replica. Therefore, perform online migration during low-demand hours. Otherwise, source instance CPU usage may surge and latency may increase.
-
 Notes and Constraints
 ---------------------
 
@@ -20,12 +16,13 @@ Notes and Constraints
 -  The source must be Redis 3.0 or later.
 -  For earlier instances whose passwords contain single quotation marks ('), modify the password for online migration or try other methods.
 -  To migrate to an instance with SSL enabled, disable the SSL setting first. For details, see :ref:`Transmitting DCS Redis Data with Encryption Using SSL <dcs-ug-023129>`.
+-  **During online migration, data is essentially synchronized in full to a new replica. Therefore, perform online migration during low-demand hours. Otherwise, source instance CPU usage may surge and latency may increase.**
 
 Prerequisites
 -------------
 
--  Before migrating data, read through :ref:`Migration Tools and Schemes <dcs-migration-090626002>` to learn about the DCS data migration function and select an appropriate target instance.
--  By default, a cluster instance has only one DB (DB0). Before you migrate data from a multi-DB single-node or master/standby instance to a Redis Cluster instance, check whether any data exists on databases other than DB0. To ensure that the migration succeeds, move all data to DB0 by referring to :ref:`Online Migration with Rump <dcs-migration-090626001_0>`.
+-  Before migrating data, read through :ref:`Migration Solution Notes <dcs-migration-090626002>` to learn about the DCS data migration function and select an appropriate target instance.
+-  By default, a cluster instance has only one DB (DB0). Before you migrate data from a multi-DB single-node or master/standby instance to a Redis Cluster instance, check whether any data exists on databases other than DB0. To ensure that the migration succeeds, move all data to DB0 by referring to :ref:`Online Migration from Another Cloud Using Rump <dcs-migration-090626001_0>`.
 -  The IP address and port of the source Redis instance has been obtained.
 -  If a target DCS Redis instance is not available, create one first. For details, see :ref:`Creating a DCS Redis Instance <dcs-ug-0312003>`.
 -  If you already have a DCS Redis instance, you do not need to create one again. For comparing migration data and reserving sufficient memory, you are advised to clear the instance data before the migration. For details, see :ref:`Clearing DCS Instance Data <dcs-ug-0312018>`. If any data exists on the target instance, duplicate data between the source and target is overwritten. If the data exists only on the target instance, the data will be retained.
@@ -47,11 +44,9 @@ Creating an Online Migration Task
 
 #. Configure the VPC, subnet, and security group for the migration task.
 
-   .. note::
-
-      -  **Select the same VPC as the target Redis. Ensure that the migration resource can access the target Redis instance.**
-      -  The online migration task uses a tenant IP address (**Migration ECS** displayed on the **Basic Information** page of the task.) If a whitelist is configured for the source or target instance, add the migration IP address to the whitelist or disable the whitelist.
-      -  To allow the VM used by the migration task to access the source and target instances, set an outbound rule for the task's security group to allow traffic through the IP addresses and ports of the source and target instances. By default, all outbound traffic is allowed.
+   -  **Select the same VPC as the target Redis. Ensure that the migration resource can access the target Redis instance.**
+   -  The online migration task uses a tenant IP address (**Migration ECS** displayed on the **Basic Information** page of the task.) If a whitelist is configured for the source or target instance, add the migration IP address to the whitelist or disable the whitelist.
+   -  To allow the VM used by the migration task to access the source and target instances, set an outbound rule for the task's security group to allow traffic through the IP addresses and ports of the source and target instances. By default, all outbound traffic is allowed.
 
 Checking the Network
 --------------------
@@ -68,14 +63,16 @@ Checking the Network
 
 #. .. _dcs-migration-0312006__dcs-migration-190703003_li423483319412:
 
-   If the source and target Redis instances are on different clouds, create a connection using only Direct Connect. For details, see the *Direct Connect User Guide*.
+   If the source and target Redis instances are on different clouds, create a Direct Connect connection. For details, see the *Direct Connect User Guide*.
 
 .. _dcs-migration-0312006__dcs-migration-190703003_section14919536272:
 
 Configuring the Online Migration Task
 -------------------------------------
 
-#. On the **Online Migration** tab page, click **Configure** in the row containing the online migration task you just created.
+#. Click **Next** and configure the source and target Redis instances.
+
+   If the resources are not ready yet, click **Create** to create a migration task. After they are ready, click **Configure** on the right of the task to continue its configuration.
 
 #. Select a migration type.
 
@@ -125,18 +122,15 @@ Configuring the Online Migration Task
 
       If a DCS Redis instance is used, the users created in :ref:`Managing Users <dcs-ug-221220>` are currently unavailable.
 
-#. Click **Next**.
+#. Click **Create**.
 
 #. Confirm the migration task details and click **Submit**.
 
    Go back to the data migration task list. After the migration is successful, the task status changes to **Successful**.
 
-   If the migration fails, click the migration task and check the log on the **Migration Logs** page.
-
-   .. note::
-
-      -  Once incremental migration starts, it remains **Migrating** after full migration.
-      -  To manually stop a migration task, select the check box on the left of the migration task and click **Stop** above the migration task.
+   -  If the migration fails, click the migration task and check the log on the **Migration Logs** page.
+   -  Once incremental migration starts, it remains **Migrating** after full migration.
+   -  To manually stop a migration task, select the check box on the left of the migration task and click **Stop** above the migration task.
 
 Verifying the Migration
 -----------------------
@@ -153,5 +147,5 @@ Before data migration, if the target Redis has no data, check data integrity aft
 
 During full migration, source Redis data updated during the migration will not be migrated to the target instance.
 
-.. |image1| image:: /_static/images/en-us_image_0143929918.png
+.. |image1| image:: /_static/images/en-us_image_0000001549115173.png
 .. |image2| image:: /_static/images/en-us_image_0293255709.png

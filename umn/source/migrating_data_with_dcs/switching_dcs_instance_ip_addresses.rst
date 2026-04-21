@@ -58,7 +58,7 @@ Switching IP Addresses
 
 #. Log in to the DCS console.
 
-#. Click |image1| in the upper left corner of the management console and select the region where your instance is located.
+#. Click |image1| in the upper left corner of the console and select the region where your instance is located.
 
 #. In the navigation pane, choose **Data Migration**.
 
@@ -89,10 +89,10 @@ Rolling Back IP Addresses
 If you want to change the instance IP address to the original IP address, perform the following operations:
 
 #. Log in to the DCS console.
-#. Click |image2| in the upper left corner of the management console and select the region where your instance is located.
+#. Click |image2| in the upper left corner of the console and select the region where your instance is located.
 #. In the navigation pane, choose **Data Migration**.
 #. On the **Online Migration** page, locate the row that contains the migration task in the **IP switched** state, choose **More** > **Roll Back IP**.
 #. In the confirmation dialog box, click **Yes**. The IP address rollback task is submitted successfully. When the task status changes to **IP rolled back**, the rollback is complete.
 
-.. |image1| image:: /_static/images/en-us_image_0148195246.png
-.. |image2| image:: /_static/images/en-us_image_0148195246.png
+.. |image1| image:: /_static/images/en-us_image_0000001549115173.png
+.. |image2| image:: /_static/images/en-us_image_0000001549115173.png

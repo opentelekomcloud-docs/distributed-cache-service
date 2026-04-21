@@ -42,8 +42,7 @@ Preparing the Target DCS Redis Instance
 -  If a DCS Redis instance is not available, create one first. For details, see :ref:`Creating a DCS Redis Instance <dcs-ug-0326008>`.
 -  If a DCS Redis instance is available, you do not need to create a new one. However, you can clear the instance data before the migration.
 
-   -  If the target instance is Redis 4.0 and later, clear the data by referring to :ref:`Clearing DCS Instance Data <dcs-ug-0312018>`.
-   -  If the target instance is a DCS Redis 3.0 instance, run the **FLUSHALL** command to clear data.
+   -  For details, see :ref:`Clearing DCS Instance Data <dcs-ug-0312018>`.
    -  If the target instance data is not cleared before the migration and the source and target instances contain the same key, the key in the target instance will be overwritten by the key in the source instance after the migration.
 
 -  Redis is backward compatible. The target instance version must be the same as or later than the source instance version.

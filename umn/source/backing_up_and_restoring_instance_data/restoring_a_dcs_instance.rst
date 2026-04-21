@@ -5,7 +5,7 @@
 Restoring a DCS Instance
 ========================
 
-On the DCS console, you can restore backup data to a chosen DCS instance.
+You can restore backup data to a specific DCS instance.
 
 Prerequisites
 -------------

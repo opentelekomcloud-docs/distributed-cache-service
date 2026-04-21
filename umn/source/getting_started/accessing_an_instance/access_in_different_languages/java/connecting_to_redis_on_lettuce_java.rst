@@ -12,28 +12,36 @@ Spring Data Redis is already integrated with `Jedis <https://github.com/redis/je
 Notes and Constraints
 ---------------------
 
-Springboot 2.3.12.RELEASE or later is required. Lettuce `6.3.0.RELEASE <https://github.com/redis/lettuce/releases/tag/6.3.0.RELEASE>`__ or later is required.
+Springboot 2.3.12.RELEASE or later is required. Lettuce `6.3.0.RELEASE <https://github.com/redis/lettuce/releases/tag/6.3.0.RELEASE>`__ or later is required. Netty 4.1.100.Final or later is required.
 
 Prerequisites
 -------------
 
 -  A Redis instance is created, and is in the **Running** state.
--  View the IP address/domain name and port number of the DCS Redis instance to be accessed. For details, see :ref:`Viewing and Modifying DCS Instance Information <dcs-ug-0312016>`.
+-  View the IP address/domain name and port of the DCS Redis instance to be accessed. For details, see :ref:`Viewing and Modifying DCS Instance Information <dcs-ug-0312016>`.
 
 Pom Configuration
 -----------------
 
 .. code-block::
 
-   <!-- Enable Spring Data Redis, Lettuce-supported SDK is integrated by default -->
+   <!-- Enable Spring Data Redis. Lettuce-supported SDK is integrated by default. -->
    <dependency>
        <groupId>org.springframework.boot</groupId>
        <artifactId>spring-boot-starter-data-redis</artifactId>
    </dependency>
+
    <dependency>
-       <groupId>io.lettuce</groupId>
-       <artifactId>lettuce-core</artifactId>
-       <version>${lettuce.version}</version>
+      <groupId>io.lettuce</groupId>
+      <artifactId>lettuce-core</artifactId>
+      <version>6.3.0.RELEASE</version>
+   </dependency>
+
+   <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-transport-native-epoll</artifactId>
+      <version>4.1.100.Final</version>
+      <classifier>linux-x86_64</classifier>
    </dependency>
 
 application.properties Configuration
@@ -116,6 +124,19 @@ Bean Configuration
 
           @Value("${redis.read.timeout:2000}")
           private Integer redisReadTimeout = 2000;
+          /**
+           *  TCP_KEEPALIVE configuration parameters:
+           *  A keepalive interval = TCP_KEEPALIVE_TIME = 30
+           *  Idle duration before keepalive = TCP_KEEPALIVE_TIME/3 = 10
+           *  keepalive xx times before disconnect = TCP_KEEPALIVE_COUNT = 3
+           */
+          private static final int TCP_KEEPALIVE_TIME = 30;
+
+          /**
+           * TCP_USER_TIMEOUT Idle duration limit, to address Lettuce timeout.
+           * refer: https://github.com/lettuce-io/lettuce-core/issues/2082
+           */
+          private static final int TCP_USER_TIMEOUT = 30;
 
           @Bean
           public RedisConnectionFactory redisConnectionFactory(LettuceClientConfiguration clientConfiguration) {
@@ -134,7 +155,26 @@ Bean Configuration
           @Bean
           public LettuceClientConfiguration clientConfiguration() {
 
-              SocketOptions socketOptions = SocketOptions.builder().connectTimeout(Duration.ofMillis(redisConnectTimeout)).build();
+
+              SocketOptions socketOptions = SocketOptions.builder()
+                  .keepAlive(SocketOptions.KeepAliveOptions.builder()
+                      // A keepalive interval
+                      .idle(Duration.ofSeconds(TCP_KEEPALIVE_TIME))
+                      // Idle duration before keepalive
+                      .interval(Duration.ofSeconds(TCP_KEEPALIVE_TIME/3))
+                      // keepalive xx times before disconnect
+                      .count(3)
+                      // Whether to keep connections alive.
+                      .enable()
+                      .build())
+                  .tcpUserTimeout(SocketOptions.TcpUserTimeoutOptions.builder()
+                      // Addressing timeouts caused by RST on the server
+                      .tcpUserTimeout(Duration.ofSeconds(TCP_USER_TIMEOUT))
+                      .enable()
+                      .build())
+                  // TCP connection timeout setting
+                  .connectTimeout(Duration.ofMillis(redisConnectTimeout))
+                  .build();
 
               ClientOptions clientOptions = ClientOptions.builder()
                       .autoReconnect(true)
@@ -147,6 +187,7 @@ Bean Configuration
 
               LettuceClientConfiguration clientConfiguration = LettuceClientConfiguration.builder()
                       .commandTimeout(Duration.ofMillis(redisReadTimeout))
+                      // readFrom is not required for Proxy Cluster instances.
                       .readFrom(ReadFrom.MASTER)
                       .clientOptions(clientOptions)
                       .build();
@@ -223,6 +264,19 @@ Bean Configuration
 
           @Value("${redis.pool.timeBetweenEvictionRunsMillis:60000}")
           private Integer redisPoolBetweenEvictionRunsMillis = 60 * 1000;
+          /**
+           *  TCP_KEEPALIVE configuration parameters:
+           *  A keepalive interval = TCP_KEEPALIVE_TIME = 30
+           *  Idle duration before keepalive = TCP_KEEPALIVE_TIME/3 = 10
+           *  keepalive xx times before disconnect = TCP_KEEPALIVE_COUNT = 3
+           */
+          private static final int TCP_KEEPALIVE_TIME = 30;
+
+          /**
+           * TCP_USER_TIMEOUT Idle duration limit, to address Lettuce timeout.
+           * refer: https://github.com/lettuce-io/lettuce-core/issues/2082
+           */
+          private static final int TCP_USER_TIMEOUT = 30;
 
           @Bean
           public RedisConnectionFactory redisConnectionFactory(LettuceClientConfiguration clientConfiguration) {
@@ -243,7 +297,26 @@ Bean Configuration
           @Bean
           public LettuceClientConfiguration clientConfiguration() {
 
-              SocketOptions socketOptions = SocketOptions.builder().connectTimeout(Duration.ofMillis(redisConnectTimeout)).build();
+
+              SocketOptions socketOptions = SocketOptions.builder()
+                  .keepAlive(SocketOptions.KeepAliveOptions.builder()
+                      // A keepalive interval
+                      .idle(Duration.ofSeconds(TCP_KEEPALIVE_TIME))
+                      // Idle duration before keepalive
+                      .interval(Duration.ofSeconds(TCP_KEEPALIVE_TIME/3))
+                      // keepalive xx times before disconnect
+                      .count(3)
+                      // Whether to keep connections alive.
+                      .enable()
+                      .build())
+                  .tcpUserTimeout(SocketOptions.TcpUserTimeoutOptions.builder()
+                      // Addressing timeouts caused by RST on the server
+                      .tcpUserTimeout(Duration.ofSeconds(TCP_USER_TIMEOUT))
+                      .enable()
+                      .build())
+                  // TCP connection timeout setting
+                  .connectTimeout(Duration.ofMillis(redisConnectTimeout))
+                  .build();
 
               ClientOptions clientOptions = ClientOptions.builder()
                       .autoReconnect(true)
@@ -258,9 +331,10 @@ Bean Configuration
                       .poolConfig(poolConfig())
                       .commandTimeout(Duration.ofMillis(redisReadTimeout))
                       .clientOptions(clientOptions)
+                      // readFrom is not required for Proxy Cluster instances.
                       .readFrom(ReadFrom.MASTER)
                       .build();
-              return poolingClientConfiguration;
+              return clientConfiguration;
           }
 
           private GenericObjectPoolConfig redisPoolConfig() {
@@ -283,7 +357,7 @@ Bean Configuration
               poolConfig.setTestOnReturn(false);
               //Indicates whether to check for idle connections. If this is set to false, idle connections are not evicted.
               poolConfig.setTestWhileIdle(true);
-              //Idle duration after which a connection is evicted. If the actual duration is greater than this value and the maximum number of idle connections is reached, idle connections are directly evicted.
+              //Duration after which idle connections are evicted. If the idle duration is greater than this value and the minimum number of idle connections is exceeded, idle connections are directly evicted.
               poolConfig.setSoftMinEvictableIdleTime(Duration.ofMillis(redisPoolSoftMinEvictableIdleTimeMillis));
               //Disable eviction policy MinEvictableIdleTimeMillis().
               poolConfig.setMinEvictableIdleTime(Duration.ofMillis(-1));
@@ -338,6 +412,19 @@ Bean Configuration
 
           @Value("${redis.cluster.topology.refresh.period.millis:10000}")
           private Integer redisClusterTopologyRefreshPeriodMillis = 10000;
+          /**
+           *  TCP_KEEPALIVE configuration parameters:
+           *  A keepalive interval = TCP_KEEPALIVE_TIME = 30
+           *  Idle duration before keepalive = TCP_KEEPALIVE_TIME/3 = 10
+           *  keepalive xx times before disconnect = TCP_KEEPALIVE_COUNT = 3
+           */
+          private static final int TCP_KEEPALIVE_TIME = 30;
+
+          /**
+           * TCP_USER_TIMEOUT Idle duration limit, to address Lettuce timeout.
+           * refer: https://github.com/lettuce-io/lettuce-core/issues/2082
+           */
+          private static final int TCP_USER_TIMEOUT = 30;
 
           @Bean
           public RedisConnectionFactory redisConnectionFactory(LettuceClientConfiguration clientConfiguration) {
@@ -360,8 +447,25 @@ Bean Configuration
 
           @Bean
           public LettuceClientConfiguration clientConfiguration() {
-
-              SocketOptions socketOptions = SocketOptions.builder().connectTimeout(Duration.ofMillis(redisConnectTimeout)).build();
+              SocketOptions socketOptions = SocketOptions.builder()
+                  .keepAlive(SocketOptions.KeepAliveOptions.builder()
+                      // A keepalive interval
+                      .idle(Duration.ofSeconds(TCP_KEEPALIVE_TIME))
+                      // Idle duration before keepalive
+                      .interval(Duration.ofSeconds(TCP_KEEPALIVE_TIME/3))
+                      // keepalive xx times before disconnect
+                      .count(3)
+                      // Whether to keep connections alive.
+                      .enable()
+                      .build())
+                  .tcpUserTimeout(SocketOptions.TcpUserTimeoutOptions.builder()
+                      // Addressing timeouts caused by RST on the server
+                      .tcpUserTimeout(Duration.ofSeconds(TCP_USER_TIMEOUT))
+                      .enable()
+                      .build())
+                  // TCP connection timeout setting
+                  .connectTimeout(Duration.ofMillis(redisConnectTimeout))
+                  .build();
 
               ClusterTopologyRefreshOptions topologyRefreshOptions = ClusterTopologyRefreshOptions.builder()
                       .enableAllAdaptiveRefreshTriggers()
@@ -461,6 +565,19 @@ Bean Configuration
 
           @Value("${redis.pool.timeBetweenEvictionRunsMillis:60000}")
           private Integer redisPoolBetweenEvictionRunsMillis = 60 * 1000;
+          /**
+           *  TCP_KEEPALIVE configuration parameters:
+           *  A keepalive interval = TCP_KEEPALIVE_TIME = 30
+           *  Idle duration before keepalive = TCP_KEEPALIVE_TIME/3 = 10
+           *  keepalive xx times before disconnect = TCP_KEEPALIVE_COUNT = 3
+           */
+          private static final int TCP_KEEPALIVE_TIME = 30;
+
+          /**
+           * TCP_USER_TIMEOUT Idle duration limit, to address Lettuce timeout.
+           * refer: https://github.com/lettuce-io/lettuce-core/issues/2082
+           */
+          private static final int TCP_USER_TIMEOUT = 30;
 
           @Bean
           public RedisConnectionFactory redisConnectionFactory(LettuceClientConfiguration clientConfiguration) {
@@ -485,8 +602,25 @@ Bean Configuration
 
           @Bean
           public LettuceClientConfiguration clientConfiguration() {
-
-              SocketOptions socketOptions = SocketOptions.builder().connectTimeout(Duration.ofMillis(redisConnectTimeout)).build();
+              SocketOptions socketOptions = SocketOptions.builder()
+                  .keepAlive(SocketOptions.KeepAliveOptions.builder()
+                      // A keepalive interval
+                      .idle(Duration.ofSeconds(TCP_KEEPALIVE_TIME))
+                      // Idle duration before keepalive
+                      .interval(Duration.ofSeconds(TCP_KEEPALIVE_TIME/3))
+                      // keepalive xx times before disconnect
+                      .count(3)
+                      // Whether to keep connections alive.
+                      .enable()
+                      .build())
+                  .tcpUserTimeout(SocketOptions.TcpUserTimeoutOptions.builder()
+                      // Addressing timeouts caused by RST on the server
+                      .tcpUserTimeout(Duration.ofSeconds(TCP_USER_TIMEOUT))
+                      .enable()
+                      .build())
+                  // TCP connection timeout setting
+                  .connectTimeout(Duration.ofMillis(redisConnectTimeout))
+                  .build();
 
               ClusterTopologyRefreshOptions topologyRefreshOptions = ClusterTopologyRefreshOptions.builder()
                       .enableAllAdaptiveRefreshTriggers()
@@ -534,7 +668,7 @@ Bean Configuration
               poolConfig.setTestWhileIdle(true);
               //Disable connection closure when the minimum idle time is reached.
               poolConfig.setMinEvictableIdleTime(Duration.ofMillis(-1));
-              //Idle duration before a connection being evicted. If the actual duration is greater than this value and the maximum number of idle connections is reached, idle connections are directly evicted. MinEvictableIdleTimeMillis (default eviction policy) is no longer used.
+              //Idle duration before a connection being evicted. If the actual duration is greater than this value and the minimum number of idle connections is reached, idle connections are directly evicted. MinEvictableIdleTimeMillis (default eviction policy) is no longer used.
               poolConfig.setSoftMinEvictableIdleTime(Duration.ofMillis(redisPoolSoftMinEvictableIdleTimeMillis));
               //Interval for checking and evicting idle connections. Default: 60s.
               poolConfig.setTimeBetweenEvictionRuns(Duration.ofMillis(redisPoolBetweenEvictionRunsMillis));
@@ -555,8 +689,25 @@ If SSL is enabled for an instance, to access it using SSL connections, use the f
 
       @Bean
       public LettuceClientConfiguration clientConfiguration() {
-
-          SocketOptions socketOptions = SocketOptions.builder().connectTimeout(Duration.ofMillis(redisConnectTimeout)).build();
+          SocketOptions socketOptions = SocketOptions.builder()
+                  .keepAlive(SocketOptions.KeepAliveOptions.builder()
+                      // A keepalive interval
+                      .idle(Duration.ofSeconds(TCP_KEEPALIVE_TIME))
+                      // Idle duration before keepalive
+                      .interval(Duration.ofSeconds(TCP_KEEPALIVE_TIME/3))
+                      // keepalive xx times before disconnect
+                      .count(3)
+                      // Whether to keep connections alive.
+                      .enable()
+                      .build())
+                  .tcpUserTimeout(SocketOptions.TcpUserTimeoutOptions.builder()
+                      // Addressing timeouts caused by RST on the server
+                      .tcpUserTimeout(Duration.ofSeconds(TCP_USER_TIMEOUT))
+                      .enable()
+                      .build())
+                  // TCP connection timeout setting
+                  .connectTimeout(Duration.ofMillis(redisConnectTimeout))
+                  .build();
 
           SslOptions sslOptions = SslOptions.builder()
               .trustManager(new File(certificationPath))
@@ -572,6 +723,7 @@ If SSL is enabled for an instance, to access it using SSL connections, use the f
               .build();
           LettuceClientConfiguration clientConfiguration = LettuceClientConfiguration.builder()
               .commandTimeout(Duration.ofMillis(redisReadTimeout))
+              // readFrom is not required for Proxy Cluster instances.
               .readFrom(ReadFrom.MASTER)
               .clientOptions(clientOptions)
               .useSsl()
@@ -586,8 +738,25 @@ If SSL is enabled for an instance, to access it using SSL connections, use the f
 
       @Bean
       public LettuceClientConfiguration clientConfiguration() {
-
-          SocketOptions socketOptions = SocketOptions.builder().connectTimeout(Duration.ofMillis(redisConnectTimeout)).build();
+          SocketOptions socketOptions = SocketOptions.builder()
+                  .keepAlive(SocketOptions.KeepAliveOptions.builder()
+                      // A keepalive interval
+                      .idle(Duration.ofSeconds(TCP_KEEPALIVE_TIME))
+                      // Idle duration before keepalive
+                      .interval(Duration.ofSeconds(TCP_KEEPALIVE_TIME/3))
+                      // keepalive xx times before disconnect
+                      .count(3)
+                      // Whether to keep connections alive.
+                      .enable()
+                      .build())
+                  .tcpUserTimeout(SocketOptions.TcpUserTimeoutOptions.builder()
+                      // Addressing timeouts caused by RST on the server
+                      .tcpUserTimeout(Duration.ofSeconds(TCP_USER_TIMEOUT))
+                      .enable()
+                      .build())
+                  // TCP connection timeout setting
+                  .connectTimeout(Duration.ofMillis(redisConnectTimeout))
+                  .build();
 
           SslOptions sslOptions = SslOptions.builder()
               .trustManager(new File(certificationPath))
@@ -641,29 +810,29 @@ Parameter Description
 
 .. table:: **Table 2** RedisStandaloneConfiguration parameters
 
-   +-----------+---------------+---------------------------------------------------------------+
-   | Parameter | Default Value | Description                                                   |
-   +===========+===============+===============================================================+
-   | hostName  | localhost     | IP address/domain name for connecting to a DCS Redis instance |
-   +-----------+---------------+---------------------------------------------------------------+
-   | port      | 6379          | Port number                                                   |
-   +-----------+---------------+---------------------------------------------------------------+
-   | database  | 0             | Database subscript                                            |
-   +-----------+---------------+---------------------------------------------------------------+
-   | password  | ``-``         | Password                                                      |
-   +-----------+---------------+---------------------------------------------------------------+
+   +-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Parameter | Default Value | Description                                                                                                                                                               |
+   +===========+===============+===========================================================================================================================================================================+
+   | hostName  | localhost     | IP address/domain name for connecting to a DCS Redis instance                                                                                                             |
+   +-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | port      | 6379          | Port number                                                                                                                                                               |
+   +-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | database  | 0             | Database subscript                                                                                                                                                        |
+   +-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | password  | ``-``         | Redis instance password. Needless for password-free instances. If you forget your password or need to reset it, see :ref:`Resetting Instance Passwords <dcs-ug-0312041>`. |
+   +-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. table:: **Table 3** RedisClusterConfiguration parameters
 
-   +--------------+------------------------------------------------------------------------------------+
-   | Parameter    | Description                                                                        |
-   +==============+====================================================================================+
-   | clusterNodes | Cluster node connection information, including the node IP address and port number |
-   +--------------+------------------------------------------------------------------------------------+
-   | maxRedirects | Maximum redirecting times. Recommended value: **3**.                               |
-   +--------------+------------------------------------------------------------------------------------+
-   | password     | Password                                                                           |
-   +--------------+------------------------------------------------------------------------------------+
+   +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Parameter    | Description                                                                                                                                                               |
+   +==============+===========================================================================================================================================================================+
+   | clusterNodes | Cluster node connection information, including the node IP address and port number                                                                                        |
+   +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | maxRedirects | Maximum redirecting times. Recommended value: **3**.                                                                                                                      |
+   +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | password     | Redis instance password. Needless for password-free instances. If you forget your password or need to reset it, see :ref:`Resetting Instance Passwords <dcs-ug-0312041>`. |
+   +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. table:: **Table 4** LettuceClientConfiguration parameters
 
@@ -721,33 +890,33 @@ Parameter Description
 
 .. table:: **Table 8** GenericObjectPoolConfig parameters
 
-   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Parameter                      | Default Value | Description                                                                                                                                                                                                                                        |
-   +================================+===============+====================================================================================================================================================================================================================================================+
-   | minIdle                        | ``-``         | Minimum connections in the pool.                                                                                                                                                                                                                   |
-   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | maxIdle                        | ``-``         | Maximum idle connections in the connection pool.                                                                                                                                                                                                   |
-   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | maxTotal                       | ``-``         | Maximum total connections in the connection pool.                                                                                                                                                                                                  |
-   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | blockWhenExhausted             | true          | Indicates whether to wait after the connection pool is exhausted. **true**: Wait. **false**: Do not wait. To validate **maxWaitMillis**, this parameter must be set to **true**.                                                                   |
-   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | maxWaitMillis                  | -1            | Maximum amount of time a connection allocation should block before throwing an exception when the pool is exhausted. The default value **-1** indicates to wait indefinitely.                                                                      |
-   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | testOnCreate                   | false         | Set to true to enable connectivity test on creating connections. Default: **false**.                                                                                                                                                               |
-   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | testOnBorrow                   | false         | Set to true to enable connectivity test on borrowing connections. Default: **false**. Set to false for heavy-traffic services to reduce overhead.                                                                                                  |
-   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | testOnReturn                   | false         | Set to **true** to enable connectivity test on returning connections. Default: **false**. Set to **false** for heavy-traffic services to reduce overhead.                                                                                          |
-   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | testWhileIdle                  | false         | Indicates whether to check for idle connections. If this parameter is set to **false**, idle connections are not evicted. Recommended value: **true**.                                                                                             |
-   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | softMinEvictableIdleTimeMillis | -1            | Duration (in milliseconds) after which idle connections are evicted. If the idle duration is greater than this value and the maximum number of idle connections is reached, idle connections are directly evicted. Recommended value: **1800000**. |
-   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | minEvictableIdleTimeMillis     | 1800000       | An eviction policy, set to **-1** (suggested) to disable it. Use **softminEvictableIdleTimeMillis** instead.                                                                                                                                       |
-   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | timeBetweenEvictionRunsMillis  | -1            | Eviction interval, in milliseconds. Recommended value: **60000**                                                                                                                                                                                   |
-   +--------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   +--------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Parameter                      | Default Value | Description                                                                                                                                                                                                                                         |
+   +================================+===============+=====================================================================================================================================================================================================================================================+
+   | minIdle                        | ``-``         | Minimum connections in the pool.                                                                                                                                                                                                                    |
+   +--------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | maxIdle                        | ``-``         | Maximum idle connections in the connection pool.                                                                                                                                                                                                    |
+   +--------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | maxTotal                       | ``-``         | Maximum total connections in the connection pool.                                                                                                                                                                                                   |
+   +--------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | blockWhenExhausted             | true          | Indicates whether to wait after the connection pool is exhausted. **true**: Wait. **false**: Do not wait. To validate **maxWaitMillis**, this parameter must be set to **true**.                                                                    |
+   +--------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | maxWaitMillis                  | -1            | Maximum amount of time a connection allocation should block before throwing an exception when the pool is exhausted. The default value **-1** indicates to wait indefinitely.                                                                       |
+   +--------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | testOnCreate                   | false         | Set to true to enable connectivity test on creating connections. Default: **false**.                                                                                                                                                                |
+   +--------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | testOnBorrow                   | false         | Set to true to enable connectivity test on borrowing connections. Default: **false**. Set to false for heavy-traffic services to reduce overhead.                                                                                                   |
+   +--------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | testOnReturn                   | false         | Set to **true** to enable connectivity test on returning connections. Default: **false**. Set to **false** for heavy-traffic services to reduce overhead.                                                                                           |
+   +--------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | testWhileIdle                  | false         | Indicates whether to check for idle connections. If this parameter is set to **false**, idle connections are not evicted. Recommended value: **true**.                                                                                              |
+   +--------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | softMinEvictableIdleTimeMillis | -1            | Duration (in milliseconds) after which idle connections are evicted. If the idle duration is greater than this value and the minimum number of idle connections is exceeded, idle connections are directly evicted. **Recommended value: 1800000.** |
+   +--------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | minEvictableIdleTimeMillis     | 1800000       | An eviction policy, set to **-1** (suggested) to disable it. Use **softminEvictableIdleTimeMillis** instead.                                                                                                                                        |
+   +--------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | timeBetweenEvictionRunsMillis  | -1            | Eviction interval, in milliseconds. Recommended value: **60000**                                                                                                                                                                                    |
+   +--------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Suggestion for Configuring DCS Instances
 ----------------------------------------

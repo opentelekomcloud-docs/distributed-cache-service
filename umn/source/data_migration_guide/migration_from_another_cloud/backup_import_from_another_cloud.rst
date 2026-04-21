@@ -12,13 +12,14 @@ Simply download the source Redis data and then upload the data to an OBS bucket 
 Notes and Constraints
 ---------------------
 
-To migrate to an instance with SSL enabled, disable the SSL setting first. For details, see :ref:`Transmitting DCS Redis Data with Encryption Using SSL <dcs-ug-023129>`.
+-  To migrate to an instance with SSL enabled, disable the SSL setting first. For details, see :ref:`Transmitting DCS Redis Data with Encryption Using SSL <dcs-ug-023129>`.
+-  Migration may fail if the target instance uses smaller specifications than its source.
 
 Prerequisites
 -------------
 
--  Before migrating data, read through :ref:`Migration Tools and Schemes <dcs-migration-090626002>` to learn about the DCS data migration function and select an appropriate target instance.
--  By default, a cluster instance has only one DB (DB0). Before you migrate data from a multi-DB single-node or master/standby instance to a Redis Cluster instance, check whether any data exists on databases other than DB0. To ensure that the migration succeeds, move all data to DB0 by referring to :ref:`Online Migration with Rump <dcs-migration-090626001_0>`.
+-  Before migrating data, read through :ref:`Migration Solution Notes <dcs-migration-090626002>` to learn about the DCS data migration function and select an appropriate target instance.
+-  By default, a cluster instance has only one DB (DB0). Before you migrate data from a multi-DB single-node or master/standby instance to a Redis Cluster instance, check whether any data exists on databases other than DB0. To ensure that the migration succeeds, move all data to DB0 by referring to :ref:`Online Migration from Another Cloud Using Rump <dcs-migration-090626001_0>`.
 -  Prepare the source Redis backup file. The backup file must be in .aof, .rdb, .zip, or .tar.gz format.
 -  If a target DCS Redis instance is not available, create one first. For details, see :ref:`Creating a DCS Redis Instance <dcs-ug-0312003>`.
 -  If you already have a DCS Redis instance, you do not need to create one again. For comparing migration data and reserving sufficient memory, you are advised to clear the instance data before the migration. For details, see :ref:`Clearing DCS Instance Data <dcs-ug-0312018>`. If any data exists on the target instance, duplicate data between the source and target is overwritten. If the data exists only on the target instance, the data will be retained.
@@ -107,7 +108,7 @@ Creating a Migration Task
 
    The task name must start with a letter, contain 4 to 64 characters, and contain only letters, digits, hyphens (-), and underscores (_).
 
-#. In the **Source Redis** area, select **OBS Bucket** for **Data Source** and then select the OBS bucket to which you have uploaded backup files.
+#. In the **Source Redis** area, select **OBS bucket** for **Data Source** and then select the OBS bucket to which you have uploaded backup files.
 
 #. Click **Add Backup** and select the backup files to be migrated.
 
@@ -120,3 +121,18 @@ Creating a Migration Task
 #. Confirm the migration task details and click **Submit**.
 
    Go back to the data migration task list. After the migration is successful, the task status changes to **Successful**.
+
+Verifying the Migration
+-----------------------
+
+Before data migration, if the target Redis has no data, check data integrity after the migration is complete in the following way:
+
+#. Connect to the source Redis and the target Redis. Connect to Redis by referring to :ref:`Accessing a DCS Redis Instance Through redis-cli <dcs-ug-0326009>`.
+
+#. Run the **info keyspace** command to check the values of **keys** and **expires**.
+
+   |image1|
+
+#. Calculate the differences between the values of **keys** and **expires** of the source Redis and the target Redis. If the differences are the same, the data is complete and the migration is successful.
+
+.. |image1| image:: /_static/images/en-us_image_0293255709.png

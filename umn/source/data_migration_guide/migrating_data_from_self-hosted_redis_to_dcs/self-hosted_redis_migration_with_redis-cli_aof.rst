@@ -5,7 +5,7 @@
 Self-Hosted Redis Migration with redis-cli (AOF)
 ================================================
 
-redis-cli is the command line tool of Redis, which can be used after you install the Redis server. This section describes how to use redis-cli to migrate a data from a self-hosted Redis instance to a DCS instance.
+redis-cli is the command line tool of Redis, which can be used after you install the Redis server. This section describes how to use redis-cli to migrate a data from a self-hosted Redis instance to a DCS instance. To migrate the source backup to a DCS instance via an OBS bucket, see :ref:`Self-Hosted Redis Migration with Backup Files <dcs-migration-190703002>`.
 
 An AOF file can be generated quickly. It applies to scenarios where you can access the Redis server and modify the configurations, such as scenarios with self-built Redis servers.
 
@@ -13,9 +13,9 @@ Notes and Constraints
 ---------------------
 
 -  To migrate to an instance with SSL enabled, disable the SSL setting first. For details, see :ref:`Transmitting DCS Redis Data with Encryption Using SSL <dcs-ug-023129>`.
--  Smaller target instance specifications than source instance specifications may cause failures.
+-  Migration may fail if the target instance uses smaller specifications than its source.
 -  Migrate data during off-peak hours.
--  Before data migration, suspend your services so that data changes newly generated will not be lost during the migration.
+-  Before data migration, suspend your services so that newly generated data changes will not be lost during the migration.
 
 Prerequisites
 -------------
@@ -48,8 +48,8 @@ Generating an AOF File
       .. code-block::
 
          cd redis-5.0.8
-         make
          cd src
+         make
 
 #. Run the following command to enable cache persistence and obtain the AOF persistence file:
 
@@ -59,21 +59,16 @@ Generating an AOF File
 
    *{source_redis_address}* is the connection address of the source Redis, *{port}* is the port of the source Redis, and *{password}* is the connection password of the source Redis.
 
-   If the size of the AOF file does not change after you have enabled persistence, the AOF file contains full cached data.
-
-   .. note::
-
-      -  To find out the path for storing the AOF file, use redis-cli to access the Redis instance, and run the **config get dir** command. Unless otherwise specified, the file is named as **appendonly.aof** by default.
-      -  To disable synchronization after the AOF file is generated, use redis-cli to log in to the Redis instance and run the **config set appendonly no** command.
+   -  If the size of the AOF file does not change after you have enabled persistence, the AOF file contains full cached data.
+   -  To find out the path for storing the AOF file, use redis-cli to access the Redis instance, and run the **config get dir** command. Unless otherwise specified, the file is named as **appendonly.aof** by default.
+   -  To disable synchronization after the AOF file is generated, use redis-cli to log in to the Redis instance and run the **config set appendonly no** command.
 
 Uploading the AOF file to ECS
 -----------------------------
 
 To save time, you are advised to compress the AOF file and upload it to ECS using an appropriate mode (for example, SFTP mode).
 
-.. note::
-
-   Ensure that the ECS has sufficient disk space for data file decompression, and can communicate with the DCS instance. Generally, the ECS and DCS instance are configured to belong to the same VPC and subnet, and the configured security group rules do not restrict access ports. For details about how to configure a security group, see :ref:`Security Group Configurations <en-us_topic_0090662012>`.
+Ensure that the ECS has sufficient disk space for data file decompression, and can communicate with the DCS instance. Generally, the ECS and DCS instance are configured to belong to the same VPC and subnet, and the configured security group rules do not restrict access ports. For details about how to configure a security group, see :ref:`Security Group Configurations <en-us_topic_0090662012>`.
 
 Importing Data
 --------------
@@ -91,6 +86,16 @@ It takes 4 to 10 seconds to import an AOF file of 1 million data (20 bytes per d
 Verifying the Migration
 -----------------------
 
-After the data is imported successfully, access the DCS instance and run the **info** command to check whether the data has been successfully imported as required. Connect to Redis by referring to :ref:`Accessing a DCS Redis Instance Through redis-cli <dcs-ug-0326009>`.
+Before data migration, if the target Redis has no data, check data integrity after the migration is complete in the following way:
+
+#. Connect to the source Redis and the target Redis. Connect to Redis by referring to :ref:`Accessing a DCS Redis Instance Through redis-cli <dcs-ug-0326009>`.
+
+#. Run the **info keyspace** command to check the values of **keys** and **expires**.
+
+   |image1|
+
+#. Calculate the differences between the values of **keys** and **expires** of the source Redis and the target Redis. If the differences are the same, the data is complete and the migration is successful.
 
 If the import fails, check the procedure. If the import command is incorrect, run the **flushall** or **flushdb** command to clear the cache data in the target instance, modify the import command, and try again.
+
+.. |image1| image:: /_static/images/en-us_image_0293255709.png

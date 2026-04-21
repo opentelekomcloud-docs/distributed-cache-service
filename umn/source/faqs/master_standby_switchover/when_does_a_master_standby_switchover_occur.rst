@@ -11,12 +11,12 @@ A master/standby switchover may occur in the following scenarios:
 
 -  If the master node of a master/standby instance fails, a master/standby switchover will be triggered.
 
-   For example, running commands that consume a lot of resources, such as **KEYS** commands, will cause CPU usage to spike and as result triggers a master/standby switchover.
+   For example, if commands (such as **KEYS**) that consume a lot of resources are used or logs are aged and deleted in batches, the CPU usage will surge, triggering a master/standby switchover.
 
 -  If you restart a master/standby instance on the DCS console, a master/standby switchover will be triggered.
 
--  If you scale up a single-node, read/write splitting, or master/standby instance, a master/standby switchover will be triggered.
+-  A master/standby switchover is triggered during Redis instance scale-out.
 
    During scale-up, a new standby node with the new specifications is created. After full and incremental data on the master node is synchronized to the standby node, a master/standby switchover is performed and the original node is deleted.
 
-After a master/standby switchover occurs, you will receive a notification. Check whether the client services are running properly. If not, check whether the TCP connection is normal and whether it can be re-established after the master/standby switchover to restore the services.
+To monitor master/standby switchovers of instances, create event monitoring on Cloud Eye. Then, the system reports master/standby switchovers based on event alarm rules. Check whether the client services are abnormal if needed. If the services are abnormal, check whether the client connections are normal, and whether client connections can be retried after master/standby switchovers. Restart the client if the connections cannot be retried.

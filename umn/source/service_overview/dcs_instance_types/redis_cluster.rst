@@ -25,21 +25,21 @@ The Redis Cluster instance type provided by DCS is compatible with the `native R
 
 .. table:: **Table 1** Specifications of Redis Cluster DCS instances
 
-   =========================== ======
-   Total Memory                Shards
-   =========================== ======
-   4 GB/8 GB/16 GB/24 GB/32 GB 3
-   48 GB                       6
-   64 GB                       8
-   96 GB                       12
-   128 GB                      16
-   192 GB                      24
-   256 GB                      32
-   384 GB                      48
-   512 GB                      64
-   768 GB                      96
-   1024 GB                     128
-   =========================== ======
+   ====================== ======
+   Total Memory           Shards
+   ====================== ======
+   4GB/8GB/16GB/24GB/32GB 3
+   48 GB                  6
+   64 GB                  8
+   96 GB                  12
+   128 GB                 16
+   192 GB                 24
+   256 GB                 32
+   384 GB                 48
+   512 GB                 64
+   768 GB                 96
+   1024 GB                128
+   ====================== ======
 
 -  Distributed architecture
 

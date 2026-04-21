@@ -7,16 +7,12 @@ Deleting DCS Instances
 
 On the DCS console, you can delete one or multiple DCS instances at a time. You can also delete all instance creation tasks that have failed to run.
 
-.. important::
+Notes and Constraints
+---------------------
 
-   -  After a DCS instance is deleted, the instance data will also be deleted without backup. In addition, any backup data of the instance will be deleted. Therefore, download the backup files of the instance for permanent storage before deleting the instance.
-   -  If the instance is in cluster mode, all cluster nodes will be deleted.
-
-Prerequisites
--------------
-
--  The DCS instances you want to delete have been created.
--  The DCS instances you want to delete are in the **Running** or **Faulty** state.
+-  DCS instances already exist. They are in the **Running** or **Faulty** state.
+-  Deleted DCS instances as well as the data in these instances and the backup files cannot be recovered. Exercise caution when performing this operation. To retain data backups, before deleting instances, download and save their backups locally.
+-  If the instance is in cluster mode, all cluster nodes will be deleted.
 
 Procedure
 ---------
@@ -29,11 +25,9 @@ Deleting DCS Instances
 
 #. In the navigation pane, choose **Cache Manager**.
 
-#. On the **Cache Manager** page, select one or more DCS instances you want to delete.
+#. Select one or more DCS instances to be deleted and choose **Delete** above.
 
-   DCS instances in the **Creating**, **Restarting**, **Upgrading**, **Resizing**, **Clearing data**, **Backing up**, or **Restoring** state cannot be deleted.
-
-#. Choose **More** > **Delete** above the instance list.
+   To delete a single instance, choose **More** > **Delete** in the **Operation** column in the row containing the instance.
 
 #. Click **Yes** to delete the instance.
 

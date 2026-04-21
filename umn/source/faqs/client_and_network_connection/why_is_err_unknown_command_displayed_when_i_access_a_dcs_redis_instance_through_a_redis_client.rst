@@ -15,7 +15,7 @@ The possible causes are as follows:
 
 #. A command available in a higher Redis version is run in a lower Redis version.
 
-   As shown in the following figure, the error message is returned because a stream command (available in Redis 5.0) is run in Redis 3.0.
+   For example, the error message is returned because a stream command (available in Redis 5.0) is run in Redis 3.0.
 
    |image2|
 
